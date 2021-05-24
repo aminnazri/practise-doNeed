@@ -52,7 +52,7 @@
                     android:fontFamily="@font/cocogoose"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
-                    android:textColor="#4E4545" />
+                    android:textColor="@color/grey" />
 
                 <LinearLayout
                     android:id="@+id/email_field"
@@ -68,12 +68,19 @@
                         android:layout_height="wrap_content"
                         android:text="EMAIL"
                         android:textSize="13sp"
-                        android:fontFamily="@font/lato"/>
+                        android:layout_marginStart="3dp"
+                        android:textColor="@color/grey"
+                        android:fontFamily="@font/lato"
+                        />
                     <EditText
                         android:id="@+id/login_email"
                         android:layout_marginTop="1dp"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"/>
+                        android:layout_height="40dp"
+                        android:textColor="@color/grey"
+                        android:backgroundTint="@color/grey"
+                        android:inputType="textEmailAddress"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -89,13 +96,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="PASSWORD"
+                        android:layout_marginStart="3dp"
                         android:textSize="13sp"
+                        android:textColor="@color/grey"
                         android:fontFamily="@font/lato"/>
                     <EditText
                         android:id="@+id/login_password"
                         android:layout_marginTop="1dp"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"/>
+                        android:layout_height="40dp"
+                        android:textColor="@color/grey"
+                        android:backgroundTint="@color/grey"
+                        android:inputType="textPassword"/>
                 </LinearLayout>
 
                 <TextView
@@ -105,7 +117,8 @@
                     android:layout_below="@+id/password_field"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="Forgot password?"/>
+                    android:text="Forgot password?"
+                    android:textColor="@color/grey"/>
 
                 <Button
                     android:id="@+id/LoginSubmit_btn"
