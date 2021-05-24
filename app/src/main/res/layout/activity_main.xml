@@ -1,18 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:fontFamily="@font/cocogoose"
+        android:text="doNeed"
+        android:textStyle="bold"
+        android:textSize="45sp"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:textColor="#8F000000"/>
+
+    <Button
+        android:id="@+id/Login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_bg1"
+        android:textSize="25sp"
+        android:fontFamily="@font/cocogoose"
+        android:textStyle="bold"
+        android:paddingLeft="66dp"
+        android:paddingRight="66dp"
+        android:text="Login"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="#ffff"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="420dp"/>
+
+    <Button
+        android:id="@+id/SignUp_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_bg2"
+        android:layout_below="@+id/Login_btn"
+        android:textSize="25sp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:fontFamily="@font/cocogoose"
+        android:textStyle="bold"
+        android:text="Sign Up"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:backgroundTint="@color/white"
+        android:textColor="#707070"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:backgroundTint="@null"/>
+
+
+
+</RelativeLayout>
