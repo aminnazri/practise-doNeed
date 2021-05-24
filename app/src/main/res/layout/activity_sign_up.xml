@@ -24,7 +24,7 @@
             android:fontFamily="@font/cocogoose"
             android:text="doNeed"
             android:textColor="#54000000"
-            android:textSize="60sp" />
+            android:textSize="88sp" />
 
         <androidx.cardview.widget.CardView
 
@@ -53,7 +53,7 @@
                     android:fontFamily="@font/cocogoose"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
-                    android:textColor="@color/grey" />
+                    android:textColor="#504E4E" />
 
                 <LinearLayout
                     android:id="@+id/username_field"
@@ -78,7 +78,7 @@
                         android:layout_marginTop="1dp"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         android:backgroundTint="@color/grey"
                         android:inputType="text"
 
@@ -108,7 +108,7 @@
                         android:layout_marginTop="1dp"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         android:backgroundTint="@color/grey"
                         android:inputType="textEmailAddress"
                         />
@@ -137,7 +137,7 @@
                         android:layout_marginTop="1dp"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         android:backgroundTint="@color/grey"
                         android:inputType="textEmailAddress"
 
@@ -167,7 +167,7 @@
                         android:layout_marginTop="1dp"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         android:backgroundTint="@color/grey"
                         android:inputType="phone"
 
@@ -197,7 +197,7 @@
                         android:layout_marginTop="1dp"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         android:backgroundTint="@color/grey"
                         android:inputType="textPassword"
 
@@ -222,19 +222,31 @@
                         android:textColor="@color/grey"
                         android:fontFamily="@font/lato"/>
                     <EditText
-                        android:id="@+id/login_password"
+                        android:id="@+id/signUp_password"
                         android:layout_marginTop="1dp"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         android:backgroundTint="@color/grey"
                         android:inputType="textPassword"/>
                 </LinearLayout>
 
+                <TextView
+
+                    android:layout_below="@+id/signUpSubmit_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All ready have an account? Login."
+                    android:id="@+id/txt_login"
+                    android:textColor="@color/grey"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    />
+
 
 
                 <Button
-                    android:id="@+id/LoginSubmit_btn"
+                    android:id="@+id/signUpSubmit_btn"
                     android:layout_below="@+id/reconfirmPassword_field"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -249,7 +261,7 @@
                     android:paddingBottom="2dp"
                     android:textColor="#ffff"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="50dp"/>
 
 
             </RelativeLayout>

@@ -20,7 +20,7 @@
         android:textColor="#8F000000"/>
 
     <Button
-        android:id="@+id/Login_btn"
+        android:id="@+id/login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg1"
@@ -37,11 +37,11 @@
         android:layout_marginTop="420dp"/>
 
     <Button
-        android:id="@+id/SignUp_btn"
+        android:id="@+id/signUp_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg2"
-        android:layout_below="@+id/Login_btn"
+        android:layout_below="@+id/login_btn"
         android:textSize="25sp"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
@@ -61,7 +61,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="156dp"
-        android:layout_marginBottom="41dp"
+        android:layout_marginBottom="35dp"
         android:alpha="0.4"
         android:src="@drawable/donation" />
 
