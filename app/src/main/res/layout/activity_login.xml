@@ -28,9 +28,11 @@
 
         <androidx.cardview.widget.CardView
 
-            android:layout_width="370dp"
-            android:layout_height="600dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="100dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="50dp"
             android:layout_centerHorizontal="true"
             app:cardCornerRadius="38dp"
             app:cardBackgroundColor="@color/white"
@@ -39,8 +41,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-
                 >
 
                 <TextView
@@ -53,6 +53,77 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
                     android:textColor="#4E4545" />
+
+                <LinearLayout
+                    android:id="@+id/email_field"
+                    android:layout_below="@+id/Login_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="EMAIL"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/lato"/>
+                    <EditText
+                        android:id="@+id/login_email"
+                        android:layout_marginTop="1dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/password_field"
+                    android:layout_below="@+id/email_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="PASSWORD"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/lato"/>
+                    <EditText
+                        android:id="@+id/login_password"
+                        android:layout_marginTop="1dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/forgotPassword_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/password_field"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Forgot password?"/>
+
+                <Button
+                    android:id="@+id/LoginSubmit_btn"
+                    android:layout_below="@+id/forgotPassword_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_bg1"
+                    android:textSize="25sp"
+                    android:fontFamily="@font/cocogoose"
+                    android:textStyle="bold"
+                    android:paddingLeft="66dp"
+                    android:paddingRight="66dp"
+                    android:text="Login"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textColor="#ffff"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"/>
 
 
             </RelativeLayout>

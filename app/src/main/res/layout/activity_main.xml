@@ -54,7 +54,7 @@
         android:textColor="#707070"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        app:backgroundTint="@null"/>
+        app:backgroundTint="@color/white"/>
 
     <ImageView
         android:layout_width="100dp"
