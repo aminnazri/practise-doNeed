@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".fragment.HomeFragment">
@@ -28,7 +29,9 @@ tools:context=".fragment.HomeFragment">
                 android:layout_marginEnd="20dp"
                 android:layout_toStartOf="@+id/image_profile"
                 android:src="@drawable/search"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                app:tint="@color/darkGrey"
+                />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="40dp"
