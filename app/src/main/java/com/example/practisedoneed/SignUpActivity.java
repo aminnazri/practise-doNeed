@@ -125,7 +125,7 @@ public class SignUpActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
 
                                 pd.dismiss();
-                                Intent intent = new Intent(SignUpActivity.this ,homeActivity.class);
+                                Intent intent = new Intent(SignUpActivity.this ,homePage.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                             }
