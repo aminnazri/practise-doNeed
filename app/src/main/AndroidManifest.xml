@@ -9,19 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PractiseDoNeed">
-        <activity android:name=".profile"></activity>
-        <activity android:name=".chat" />
-        <activity android:name=".donate" />
+        <activity android:name=".profile"/>
         <activity
             android:name=".homePage"
             android:label="@string/title_activity_home_page" />
-        <activity
-            android:name=".homePageActivity"
-            android:label="@string/title_activity_home_page" />
-        <activity
-            android:name=".MainActivity2"
-            android:label="@string/title_activity_main2" />
-        <activity android:name=".homeActivity" />
+
+
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
