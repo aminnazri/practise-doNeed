@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.practisedoneed.R;
 import com.example.practisedoneed.databinding.FragmentHomeBinding;
 import com.example.practisedoneed.ui.home.HomeViewModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,23 +40,13 @@ public class HomeFragment extends Fragment {
     private List<String> followingList;
     private ProgressBar progressBar;
     private RecyclerView recyclerView_story;
+    RecyclerView.LayoutManager linearLayoutManager;
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView( LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-
-        @NonNull FragmentHomeBinding binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-
-            }
-        });
-        return root;
+        View view = inflater.inflate(R.layout.fragment_home,container,false);
+        return view;
     }
 
     @Override
