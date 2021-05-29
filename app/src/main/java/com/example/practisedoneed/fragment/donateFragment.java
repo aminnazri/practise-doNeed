@@ -18,9 +18,11 @@ import com.example.practisedoneed.ui.notifications.NotificationsViewModel;
 
 public class donateFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
-
-
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_donate,container,false);
+        return view;
+    }
 
     @Override
     public void onDestroyView() {
