@@ -33,13 +33,15 @@ public class homePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home_page);
-
         bottomNavigationView  = findViewById(R.id.bottom_navigation);
-
         bottomNavigationView.setOnNavigationItemReselectedListener(navigationItemSelectedListner);
-
         Bundle intent = getIntent().getExtras();
 
+
+        // Default Fragment
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new HomeFragment())
+                .commit();
 
         logout = findViewById(R.id.logout);
 
@@ -47,13 +49,16 @@ public class homePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(homePage.this, com.example.practisedoneed.MainActivity.class)
+                startActivity(new Intent(homePage.this, MainActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
     }
 
-    private  BottomNavigationView.OnNavigationItemReselectedListener navigationItemSelectedListner =
+
+
+
+    private final BottomNavigationView.OnNavigationItemReselectedListener navigationItemSelectedListner =
             new BottomNavigationView.OnNavigationItemReselectedListener() {
                 @Override
                 public void onNavigationItemReselected(@NonNull MenuItem menuItem) {
@@ -63,12 +68,12 @@ public class homePage extends AppCompatActivity {
                             selectedFagrament = new HomeFragment();
                             break;
                         case R.id.navigation_donate:
-                            selectedFagrament = null;
-                            startActivity(new Intent(homePage.this, donate.class));
+                            selectedFagrament = new donateFragment();
+//
                             break;
                         case R.id.navigation_chatting:
                             selectedFagrament = null;
-                            startActivity(new Intent(homePage.this, chat.class));
+                            startActivity(new Intent(homePage.this, chatFragment.class));
                             break;
 
                     }
