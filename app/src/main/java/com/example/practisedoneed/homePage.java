@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.practisedoneed.fragment.HomeFragment;
 import com.example.practisedoneed.fragment.chatFragment;
@@ -23,19 +25,32 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class homePage extends AppCompatActivity {
 
+    Button logout;
     BottomNavigationView bottomNavigationView ;
     Fragment selectedFagrament = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home_page);
 
         bottomNavigationView  = findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setOnNavigationItemReselectedListener(navigationItemSelectedListner);
 
         Bundle intent = getIntent().getExtras();
+
+
+        logout = findViewById(R.id.logout);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(homePage.this, com.example.practisedoneed.MainActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
+        });
     }
 
     private  BottomNavigationView.OnNavigationItemReselectedListener navigationItemSelectedListner =

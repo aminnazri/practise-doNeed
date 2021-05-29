@@ -16,7 +16,7 @@ tools:context=".fragment.HomeFragment">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Toolbar"
-        android:background="?android:attr/windowBackground">
+        android:background="@color/yellow_musterd">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -48,6 +48,24 @@ tools:context=".fragment.HomeFragment">
 
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
+
+</com.google.android.material.appbar.AppBarLayout>
+
+<com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/filter"
+    android:layout_below="@id/bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
 </com.google.android.material.appbar.AppBarLayout>
 
 <androidx.core.widget.NestedScrollView

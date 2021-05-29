@@ -5,14 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    tools:context=".MainActivity">
+android:background="@color/white"
+    tools:context=".homePage">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_navbar"
         android:id="@+id/fragment_container"
+
         />
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -26,11 +27,19 @@
             android:id="@+id/bottom_navigation"
             app:itemIconTint="@color/selector"
             app:labelVisibilityMode="unlabeled"
-            android:background="?android:attr/windowBackground"
+            android:background="@color/white"
             app:menu="@menu/bottom_nav_menu">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
     </com.google.android.material.appbar.AppBarLayout>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="logout"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="281dp" />
 
 
 
