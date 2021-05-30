@@ -3,9 +3,12 @@ package com.example.practisedoneed;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 
 import com.example.practisedoneed.fragment.HomeFragment;
 import com.example.practisedoneed.fragment.chatFragment;
@@ -22,6 +25,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.practisedoneed.databinding.ActivityHomePageBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.annotations.NotNull;
 
 public class homePage extends AppCompatActivity {
 
@@ -90,5 +94,29 @@ public class homePage extends AppCompatActivity {
                 }
 
             };
+
+
+//    private BottomNavigationView.OnNavigationItemSelectedListener navItemSelectListener =
+//            new BottomNavigationView.OnNavigationItemSelectedListener() {
+//                @Override
+//                public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+//                    switch(item.getItemId()){
+//                        case R.id.navigation_home:
+//                            selectedFagrament = new HomeFragment();
+//                            break;
+//                        case R.id.navigation_donate:
+//                            selectedFagrament = new donateFragment();
+//                            break;
+//                        case R.id.navigation_chatting:
+//                            selectedFagrament = null;
+////                            startActivity(new Intent(homePage.this, chatFragment.class));
+////                            break;
+//                    }
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                            selectedFagrament).commit();
+//                    return true;
+//                }
+//            };
+
 
 }
