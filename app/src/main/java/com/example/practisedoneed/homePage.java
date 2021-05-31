@@ -1,31 +1,21 @@
 package com.example.practisedoneed;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SearchView;
 
 import com.example.practisedoneed.fragment.HomeFragment;
-import com.example.practisedoneed.fragment.chatFragment;
+import com.example.practisedoneed.fragment.profileFragment;
 import com.example.practisedoneed.fragment.donateFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
-import com.example.practisedoneed.databinding.ActivityHomePageBinding;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.annotations.NotNull;
 
 public class homePage extends AppCompatActivity {
 
@@ -38,7 +28,7 @@ public class homePage extends AppCompatActivity {
 
         setContentView(R.layout.activity_home_page);
         bottomNavigationView  = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemReselectedListener(navigationItemSelectedListner);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListner);
         Bundle intent = getIntent().getExtras();
 
 
@@ -62,10 +52,10 @@ public class homePage extends AppCompatActivity {
 
 
 
-    private final BottomNavigationView.OnNavigationItemReselectedListener navigationItemSelectedListner =
-            new BottomNavigationView.OnNavigationItemReselectedListener() {
+    private final BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListner =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
-                public void onNavigationItemReselected(@NonNull MenuItem menuItem) {
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                     switch (menuItem.getItemId()) {
                         case R.id.navigation_home:
@@ -76,47 +66,20 @@ public class homePage extends AppCompatActivity {
 //
                             break;
                         case R.id.navigation_chatting:
-                            selectedFagrament = null;
-                            startActivity(new Intent(homePage.this, chatFragment.class));
+                            selectedFagrament = new profileFragment();
+
                             break;
 
                     }
 
-
-
-                    if (selectedFagrament != null) {
-
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 selectedFagrament).commit();
 
-                    }
-                    return ;
+
+                    return true;
                 }
 
             };
-
-
-//    private BottomNavigationView.OnNavigationItemSelectedListener navItemSelectListener =
-//            new BottomNavigationView.OnNavigationItemSelectedListener() {
-//                @Override
-//                public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-//                    switch(item.getItemId()){
-//                        case R.id.navigation_home:
-//                            selectedFagrament = new HomeFragment();
-//                            break;
-//                        case R.id.navigation_donate:
-//                            selectedFagrament = new donateFragment();
-//                            break;
-//                        case R.id.navigation_chatting:
-//                            selectedFagrament = null;
-////                            startActivity(new Intent(homePage.this, chatFragment.class));
-////                            break;
-//                    }
-//                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                            selectedFagrament).commit();
-//                    return true;
-//                }
-//            };
 
 
 }

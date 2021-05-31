@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.practisedoneed.fragment.chatFragment"
+        android:name="com.example.practisedoneed.fragment.profileFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_notifications"
