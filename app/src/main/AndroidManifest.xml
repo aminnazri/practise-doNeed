@@ -9,12 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PractiseDoNeed">
-        <activity android:name=".profile"/>
+        <activity android:name=".ProfileSetting"></activity>
+        <activity android:name=".profile" />
         <activity
             android:name=".homePage"
             android:label="@string/title_activity_home_page" />
-
-
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
