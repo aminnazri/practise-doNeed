@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/navigation_chatting"
-        android:icon="@drawable/chat"
-        android:title="message" />
+        android:icon="@drawable/user"
+        android:title="profile" />
 
 </menu>
