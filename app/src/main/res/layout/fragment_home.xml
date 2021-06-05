@@ -2,60 +2,68 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".fragment.HomeFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_home"
+    tools:context=".fragment.HomeFragment"
     android:orientation="vertical">
 
-<com.google.android.material.appbar.AppBarLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/bar"
-    android:background="?android:attr/windowBackground">
+    <include
+        layout="@layout/apptoolbar"/>
+
+<!--<com.google.android.material.appbar.AppBarLayout-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:id="@+id/bar"-->
+<!--    android:background="?android:attr/windowBackground">-->
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Toolbar"
-        android:background="@color/yellow_musterd">
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/Toolbar"-->
+<!--        android:background="@color/yellow_musterd">-->
+<!--        -->
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<!--            <ImageView-->
+<!--                android:id="@+id/search_feed"-->
+<!--                android:layout_width="25dp"-->
+<!--                android:layout_height="25dp"-->
+<!--                android:layout_marginEnd="20dp"-->
+<!--                android:layout_toStartOf="@+id/image_profile"-->
+<!--                android:src="@drawable/search"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                app:tint="@color/darkGrey"-->
+<!--                app:showAsAction="ifRoom|collapseActionView"-->
+<!--                app:actionViewClass="android.widget.SearchView"-->
+<!--                />-->
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="20dp"
-                android:layout_toStartOf="@+id/image_profile"
-                android:src="@drawable/search"
-                android:layout_centerVertical="true"
-                app:tint="@color/darkGrey"
-                />
-
-            <ImageView
-                android:src="@drawable/chat"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginRight="18dp"
-                android:layout_alignParentEnd="true"
-                app:tint="@color/darkGrey"
-                android:id="@+id/image_profile" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="doNeed"
-                android:fontFamily="@font/cocogoose"
-                android:layout_centerVertical="true"
-                android:textSize="20sp"
-                android:layout_marginStart="10dp"/>
+<!--            <ImageView-->
+<!--                android:src="@drawable/chat"-->
+<!--                android:layout_width="25dp"-->
+<!--                android:layout_height="25dp"-->
+<!--                android:layout_marginRight="18dp"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                app:tint="@color/darkGrey"-->
+<!--                android:id="@+id/image_profile" />-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="doNeed"-->
+<!--                android:fontFamily="@font/cocogoose"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:textSize="20sp"-->
+<!--                android:layout_marginStart="10dp"/>-->
 
 
-        </RelativeLayout>
-    </androidx.appcompat.widget.Toolbar>
+<!--        </RelativeLayout>-->
+<!--    </androidx.appcompat.widget.Toolbar>-->
 
-</com.google.android.material.appbar.AppBarLayout>
+<!--</com.google.android.material.appbar.AppBarLayout>-->
+
 
 <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/filter"
@@ -83,7 +91,6 @@ tools:context=".fragment.HomeFragment"
                 android:textColor="@color/darkGrey"
                 android:text="Category"
                 style="?android:attr/buttonBarButtonStyle"/>
-
 
     </LinearLayout>
 

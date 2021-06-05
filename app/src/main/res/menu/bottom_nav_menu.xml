@@ -12,7 +12,7 @@
         android:title="donate" />
 
     <item
-        android:id="@+id/navigation_chatting"
+        android:id="@+id/navigation_profile"
         android:icon="@drawable/user"
         android:title="profile" />
 
