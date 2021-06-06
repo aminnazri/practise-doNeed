@@ -2,130 +2,130 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_home"
-    tools:context=".fragment.HomeFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".fragment.HomeFragment">
 
-    <include
-        layout="@layout/apptoolbar"
-        />
+    <include layout="@layout/apptoolbar" />
 
-<!--<com.google.android.material.appbar.AppBarLayout-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:id="@+id/bar"-->
-<!--    android:background="?android:attr/windowBackground">-->
+    <!--<com.google.android.material.appbar.AppBarLayout-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:id="@+id/bar"-->
+    <!--    android:background="?android:attr/windowBackground">-->
 
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/Toolbar"-->
-<!--        android:background="@color/yellow_musterd">-->
-<!--        -->
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
+    <!--    <androidx.appcompat.widget.Toolbar-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:id="@+id/Toolbar"-->
+    <!--        android:background="@color/yellow_musterd">-->
+    <!--        -->
+    <!--        <RelativeLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content">-->
 
-<!--            <ImageView-->
-<!--                android:id="@+id/search_feed"-->
-<!--                android:layout_width="25dp"-->
-<!--                android:layout_height="25dp"-->
-<!--                android:layout_marginEnd="20dp"-->
-<!--                android:layout_toStartOf="@+id/image_profile"-->
-<!--                android:src="@drawable/search"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                app:tint="@color/darkGrey"-->
-<!--                app:showAsAction="ifRoom|collapseActionView"-->
-<!--                app:actionViewClass="android.widget.SearchView"-->
-<!--                />-->
+    <!--            <ImageView-->
+    <!--                android:id="@+id/search_feed"-->
+    <!--                android:layout_width="25dp"-->
+    <!--                android:layout_height="25dp"-->
+    <!--                android:layout_marginEnd="20dp"-->
+    <!--                android:layout_toStartOf="@+id/image_profile"-->
+    <!--                android:src="@drawable/search"-->
+    <!--                android:layout_centerVertical="true"-->
+    <!--                app:tint="@color/darkGrey"-->
+    <!--                app:showAsAction="ifRoom|collapseActionView"-->
+    <!--                app:actionViewClass="android.widget.SearchView"-->
+    <!--                />-->
 
-<!--            <ImageView-->
-<!--                android:src="@drawable/chat"-->
-<!--                android:layout_width="25dp"-->
-<!--                android:layout_height="25dp"-->
-<!--                android:layout_marginRight="18dp"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                app:tint="@color/darkGrey"-->
-<!--                android:id="@+id/image_profile" />-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="doNeed"-->
-<!--                android:fontFamily="@font/cocogoose"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:textSize="20sp"-->
-<!--                android:layout_marginStart="10dp"/>-->
-
-
-<!--        </RelativeLayout>-->
-<!--    </androidx.appcompat.widget.Toolbar>-->
-
-<!--</com.google.android.material.appbar.AppBarLayout>-->
+    <!--            <ImageView-->
+    <!--                android:src="@drawable/chat"-->
+    <!--                android:layout_width="25dp"-->
+    <!--                android:layout_height="25dp"-->
+    <!--                android:layout_marginRight="18dp"-->
+    <!--                android:layout_alignParentEnd="true"-->
+    <!--                app:tint="@color/darkGrey"-->
+    <!--                android:id="@+id/image_profile" />-->
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="doNeed"-->
+    <!--                android:fontFamily="@font/cocogoose"-->
+    <!--                android:layout_centerVertical="true"-->
+    <!--                android:textSize="20sp"-->
+    <!--                android:layout_marginStart="10dp"/>-->
 
 
-<com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/filter"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white">
-    <LinearLayout
+    <!--        </RelativeLayout>-->
+    <!--    </androidx.appcompat.widget.Toolbar>-->
+
+    <!--</com.google.android.material.appbar.AppBarLayout>-->
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:background="@color/white">
 
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/state_filter"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="State"
                 android:textColor="@color/darkGrey"
-                android:layout_weight="1"
-                style="?android:attr/buttonBarButtonStyle"
-
+                android:background="@android:drawable/editbox_background"
                 />
+
             <TextView
+                android:id="@+id/category_filter"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/darkGrey"
                 android:text="Category"
-                style="?android:attr/buttonBarButtonStyle"/>
+                android:textColor="@color/darkGrey"
+                android:background="@android:drawable/editbox_background"
+                />
 
-    </LinearLayout>
+        </LinearLayout>
 
-</com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-<androidx.core.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_viewhome"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_viewhome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" />
+
+        </LinearLayout>
 
 
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
-
-
-<!--<ProgressBar-->
-<!--    android:layout_width="wrap_content"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:id="@+id/progress_circular"-->
-<!--    android:layout_centerInParent="true"-->
-<!--    />-->
+    <!--<ProgressBar-->
+    <!--    android:layout_width="wrap_content"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:id="@+id/progress_circular"-->
+    <!--    android:layout_centerInParent="true"-->
+    <!--    />-->
 
 </LinearLayout>
