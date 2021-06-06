@@ -50,7 +50,9 @@ public class HomeFragment extends Fragment {
     private ProgressBar progressBar;
     private RecyclerView recyclerView_story;
     RecyclerView.LayoutManager linearLayoutManager;
-    Toolbar toolbar;
+    private Toolbar toolbar;
+
+    private TextView doNeedTitle;
 
 
     public View onCreateView(LayoutInflater inflater,
@@ -58,7 +60,10 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home,container,false);
         setHasOptionsMenu(true);
         toolbar = view.findViewById(R.id.app_toolbar);
+        toolbar.setTitle("");
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        doNeedTitle = toolbar.findViewById(R.id.text_doNeed);
+        doNeedTitle.setVisibility(View.VISIBLE);
 
         return view;
     }

@@ -9,7 +9,8 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/apptoolbar"/>
+        layout="@layout/apptoolbar"
+        />
 
 <!--<com.google.android.material.appbar.AppBarLayout-->
 <!--    android:layout_width="match_parent"-->

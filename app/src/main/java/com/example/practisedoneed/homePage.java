@@ -29,13 +29,13 @@ import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 public class homePage extends AppCompatActivity {
 
-    Button logout;
-    BottomNavigationView bottomNavigationView ;
-    Fragment selectedFagrament = null;
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-    String fragmentName = "home";
-    int check;
+    private Button logout;
+    private BottomNavigationView bottomNavigationView ;
+    private Fragment selectedFagrament = null;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+    private String fragmentName = "home";
+    private long pressedTime;
 
 
     @Override
@@ -46,13 +46,12 @@ public class homePage extends AppCompatActivity {
         bottomNavigationView  = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListner);
         Bundle intent = getIntent().getExtras();
-        check=0;
 
 
         // Default Fragment
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.fragment_container, new HomeFragment())
+                .replace(R.id.fragment_container, new HomeFragment())
                 .addToBackStack("home")
                 .commit();
         
@@ -68,9 +67,6 @@ public class homePage extends AppCompatActivity {
             }
         });
     }
-
-
-
 
 
     private final BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListner =
@@ -105,34 +101,18 @@ public class homePage extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if(fragmentManager.getBackStackEntryCount() > 0){
-
-            fragmentManager.popBackStack();
-            int count = fragmentManager.getBackStackEntryCount();
-            String currentFragment=null;
-            if(count-2>=0){
-                currentFragment=fragmentManager.getBackStackEntryAt(count-2).getName();
-
-                Log.i(TAG,String.valueOf(count));
-                Log.i(TAG,fragmentManager.getBackStackEntryAt(0).getName());
-                //check your position based on selected fragment and set it accordingly.
-                assert currentFragment != null;
-                if(currentFragment.equals("home")){
-
-                    bottomNavigationView.getMenu().getItem(0).setChecked(true);
-                }else if(currentFragment.equals("donate")){
-
-                    bottomNavigationView.getMenu().getItem(1).setChecked(true);
-                }else if(currentFragment.equals("profile")){
-
-                    bottomNavigationView.getMenu().getItem(2).setChecked(true);
-                }
-            }else{
-                super.onBackPressed();
-            }
+        if(fragmentManager.getBackStackEntryCount()>1){
+            fragmentManager.popBackStack(0,0);
+            bottomNavigationView.getMenu().getItem(0).setChecked(true);
         }
-        else {
-            super.onBackPressed();
+        else{
+            if (pressedTime + 2000 > System.currentTimeMillis()) {
+                super.onBackPressed();
+                finish();
+            } else {
+                Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+            }
+            pressedTime = System.currentTimeMillis();
         }
     }
 

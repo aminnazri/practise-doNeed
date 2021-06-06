@@ -30,7 +30,8 @@ import java.util.Objects;
 
 public class donateFragment extends Fragment {
 
-    Toolbar toolbar;
+    private Toolbar toolbar;
+    private TextView donateTitle;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,8 +41,10 @@ public class donateFragment extends Fragment {
         AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
         assert appCompatActivity != null;
         appCompatActivity.setSupportActionBar(toolbar);
-        toolbar.setTitle("Donate");
+        toolbar.setTitle("");
         appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        donateTitle = toolbar.findViewById(R.id.text_Donate);
+        donateTitle.setVisibility(View.VISIBLE);
         return view;
     }
 
