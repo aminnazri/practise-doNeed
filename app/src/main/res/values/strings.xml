@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">practise doNeed</string>
+    <string name="app_name">doNeed</string>
     <string name="logout">LOGOUT</string>
     <string name="title_activity_home_page">MainActivity</string>
     <string name="title_home">Home</string>
