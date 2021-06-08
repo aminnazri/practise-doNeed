@@ -14,14 +14,18 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.practisedoneed.MainActivity;
 import com.example.practisedoneed.ProfileSetting;
 import com.example.practisedoneed.R;
 
+import com.example.practisedoneed.homePage;
 import com.example.practisedoneed.ui.dashboard.DashboardViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class profileFragment extends Fragment {
 
     Intent intent;
+    private Button logout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +42,19 @@ public class profileFragment extends Fragment {
             }
         });
 
+        logout = (Button) rootView.findViewById(R.id.logout);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getActivity(), MainActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
+        });
+
         return rootView;
+
+
     }
 }

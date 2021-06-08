@@ -54,18 +54,7 @@ public class homePage extends AppCompatActivity {
                 .replace(R.id.fragment_container, new HomeFragment())
                 .addToBackStack("home")
                 .commit();
-        
 
-        logout = findViewById(R.id.logout);
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(homePage.this, MainActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            }
-        });
     }
 
 
