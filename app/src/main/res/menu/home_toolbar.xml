@@ -7,12 +7,13 @@
         android:title="Search"
         android:icon="@drawable/ic_baseline_search_24"
         app:showAsAction="ifRoom|collapseActionView"
+        app:iconTint="@color/black"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         />
 
     <item
         android:id="@+id/chat_tool"
-        android:title="Profile"
+        android:title="Chat"
         android:icon="@drawable/ic_baseline_chat_24"
         app:showAsAction="ifRoom"
         />
