@@ -116,16 +116,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             builder.setMultiChoiceItems(stateArray, selectedState, new DialogInterface.OnMultiChoiceClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-//                    if(isChecked){
-//                        if(!stateList.contains(which)){
-//                            stateList.add(which);
-//                            Collections.sort(stateList);
-//                        }
-//                    }else {
-//                        if(stateList.contains(which)){
-//                            stateList.remove(which);
-//                        }
-//                    }
+
 
                     selectedState[which] = isChecked;
                     String currentItem = stateList.get(which);
