@@ -35,15 +35,7 @@
         </com.google.android.material.bottomnavigation.BottomNavigationView>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:text="logout"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="281dp" />
+
 
 
 
