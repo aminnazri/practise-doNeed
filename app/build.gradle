@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.practisedoneed"
-        minSdkVersion 23
-        targetSdkVersion 30
+        minSdkVersion 21
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -56,4 +56,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
