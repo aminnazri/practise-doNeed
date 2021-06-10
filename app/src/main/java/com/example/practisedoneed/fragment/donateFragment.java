@@ -1,5 +1,6 @@
 package com.example.practisedoneed.fragment;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,24 +65,26 @@ public class donateFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-//                // start picker to get image for cropping and then use the image in cropping activity
-//                CropImage.activity()
-//                        .setGuidelines(CropImageView.Guidelines.ON)
-//                        .start(this);
-//
-//// start cropping activity for pre-acquired image saved on the device
-//                CropImage.activity(imageUri)
-//                        .start(this);
-//
-//// for fragment (DO NOT use `getActivity()`)
-//                CropImage.activity()
-//                        .start(getContext(),this);
+                Intent intent = new Intent();
+
+                intent.setType("image/*");
+
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(intent, "Open Gallery"), 1);
 
             }
         });
-        CropImage.activity()
-                .start(getContext(),this);
+
         return view;
+
+    }
+
+    private String getFileExtensions(Uri uri) {
+
+        ContentResolver contentResolver = getActivity().getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
 
     }
 
@@ -103,41 +107,21 @@ public class donateFragment extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                Uri resultUri = result.getUri();
-                Log.e("resultUri ->", String.valueOf(resultUri));
-//                AddImage1.setImageURI(resultUri);
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Exception error = result.getError();
-                Log.e("error ->", String.valueOf(error));
-            }
-        }
-
-
-//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
-//
-//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-//
-//            imageUrl = result.getUri();
-//
-//            image_added.setImageURI(imageUrl);
-//        }
-//        else {
-//            Toast.makeText(PostActivity.this,"Searching gone wrong!",Toast.LENGTH_SHORT).show();
-//
-//            startActivity(new Intent(PostActivity.this, MainActivity.class));
-//            finish();
-//        }
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if(requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            imageUrl = data.getData();
+            image_add.setImageURI(imageUrl);
+
+        }
     }
 }
