@@ -108,7 +108,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                     FirebaseUser firebaseUser = mauth.getCurrentUser();
                     String userid  = firebaseUser.getUid();
-                    reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
+                    reference = FirebaseDatabase.getInstance().getReference().child("User").child(userid);
                     HashMap<String,Object> hashMap = new HashMap<>();
 
                     hashMap.put("id",userid);

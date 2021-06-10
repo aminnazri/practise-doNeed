@@ -73,12 +73,13 @@
                     android:layout_marginTop="100dp"
                     android:layout_marginRight="40dp"
                     android:layout_marginLeft="40dp"
+                    app:boxStrokeColor="@color/black"
                     >
 
                     <EditText
                         android:id="@+id/login_email"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:textColor="@color/black"
                         android:ems="10"
                         android:background="@color/white"
@@ -112,6 +113,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:ems="20"
+                        app:boxStrokeColor="@color/black"
                         android:hint="Password"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,7 +143,8 @@
                     android:paddingBottom="5dp"
                     android:textColor="#ffff"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="50dp"/>
+                    android:layout_marginTop="50dp"
+                    />
 
                 <TextView
 

@@ -39,8 +39,7 @@
                     android:scaleType="centerInside"
                     android:layout_gravity="center"
                     android:src="@mipmap/ic_launcher_foreground"
-
-                    android:id="@+id/image_added"
+                    android:id="@+id/image_add"
                     app:tint="@color/yellow_musterd" />
 
             </RelativeLayout>
