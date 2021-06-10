@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText password,email;
@@ -31,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mauth;
     DatabaseReference reference;
     ProgressDialog pd;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +57,14 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+        Log.d(TAG, "email");
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+//                startActivity(new Intent(LoginActivity.this, homePage.class));
+//                finish();
                 pd = new ProgressDialog(LoginActivity.this);
                 pd.setMessage("Please wait...");
                 pd.show();
@@ -64,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                 //  String str_fullname= fullname.getText().toString();
                 String str_email= email.getText().toString();
                 String str_password= password.getText().toString();
+
 
                 if(TextUtils.isEmpty(str_email) || TextUtils.isEmpty(str_password)){
 
@@ -94,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
                                         finish();
-
                                     }
 
                                     @Override
@@ -106,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                             }else {
+                                pd.dismiss();
                                 Toast.makeText(LoginActivity.this,"Authentication Failed!",Toast.LENGTH_SHORT).show();
                             }
                         }

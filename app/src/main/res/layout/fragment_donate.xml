@@ -46,11 +46,19 @@
 
             </RelativeLayout>
 
+            <Button
+                android:id="@+id/choose_image_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Image"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:hint="Tittle"
                 android:textColorHint="@color/grey"
                 android:maxLines="5"
@@ -81,31 +89,31 @@
                 android:elevation="2dp"
                 />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:hint="Category"
-                android:textColorHint="@color/grey"
-                android:maxLines="5"
-                android:id="@+id/category"
-                android:background="@drawable/text_background"
-                android:padding="10dp"
-                android:layout_marginLeft="21dp"
-                android:layout_marginRight="21dp"
-                android:inputType="textImeMultiLine"
-                android:textColor="@color/black"
-                android:elevation="2dp"
-                />
+<!--            <EditText-->
+<!--                android:id="@+id/category"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:hint="Category"-->
+<!--                android:textColorHint="@color/grey"-->
+<!--                android:maxLines="5"-->
+<!--                android:background="@drawable/text_background"-->
+<!--                android:padding="10dp"-->
+<!--                android:layout_marginLeft="21dp"-->
+<!--                android:layout_marginRight="21dp"-->
+<!--                android:inputType="textImeMultiLine"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:elevation="2dp"-->
+<!--                />-->
 
             <EditText
+                android:id="@+id/Quantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:hint="Quantity"
                 android:textColorHint="@color/grey"
                 android:maxLines="5"
-                android:id="@+id/Quantity"
                 android:background="@drawable/text_background"
                 android:padding="10dp"
                 android:layout_marginLeft="21dp"
@@ -115,22 +123,50 @@
                 android:elevation="2dp"
                 />
 
-            <EditText
+            <Spinner
+                android:id="@+id/categories_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="15dp"
-                android:hint="State"
-                android:textColorHint="@color/grey"
-                android:maxLines="5"
-                android:id="@+id/Location"
-                android:background="@drawable/text_background"
+                android:layout_marginStart="21dp"
+                android:layout_marginEnd="21dp"
                 android:padding="10dp"
-                android:layout_marginLeft="21dp"
-                android:layout_marginRight="21dp"
-                android:inputType="textImeMultiLine"
-                android:textColor="@color/black"
-                android:elevation="2dp"
+                android:prompt="@string/categories"
+                android:background="@drawable/text_background"
                 />
+
+            <Spinner
+                android:id="@+id/state_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginEnd="21dp"
+                android:padding="10dp"
+                android:prompt="@string/state"
+
+                android:background="@drawable/text_background"
+                />
+
+
+
+<!--            <EditText-->
+<!--                android:id="@+id/Location"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:hint="State"-->
+<!--                android:textColorHint="@color/grey"-->
+<!--                android:maxLines="5"-->
+<!--                -->
+<!--                android:background="@drawable/text_background"-->
+<!--                android:padding="10dp"-->
+<!--                android:layout_marginLeft="21dp"-->
+<!--                android:layout_marginRight="21dp"-->
+<!--                android:inputType="textImeMultiLine"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:elevation="2dp"-->
+<!--                />-->
 
         </LinearLayout>
 
