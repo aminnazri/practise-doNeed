@@ -187,6 +187,7 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
             ((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
             Toast.makeText(getActivity(), categoryArray[position], Toast.LENGTH_SHORT).show();
         }else if(parent.getId()==R.id.state_spinner){
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
             Toast.makeText(getActivity(), stateArray[position], Toast.LENGTH_SHORT).show();
         }
     }
