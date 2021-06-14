@@ -1,11 +1,13 @@
 package com.example.practisedoneed.fragment;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +48,27 @@ public class profileFragment extends Fragment {
         logout = (Button) rootView.findViewById(R.id.logout);
 
         logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getActivity(), MainActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
+        });
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+        ImageView logout2 = (ImageView) rootView.findViewById(R.id.logout2);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
+
+        logout2 = (ImageView) rootView.findViewById(R.id.logout2);
+
+        logout2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
