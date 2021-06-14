@@ -1,69 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".MainActivity">
+    tools:context="MainActivity">
+
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="204dp"
         android:fontFamily="@font/cocogoose"
         android:text="doNeed"
-        android:textStyle="bold"
+        android:textColor="#8F000000"
         android:textSize="45sp"
-
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:textColor="#8F000000"/>
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
         android:background="@drawable/button1"
-        android:textSize="25sp"
         android:fontFamily="@font/cocogoose"
-        android:textStyle="bold"
         android:paddingLeft="66dp"
-        android:paddingRight="66dp"
-        android:text="Login"
         android:paddingTop="5dp"
+        android:paddingRight="66dp"
         android:paddingBottom="5dp"
-        android:textColor="#ffff"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="420dp"/>
+        android:text="Login"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
         android:id="@+id/signUp_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button2"
-        android:layout_below="@+id/login_btn"
-        android:textSize="25sp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/button1"
         android:fontFamily="@font/cocogoose"
-        android:textStyle="bold"
-        android:text="Sign Up"
+        android:paddingLeft="50dp"
+
         android:paddingTop="5dp"
+        android:paddingRight="50dp"
         android:paddingBottom="5dp"
+        android:text="Sign Up"
         android:textColor="#707070"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        app:backgroundTint="@color/white"/>
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/login_btn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/login_btn"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn"
+
+        />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="156dp"
-        android:layout_marginBottom="35dp"
+        android:id="@+id/imageView"
+        android:layout_width="98dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="84dp"
         android:alpha="0.4"
-        android:src="@drawable/donation" />
+        app:layout_constraintEnd_toEndOf="@+id/signUp_btn"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/signUp_btn"
+        app:layout_constraintTop_toTopOf="@+id/signUp_btn"
+        app:srcCompat="@drawable/donation" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
