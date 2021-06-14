@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/chat_tool"
+        android:id="@+id/donate_now"
         android:title="Post"
         android:icon="@drawable/ic_baseline_done_outline_24"
         app:showAsAction="ifRoom|withText"

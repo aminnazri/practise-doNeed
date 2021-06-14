@@ -116,7 +116,7 @@ public class SignUpActivity extends AppCompatActivity {
                     hashMap.put("address",address);
                     hashMap.put("phone",phoneNumber);
                     hashMap.put("pass",password);
-                    hashMap.put("imageurl","https://firebasestorage.googleapis.com/v0/b/instagramappdatabase.appspot.com/o/120x120profile.png?alt=media&token=2858c7bc-58da-430a-9d20-89f6ea2f62e7");
+                    hashMap.put("imageurl","https://firebasestorage.googleapis.com/v0/b/practise-doneed.appspot.com/o/profile-user.png?alt=media&token=759bcc21-773e-4ddd-95e9-4415026080c8");
 
                     reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

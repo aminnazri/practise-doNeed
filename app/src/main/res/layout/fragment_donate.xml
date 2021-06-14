@@ -60,13 +60,13 @@
                 />
 
             <EditText
+                android:id="@+id/Tittle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="Tittle"
                 android:textColorHint="@color/grey"
                 android:maxLines="5"
-                android:id="@+id/Tittle"
                 android:background="@drawable/text_background"
                 android:padding="10dp"
                 android:layout_marginLeft="21dp"
@@ -77,12 +77,12 @@
                 />
 
             <EditText
+                android:id="@+id/Description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:hint="Description"
                 android:textColorHint="@color/grey"
-                android:id="@+id/Description"
                 android:background="@drawable/text_background"
                 android:padding="10dp"
                 android:layout_marginLeft="21dp"
@@ -92,23 +92,6 @@
                 android:maxLines="5"
                 android:elevation="2dp"
                 />
-
-<!--            <EditText-->
-<!--                android:id="@+id/category"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="15dp"-->
-<!--                android:hint="Category"-->
-<!--                android:textColorHint="@color/grey"-->
-<!--                android:maxLines="5"-->
-<!--                android:background="@drawable/text_background"-->
-<!--                android:padding="10dp"-->
-<!--                android:layout_marginLeft="21dp"-->
-<!--                android:layout_marginRight="21dp"-->
-<!--                android:inputType="textImeMultiLine"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:elevation="2dp"-->
-<!--                />-->
 
             <EditText
                 android:id="@+id/Quantity"
@@ -154,26 +137,6 @@
                 android:elevation="2dp"
                 android:background="@drawable/text_background"
                 />
-
-
-
-<!--            <EditText-->
-<!--                android:id="@+id/Location"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="15dp"-->
-<!--                android:hint="State"-->
-<!--                android:textColorHint="@color/grey"-->
-<!--                android:maxLines="5"-->
-<!--                -->
-<!--                android:background="@drawable/text_background"-->
-<!--                android:padding="10dp"-->
-<!--                android:layout_marginLeft="21dp"-->
-<!--                android:layout_marginRight="21dp"-->
-<!--                android:inputType="textImeMultiLine"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:elevation="2dp"-->
-<!--                />-->
 
         </LinearLayout>
         </ScrollView>
