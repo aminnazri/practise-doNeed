@@ -226,7 +226,8 @@
                         android:layout_height="40dp"
                         android:textColor="@color/black"
                         android:backgroundTint="@color/grey"
-                        android:inputType="textPassword"/>
+                        android:inputType="textPassword"
+                        app:passwordToggleEnabled="true"/>
                 </LinearLayout>
 
                 <TextView
