@@ -56,36 +56,36 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
 //                .apply(new RequestOptions().placeholder(R.drawable.placeholder))
                 .into(holder.post_image);
         holder.title.setText(post.getTitle());
-        if(post.getDescription().equals("")){
+//        if(post.getDescription().equals("")){
+//
+//            holder.description.setVisibility(View.GONE);
+//
+//        }else {
+//            holder.description.setVisibility(View.VISIBLE);
+//            holder.description.setText(post.getDescription());
+//        }
+//        if (post.getQuantity().equals("")){
+//            holder.quantity.setVisibility(View.GONE);
+//        }else{
+//            holder.quantity.setVisibility(View.VISIBLE);
+//            holder.quantity.setText(new StringBuilder().append("Quantity:").append(post.getQuantity()).toString());
+//        }
+//        if (post.getCategory().equals("")){
+//            holder.category.setVisibility(View.GONE);
+//        }else{
+//            holder.category.setVisibility(View.VISIBLE);
+//            holder.category.setText(post.getCategory());
+//        }
+//        if (post.getLocation().equals("")){
+//            holder.location.setVisibility(View.GONE);
+//        }else{
+//            holder.location.setVisibility(View.VISIBLE);
+//            holder.location.setText(post.getLocation());
+//        }
 
-            holder.description.setVisibility(View.GONE);
 
-        }else {
-            holder.description.setVisibility(View.VISIBLE);
-            holder.description.setText(post.getDescription());
-        }
-        if (post.getQuantity().equals("")){
-            holder.quantity.setVisibility(View.GONE);
-        }else{
-            holder.quantity.setVisibility(View.VISIBLE);
-            holder.quantity.setText(new StringBuilder().append("Quantity:").append(post.getQuantity()).toString());
-        }
-        if (post.getCategory().equals("")){
-            holder.category.setVisibility(View.GONE);
-        }else{
-            holder.category.setVisibility(View.VISIBLE);
-            holder.category.setText(post.getCategory());
-        }
-        if (post.getLocation().equals("")){
-            holder.location.setVisibility(View.GONE);
-        }else{
-            holder.location.setVisibility(View.VISIBLE);
-            holder.location.setText(post.getLocation());
-        }
-
-
-        publisherInfo(holder.image_profile, holder.username, post.getDonator());
-
+        publisherInfo(holder.image_profile,  post.getDonator());
+//        holder.username,
     }
 
     @Override
@@ -107,16 +107,16 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
             save = itemView.findViewById(R.id.save);
             username = itemView.findViewById(R.id.username);
             title = itemView.findViewById(R.id.title);
-            quantity = itemView.findViewById(R.id.quantity);
-            category = itemView.findViewById(R.id.category);
-            location = itemView.findViewById(R.id.location);
-            description = itemView.findViewById(R.id.description);
+//            quantity = itemView.findViewById(R.id.quantity);
+//            category = itemView.findViewById(R.id.category);
+//            location = itemView.findViewById(R.id.location);
+//            description = itemView.findViewById(R.id.description);
 
         }
     }
 
-    private  void  publisherInfo(final ImageView image_profile, final TextView donator , String userid ){
-
+    private  void  publisherInfo(final ImageView image_profile, String userid ){
+//        final TextView donator ,
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
@@ -129,7 +129,7 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
 
                 Glide.with(mContext).load(user.getImageUrl()).into(image_profile);
 
-                donator.setText(user.getUsername());
+//                donator.setText(user.getUsername());
 
             }
 
