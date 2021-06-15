@@ -132,15 +132,15 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
     }
 
     @Override
-    public void onClick(View v) {
-        if(v.getId()==R.id.choose_image_btn){
+    public void onClick(View j) {
+        if(j.getId()==R.id.choose_image_btn){
             pickFromGallery();
         }
     }
 
     // Here we will pick image from gallery or camera
     private void pickFromGallery() {
-        CropImage.activity().start(getContext(), this);
+        CropImage.activity().setFixAspectRatio(true).start(requireContext(), this);
     }
 
     private String getFileExtensions(Uri uri) {
