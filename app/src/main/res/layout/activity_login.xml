@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
     app:backgroundTint="@color/white"
+
     >
 
 
@@ -16,6 +17,7 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:padding="1dp"
+
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="1dp">
+            tools:layout_editor_absoluteY="1dp"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -53,8 +56,9 @@
             android:layout_centerHorizontal="true"
             app:cardCornerRadius="38dp"
             android:paddingBottom="10dp"
-            app:cardBackgroundColor="@color/yellow_musterd"
-            app:cardElevation="10dp">
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="10dp"
+            android:alpha="0.9">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -88,7 +92,8 @@
                     android:layout_below="@+id/Login_txt"
                     android:layout_marginTop="108dp"
                     android:hint="Email"
-                    app:boxStrokeColor="@color/white"
+                    app:boxBackgroundMode="filled"
+                    app:boxBackgroundColor="@color/lightGrey"
                     app:endIconMode="clear_text"
                     app:hintEnabled="true"
                     app:hintTextColor="@color/darkGrey"
@@ -105,7 +110,7 @@
                         android:ems="10"
                         android:inputType="textEmailAddress"
                         android:paddingStart="10dp"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textColorHint="@color/yellow_musterd"
 
                         />
@@ -119,13 +124,15 @@
                     android:layout_below="@+id/email_field"
                     android:layout_marginTop="44dp"
                     android:hint="Password"
-                    app:boxStrokeColor="@color/darkGrey"
+                    app:boxBackgroundMode="filled"
+                    app:boxBackgroundColor="@color/lightGrey"
                     app:hintTextColor="@color/darkGrey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/email_field"
                     app:layout_constraintTop_toBottomOf="@+id/email_field"
-                    app:passwordToggleEnabled="true">
+                    app:passwordToggleEnabled="true"
+                    >
 
                     <EditText
                         android:id="@+id/login_password"
@@ -139,7 +146,8 @@
                         android:ems="20"
 
                         android:inputType="textPassword"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
+                        app:hintTextColor="@color/darkGrey"
                         android:textColorHint="@color/darkGrey" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -171,7 +179,7 @@
                     android:text="Login"
                     android:textColor="@color/darkGrey"
                     android:textSize="20sp"
-                    app:backgroundTint="@color/white"
+                    app:backgroundTint="@color/yellow_musterd"
                     android:textStyle="bold"
 
                     app:layout_constraintEnd_toEndOf="parent"
