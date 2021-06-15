@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PractiseDoNeed">
-        <activity android:name=".test"></activity>
+        <activity android:name=".detailPost"></activity>
+        <activity android:name=".test" />
         <activity android:name=".ProfileSetting" />
         <activity android:name=".profile" />
         <activity

@@ -22,13 +22,6 @@ public class ProfileSetting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_setting);
 
-//            // start picker to get image for cropping and then use the image in cropping activity
-//        CropImage.activity()
-//                .setAspectRatio(1, 1)
-//                .start(ProfileSetting.this);
-//
-//
-        openFileChooser();
     }
 
     @Override

@@ -36,25 +36,10 @@ public class profileFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        intent = new Intent(getActivity(), test.class);
+        intent = new Intent(getActivity(), ProfileSetting.class);
         final Button button = (Button) rootView.findViewById(R.id.setting_button);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(intent);
-            }
-        });
 
-        logout = (Button) rootView.findViewById(R.id.logout);
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getActivity(), MainActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            }
-        });
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
