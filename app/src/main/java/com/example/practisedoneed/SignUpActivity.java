@@ -108,15 +108,15 @@ public class SignUpActivity extends AppCompatActivity {
 
                     FirebaseUser firebaseUser = mauth.getCurrentUser();
                     String userid  = firebaseUser.getUid();
-                    reference = FirebaseDatabase.getInstance().getReference().child("User").child(userid);
+                    reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
                     HashMap<String,Object> hashMap = new HashMap<>();
 
                     hashMap.put("id",userid);
                     hashMap.put("username",username);
                     hashMap.put("address",address);
                     hashMap.put("phone",phoneNumber);
-                    hashMap.put("pass",password);
-                    hashMap.put("imageurl","https://firebasestorage.googleapis.com/v0/b/practise-doneed.appspot.com/o/profile-user.png?alt=media&token=759bcc21-773e-4ddd-95e9-4415026080c8");
+                    hashMap.put("email",email);
+                    hashMap.put("imageUrl","https://firebasestorage.googleapis.com/v0/b/practise-doneed.appspot.com/o/profile-user.png?alt=media&token=759bcc21-773e-4ddd-95e9-4415026080c8");
 
                     reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

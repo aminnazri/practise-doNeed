@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.R;
 
 //import com.example.practisedoneed.databinding.FragmentHomeBinding;
@@ -51,10 +52,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private donateAdapter postAdapter;
-//    private List<Post> postLists;
-    private List<String> followingList;
+    private List<donatePost> postLists;
     private ProgressBar progressBar;
-    private RecyclerView recyclerView_story;
+
     RecyclerView.LayoutManager linearLayoutManager;
     private Toolbar toolbar;
     private TextView doNeedTitle;
@@ -89,6 +89,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         selectedCategory = new boolean[categoryArray.length];
         textCategory.setOnClickListener(this);
         selectedCategory[0] = true;
+
+        recyclerView = view.findViewById(R.id.recycler_viewhome);
+        recyclerView.setHasFixedSize(true);
+        linearLayoutManager = new GridLayoutManager(getContext(),1);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        postLists = new ArrayList<>();
+        postAdapter = new donateAdapter(getContext(),postLists);
+        recyclerView.setAdapter(postAdapter);
+
+        readPost();
 
         return view;
     }
@@ -222,5 +233,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
+    }
+
+    private  void  readPost(){
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                postLists.clear();
+                for(DataSnapshot Snapshot : dataSnapshot.getChildren()){
+
+                    donatePost post  = Snapshot.getValue(donatePost.class);
+                    postLists.add(post);
+                }
+                postAdapter.notifyDataSetChanged();
+//                progressBar.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

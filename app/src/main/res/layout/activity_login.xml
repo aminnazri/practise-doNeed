@@ -169,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="92dp"
+                    android:layout_marginTop="90dp"
                     android:background="@drawable/button1"
                     android:fontFamily="@font/cocogoose"
                     android:paddingLeft="66dp"
@@ -179,13 +179,15 @@
                     android:text="Login"
                     android:textColor="@color/darkGrey"
                     android:textSize="20sp"
-                    app:backgroundTint="@color/yellow_musterd"
                     android:textStyle="bold"
+                    app:backgroundTint="@color/yellow_musterd"
 
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_bias="0.503"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_signUp" />
+                    app:layout_constraintTop_toBottomOf="@+id/txt_signUp"
+                    app:layout_constraintVertical_bias="0.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

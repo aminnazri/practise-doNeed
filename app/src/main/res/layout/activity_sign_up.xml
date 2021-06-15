@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity"
-    android:background="@drawable/bg3">
+    android:background="@drawable/background"
+    tools:context=".SignUpActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,7 +22,8 @@
             android:fontFamily="@font/cocogoose"
             android:text="doNeed"
             android:textColor="#54000000"
-            android:textSize="88sp" />
+            android:textSize="85sp" />
+
 
         <androidx.cardview.widget.CardView
 
@@ -36,6 +37,10 @@
             android:layout_centerHorizontal="true"
             app:cardCornerRadius="38dp"
             app:cardElevation="8dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -264,8 +269,10 @@
 
 
             </RelativeLayout>
+            </ScrollView>
 
         </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 
 </RelativeLayout>

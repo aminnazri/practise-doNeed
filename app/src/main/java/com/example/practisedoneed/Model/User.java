@@ -6,14 +6,14 @@ public class User {
     private  String username ;
     private  String email ;
     private  String imageUrl ;
-    private  String phoneNumber ;
+    private  String phone ;
 
-    public User(String id, String username, String email, String imageUrl, String phoneNumber) {
+    public User(String id, String username, String email, String imageUrl, String phone) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.imageUrl = imageUrl;
-        this.phoneNumber = phoneNumber;
+        this.phone = phone;
     }
 
     public User() {
@@ -51,11 +51,11 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phoneNumber) {
+        this.phone = phoneNumber;
     }
 }

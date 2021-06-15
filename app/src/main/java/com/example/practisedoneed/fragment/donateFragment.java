@@ -204,14 +204,14 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
 
                         String postid = reference.push().getKey();
                         HashMap<String,Object> hashMap = new HashMap<>();
-                        hashMap.put("postid",postid);
-                        hashMap.put("postimage",myUrl);
-                        hashMap.put("postTitle", postTitle.getText().toString());
+                        hashMap.put("id",postid);
+                        hashMap.put("image",myUrl);
+                        hashMap.put("title", postTitle.getText().toString());
                         hashMap.put("description",description.getText().toString());
                         hashMap.put("quantity",quantity.getText().toString());
                         hashMap.put("location", state);
                         hashMap.put("category", category);
-                        hashMap.put("publisher", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        hashMap.put("donator", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                         reference.child(postid).setValue(hashMap);
 
