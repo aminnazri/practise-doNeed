@@ -1,14 +1,17 @@
 package com.example.practisedoneed.fragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -58,6 +61,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -82,6 +86,8 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
     String state;
     StorageTask uploadTask;
     StorageReference storageReference;
+    String extension;
+    private Context context;
 
 //    private static final int GalleryPick = 1;
 //    private static final int CAMERA_REQUEST = 100;
@@ -128,6 +134,8 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
 //        storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storageReference = FirebaseStorage.getInstance().getReference("posts");
 
+        context = container.getContext();
+
         return view;
     }
 
@@ -143,12 +151,28 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         CropImage.activity().setAspectRatio(5,4).start(requireContext(), this);
     }
 
-    private String getFileExtensions(Uri uri) {
-
-        ContentResolver contentResolver = getActivity().getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
-
+    public static String getMimeType(Activity context, Uri uri) {
+        String extension;
+        //Check uri format to avoid null
+        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
+            //If scheme is a content
+            extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(context.getContentResolver().getType(uri));
+            if (TextUtils.isEmpty(extension)) {
+                extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
+            }
+        } else {
+            //If scheme is a File
+            //This will replace white spaces with %20 and also other special characters. This will avoid returning null values on file
+            // name with spaces and special characters.
+            extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
+            if (TextUtils.isEmpty(extension)) {
+                extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(context.getContentResolver().getType(uri));
+            }
+        }
+//        if (TextUtils.isEmpty(extension)) {
+//            extension = getMimeTypeByFileName(TUriParse.getFileWithUri(uri, context).getName());
+//        }
+        return extension;
     }
 
 
@@ -175,10 +199,10 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         progressDialog.show();
         if(imageUrl != null){
 
-            final StorageReference fileReferance = storageReference.child(System.currentTimeMillis()
-                    + "."+ getFileExtensions(imageUrl));
-
-            uploadTask = fileReferance.putFile(imageUrl);
+            StorageReference fileReference = storageReference.child(System.currentTimeMillis()
+                    + "."+ getMimeType(getActivity(), imageUrl));
+//            getFileExtensions(imageUrl)
+            uploadTask = fileReference.putFile(imageUrl);
             uploadTask.continueWithTask(new Continuation() {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {
@@ -187,7 +211,7 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
                         throw  task.getException();
 
                     }
-                    return fileReferance.getDownloadUrl();
+                    return fileReference.getDownloadUrl();
 
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
