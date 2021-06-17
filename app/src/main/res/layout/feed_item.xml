@@ -60,12 +60,13 @@
                 android:layout_marginStart="10dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
+
                 app:layout_constraintStart_toEndOf="@+id/image_profile"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/title"
-                    android:layout_width="56dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="27dp"
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/cocogoose"

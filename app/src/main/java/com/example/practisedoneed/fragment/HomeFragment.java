@@ -249,6 +249,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     donatePost post  = Snapshot.getValue(donatePost.class);
                     postLists.add(post);
                 }
+                Collections.reverse(postLists);
                 postAdapter.notifyDataSetChanged();
 //                progressBar.setVisibility(View.GONE);
 

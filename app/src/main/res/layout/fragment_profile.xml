@@ -97,7 +97,8 @@
                             android:id="@+id/username"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/cocogoose"
+                            android:fontFamily="@font/lato"
+                            android:textStyle="bold"
                             android:text="amin"
                             android:textColor="@color/darkGrey"
                             android:textSize="25sp" />
@@ -119,11 +120,6 @@
                             android:text="Profile settings"
                             android:textSize="15sp" />
                     </LinearLayout>
-                    <!--                <LinearLayout-->
-                    <!--                    android:layout_width="match_parent"-->
-                    <!--                    android:layout_height="wrap_content">-->
-                    <!--                    -->
-                    <!--                </LinearLayout>-->
                 </LinearLayout>
 
                 <LinearLayout

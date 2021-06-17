@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,7 +18,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.practisedoneed.MainActivity;
+import com.example.practisedoneed.Model.User;
 import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.ProfileSetting;
 import com.example.practisedoneed.R;
@@ -25,6 +28,7 @@ import com.example.practisedoneed.R;
 import com.example.practisedoneed.adapter.myFotosAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,10 +46,12 @@ import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 public class profileFragment extends Fragment {
 
     Intent intent;
-    private Button logout;
+    private ImageView logout2, profilePicture;
+    private TextView username, bio;
     private TabLayout tabLayout;
     private int[] tabIcon = {R.drawable.ic_grid, R.drawable.ic_save};
-
+    private FirebaseUser firebaseUser;
+    String userID;
     String profileid;
 
     private myFotosAdapter fotosAdapter;
@@ -61,12 +67,14 @@ public class profileFragment extends Fragment {
         final Button button = (Button) rootView.findViewById(R.id.setting_button);
 
         SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
-        profileid = prefs.getString("profileid", "none");
-
-
+        profileid = prefs.getString("profileId", "none");
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        userID = firebaseUser.getUid();
 ///////////////////////////////////////////////////////////////////////////////////////
 
-        ImageView logout2 = (ImageView) rootView.findViewById(R.id.logout2);
+        profilePicture = rootView.findViewById(R.id.image_profile);
+        username = rootView.findViewById(R.id.username);
+        bio = rootView.findViewById(R.id.user_bio);
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -82,6 +90,7 @@ public class profileFragment extends Fragment {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getActivity(), MainActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                getActivity().finish();
             }
         });
 
@@ -96,6 +105,7 @@ public class profileFragment extends Fragment {
         fotosAdapter = new myFotosAdapter(getContext(),postList);
         recyclerView1.setAdapter(fotosAdapter);
 
+        userProfile();
         myFotos();
 
         return rootView;
@@ -114,10 +124,10 @@ public class profileFragment extends Fragment {
                 postList.clear();
                 for(DataSnapshot data : snapshot.getChildren()){
                     donatePost post = data.getValue(donatePost.class);
-//                    if(post.getDonator().equals(profileid)){
-//                        postList.add(post);
-//                    }
-                    postList.add(post);
+                    if(post.getDonator().equals(userID)){
+                        postList.add(post);
+                    }
+//                    postList.add(post);
 
                 }
                 Collections.reverse(postList);
@@ -128,6 +138,24 @@ public class profileFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
                 Log.i(TAG,error.getMessage());
+            }
+        });
+    }
+
+    public void userProfile(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userID);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                Glide.with(getContext()).load(user.getImageUrl()).into(profilePicture);
+                username.setText(user.getUsername());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
             }
         });
     }

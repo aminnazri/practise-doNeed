@@ -2,6 +2,7 @@ package com.example.practisedoneed.adapter;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.practisedoneed.Model.User;
 import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.R;
+import com.example.practisedoneed.fragment.PostDetailsFragment;
+import com.example.practisedoneed.fragment.profileFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -61,32 +65,31 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
                 .into(holder.post_image);
 
         holder.title.setText(post.getTitle());
-//        if(post.getDescription().equals("")){
-//
-//            holder.description.setVisibility(View.GONE);
-//
-//        }else {
-//            holder.description.setVisibility(View.VISIBLE);
-//            holder.description.setText(post.getDescription());
-//        }
-//        if (post.getQuantity().equals("")){
-//            holder.quantity.setVisibility(View.GONE);
-//        }else{
-//            holder.quantity.setVisibility(View.VISIBLE);
-//            holder.quantity.setText(new StringBuilder().append("Quantity:").append(post.getQuantity()).toString());
-//        }
-//        if (post.getCategory().equals("")){
-//            holder.category.setVisibility(View.GONE);
-//        }else{
-//            holder.category.setVisibility(View.VISIBLE);
-//            holder.category.setText(post.getCategory());
-//        }
-//        if (post.getLocation().equals("")){
-//            holder.location.setVisibility(View.GONE);
-//        }else{
-//            holder.location.setVisibility(View.VISIBLE);
-//            holder.location.setText(post.getLocation());
-//        }
+        holder.image_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                editor.putString("profileId",post.getDonator());
+                editor.apply();
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new profileFragment())
+                        .addToBackStack("profile")
+                        .commit();
+            }
+        });
+        holder.post_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                editor.putString("postId",post.getId());
+                editor.apply();
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PostDetailsFragment())
+                        .addToBackStack("details")
+                        .commit();
+            }
+        });
+
 
 
         publisherInfo(holder.image_profile, holder.username, post.getDonator());
@@ -111,7 +114,7 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
             image_profile = itemView.findViewById(R.id.image_profile);
             post_image = itemView.findViewById(R.id.post_image);
             save = itemView.findViewById(R.id.save);
-            username = itemView.findViewById(R.id.username);
+            username = itemView.findViewById(R.id.usernamepost);
             title = itemView.findViewById(R.id.title);
 //            quantity = itemView.findViewById(R.id.quantity);
 //            category = itemView.findViewById(R.id.category);
@@ -135,7 +138,7 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
 
                 Glide.with(mContext).load(user.getImageUrl()).into(image_profile);
 
-//                donator.setText(user.getUsername());
+                donator.setText(user.getUsername());
 
             }
 

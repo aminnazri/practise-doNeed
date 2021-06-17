@@ -1,6 +1,7 @@
 package com.example.practisedoneed.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.R;
+import com.example.practisedoneed.fragment.PostDetailsFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,6 +47,18 @@ public class myFotosAdapter extends RecyclerView.Adapter<myFotosAdapter.ViewHold
         final donatePost post = mPosts.get(position);
         Glide.with(mContext).load(post.getImage()).into(holder.postImage);
 
+        holder.postImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                editor.putString("postId",post.getId());
+                editor.apply();
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PostDetailsFragment())
+                        .addToBackStack("details")
+                        .commit();
+            }
+        });
     }
 
     @Override
