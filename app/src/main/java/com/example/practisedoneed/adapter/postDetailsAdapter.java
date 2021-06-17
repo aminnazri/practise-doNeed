@@ -1,20 +1,25 @@
 package com.example.practisedoneed.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.practisedoneed.Model.User;
 import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.R;
+import com.example.practisedoneed.fragment.donateFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -66,7 +71,34 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
             holder.saveIcon.setVisibility(View.GONE);
             holder.optionIcon.setVisibility(View.VISIBLE);
         }
+
+        holder.optionIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getItemId()==R.id.edit_post){
+                            SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                            editor.putString("editPostId",post.getId());
+                            editor.apply();
+                            ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container
+                                    , new donateFragment())
+                                    .addToBackStack("donate")
+                                    .commit();
+                        }else if(item.getItemId()==R.id.del_post){
+
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.inflate(R.menu.post_option);
+                popupMenu.show();
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {

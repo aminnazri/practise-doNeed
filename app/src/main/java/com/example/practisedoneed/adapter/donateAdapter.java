@@ -87,6 +87,7 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
                         new PostDetailsFragment())
                         .addToBackStack("details")
                         .commit();
+                //try2
             }
         });
 
