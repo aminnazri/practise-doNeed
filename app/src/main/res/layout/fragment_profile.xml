@@ -2,40 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_profile"
     tools:context=".fragment.profileFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/bar"
-        android:background="?android:attr/windowBackground">
-
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/Toolbar"
-            android:background="@color/yellow_musterd">
-
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:layout_scrollFlags="scroll|enterAlways">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/cocogoose"
                     android:text="doNeed"
                     android:textColor="@color/lightGrey"
-                    android:fontFamily="@font/cocogoose"
-                    android:layout_centerVertical="true"
                     android:textSize="25sp"
-                    android:layout_marginStart="10dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
                 <ImageView
@@ -45,67 +41,189 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="15dp"
                     android:alpha="0.4"
-                    android:src="@drawable/logout3"
-                    />
+                    android:src="@drawable/logout3" />
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bar"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/image_profile"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="18dp" />
-        </LinearLayout>
-       <LinearLayout
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:orientation="vertical"
-           android:layout_marginLeft="20dp"
-           android:layout_marginTop="10dp"
-           android:padding="5dp">
-           <TextView
-               android:id="@+id/username"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:fontFamily="@font/cocogoose"
-               android:textSize="25sp"
-               android:text="amin"
-               android:textColor="@color/darkGrey"
-               />
-           <TextView
-               android:id="@+id/user_details"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:fontFamily="@font/lato"
-               android:textSize="15sp"
-               android:textColor="@color/darkGrey"
-               android:text="amin "/>
-           <Button
-               android:id="@+id/setting_button"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:textSize="15sp"
-               android:text="Profile settings"
-               android:padding="6dp"/>
-       </LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <com.amar.library.ui.StickyScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:stickyHeader="@id/linearTab">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/profile_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/bar"
+                    android:background="@color/white">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/image_profile"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginRight="18dp"
+                            android:layout_marginBottom="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/cocogoose"
+                            android:text="amin"
+                            android:textColor="@color/darkGrey"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/user_bio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato"
+                            android:text="bio"
+                            android:textColor="@color/darkGrey"
+                            android:textSize="15sp" />
+
+                        <Button
+                            android:id="@+id/setting_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="6dp"
+                            android:text="Profile settings"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                    <!--                <LinearLayout-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content">-->
+                    <!--                    -->
+                    <!--                </LinearLayout>-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearTab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tablayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:tag="sticky">
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </com.google.android.material.tabs.TabLayout>
+
+                </LinearLayout>
+
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/post_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/topBar"
+                            android:background="@color/white"
+                             />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/saved_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/topBar"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+
+            </LinearLayout>
+        </com.amar.library.ui.StickyScrollView>
     </LinearLayout>
 
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        >-->
 
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:id="@+id/post_recycler"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_below="@+id/topBar"-->
+    <!--            android:background="@color/white"-->
+    <!--            app:layout_scrollFlags="scroll|enterAlways" />-->
+
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:id="@+id/saved_recycler"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_below="@+id/topBar"-->
+    <!--            android:visibility="gone" />-->
+    <!--    </LinearLayout>-->
+
+
+    <!--    <LinearLayout-->
+
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:layout_below="@+id/profile_linear">-->
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:id="@+id/post_recycler"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="5dp"-->
+    <!--            />-->
+
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:id="@+id/saved_recycler"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:visibility="gone" />-->
+    <!--    </LinearLayout>-->
 
 
 </RelativeLayout>

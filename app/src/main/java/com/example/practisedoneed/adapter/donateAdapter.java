@@ -2,6 +2,7 @@ package com.example.practisedoneed.adapter;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder> {
 
@@ -56,6 +59,7 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
         Glide.with(mContext).load(post.getImage())
 //                .apply(new RequestOptions().placeholder(R.drawable.placeholder))
                 .into(holder.post_image);
+
         holder.title.setText(post.getTitle());
 //        if(post.getDescription().equals("")){
 //

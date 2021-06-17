@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:id="@+id/topBar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            app:layout_collapseMode="pin"-->
+<!--            app:layout_scrollFlags="scroll|enterAlways">-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:fontFamily="@font/cocogoose"-->
+<!--                    android:text="doNeed"-->
+<!--                    android:textColor="@color/lightGrey"-->
+<!--                    android:textSize="25sp"-->
+<!--                    android:textStyle="bold" />-->
+
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/logout2"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:alpha="0.4"-->
+<!--                    android:src="@drawable/logout3" />-->
+
+<!--            </RelativeLayout>-->
+<!--        </androidx.appcompat.widget.Toolbar>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/profile_linear"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/bar"-->
+<!--            android:background="@color/white">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                    android:id="@+id/image_profile"-->
+<!--                    android:layout_width="120dp"-->
+<!--                    android:layout_height="120dp"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginRight="18dp"-->
+<!--                    android:layout_marginBottom="10dp" />-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="5dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/username"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/cocogoose"-->
+<!--                    android:text="amin"-->
+<!--                    android:textColor="@color/darkGrey"-->
+<!--                    android:textSize="25sp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/user_bio"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/lato"-->
+<!--                    android:text="bio"-->
+<!--                    android:textColor="@color/darkGrey"-->
+<!--                    android:textSize="15sp" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/setting_button"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="6dp"-->
+<!--                    android:text="Profile settings"-->
+<!--                    android:textSize="15sp" />-->
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
+
+<!--        <com.google.android.material.tabs.TabLayout-->
+<!--            android:id="@+id/tablayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_scrollFlags="scroll|enterAlways">-->
+
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                />-->
+
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                />-->
+
+<!--        </com.google.android.material.tabs.TabLayout>-->
+
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/post_recycler"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/topBar" />-->
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/saved_recycler"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/topBar"-->
+<!--        android:visibility="gone" />-->
+
+
+
+</RelativeLayout>
