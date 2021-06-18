@@ -70,6 +70,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Objects;
 
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+
 public class donateFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private static final int RESULT_OK = -1;
@@ -108,9 +110,9 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_donate,container,false);
         setHasOptionsMenu(true);
-//        SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
-//        postId = preferences.getString("postId", "none");
-//        editPostId = preferences.getString("editPostId","none");
+        SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
+        postId = preferences.getString("postId", "none");
+        editPostId = preferences.getString("editPostId","none");
 
         postTitle = view.findViewById(R.id.Tittle);
         description = view.findViewById(R.id.Description);
@@ -148,9 +150,18 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         context = container.getContext();
 
 //        if(!editPostId.equals("none")){
-//            editPost();
-//            if(getParentFragmentManager().getBackStackEntryCount()<2){
+//
+//            int index = getActivity().getSupportFragmentManager().getBackStackEntryCount() - 1;
+//            FragmentManager.BackStackEntry backEntry = getActivity().getSupportFragmentManager().getBackStackEntryAt(index);
+////                    getParentFragmentManager().getBackStackEntryAt(index);
+//            String tag = backEntry.getName();
+//            Log.i(TAG,tag);
+//            if(tag.equals("details")){
+//                editPost();
+//                Log.i(TAG, "can edit");
+//            }else {
 //                editPostId="none";
+//                Log.i(TAG, "cannot edit");
 //            }
 //        }
 
@@ -321,24 +332,24 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
 
     }
 
-//    public void editPost(){
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(editPostId);
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                donatePost post = snapshot.getValue(donatePost.class);
-//                Picasso.get().load(post.getImage()).into(image_add);
-//                postTitle.setText(post.getTitle());
-//                description.setText(post.getDescription());
-//                quantity.setText(post.getQuantity());
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
+    public void editPost(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(editPostId);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                donatePost post = snapshot.getValue(donatePost.class);
+                Picasso.get().load(post.getImage()).into(image_add);
+                postTitle.setText(post.getTitle());
+                description.setText(post.getDescription());
+                quantity.setText(post.getQuantity());
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
 
 
 }
