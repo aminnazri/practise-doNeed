@@ -38,7 +38,7 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
     public Context mContext;
     public List<donatePost> mPosts;
     public FirebaseUser firebaseUser;
-    SharedPreferences.Editor editor;
+
 
     public postDetailsAdapter(Context mContext, List<donatePost> mPosts) {
         this.mContext = mContext;
@@ -50,9 +50,7 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.details_item,parent,false);
-        editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
-        editor.putStringSet("editPostId", Collections.singleton("none"));
-        editor.apply();
+
         return new postDetailsAdapter.ViewHolder(view);
     }
 
@@ -85,8 +83,9 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if(item.getItemId()==R.id.edit_post){
-
-                            editor.putString("editPostId",post.getId());
+                            SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+                            editor.putString("editPostID",post.getId());
+                            editor.putString("imageUrl",post.getImage());
                             editor.apply();
                             ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container
                                     , new donateFragment())

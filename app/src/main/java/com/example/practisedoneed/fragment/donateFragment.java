@@ -3,6 +3,7 @@ package com.example.practisedoneed.fragment;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -91,12 +92,16 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
     String[] categoryArray = {"Categories","Home Equipment","Furniture","Computer","Smartphone","Technology","Cloth","Sport"};
     String category;
     String state;
+    ArrayAdapter ad1;
+    ArrayAdapter ad2;
     StorageTask uploadTask;
     StorageReference storageReference;
     String extension;
     private Context context;
     private String postId;
     private String editPostId;
+    private String defaultImage;
+    private FragmentManager fragmentManager;
 
 //    private static final int GalleryPick = 1;
 //    private static final int CAMERA_REQUEST = 100;
@@ -112,7 +117,8 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         setHasOptionsMenu(true);
         SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         postId = preferences.getString("postId", "none");
-        editPostId = preferences.getString("editPostId","none");
+        editPostId = preferences.getString("editPostID","none");
+        defaultImage = preferences.getString("imageUrl","none");
 
         postTitle = view.findViewById(R.id.Tittle);
         description = view.findViewById(R.id.Description);
@@ -131,13 +137,13 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
 
         categoriesSpinner = view.findViewById(R.id.categories_spinner);
         categoriesSpinner.setOnItemSelectedListener(this);
-        ArrayAdapter ad1 = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, categoryArray);
+        ad1 = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, categoryArray);
         ad1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categoriesSpinner.setAdapter(ad1);
 
         stateSpinner = view.findViewById(R.id.state_spinner);
         stateSpinner.setOnItemSelectedListener(this);
-        ArrayAdapter ad2 = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, stateArray);
+        ad2 = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, stateArray);
         ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateSpinner.setAdapter(ad2);
 
@@ -148,22 +154,21 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         storageReference = FirebaseStorage.getInstance().getReference("posts");
 
         context = container.getContext();
+        fragmentManager = getActivity().getSupportFragmentManager();
 
-//        if(!editPostId.equals("none")){
-//
-//            int index = getActivity().getSupportFragmentManager().getBackStackEntryCount() - 1;
-//            FragmentManager.BackStackEntry backEntry = getActivity().getSupportFragmentManager().getBackStackEntryAt(index);
-////                    getParentFragmentManager().getBackStackEntryAt(index);
-//            String tag = backEntry.getName();
-//            Log.i(TAG,tag);
-//            if(tag.equals("details")){
-//                editPost();
-//                Log.i(TAG, "can edit");
-//            }else {
-//                editPostId="none";
-//                Log.i(TAG, "cannot edit");
-//            }
-//        }
+        int index = getActivity().getSupportFragmentManager().getBackStackEntryCount() - 2;
+        if(!editPostId.equals("none")){
+//            editPost();
+            FragmentManager.BackStackEntry backEntry = getActivity().getSupportFragmentManager().getBackStackEntryAt(index);
+//                    getParentFragmentManager().getBackStackEntryAt(index);
+            String tag = backEntry.getName();
+            Log.i(TAG,tag);
+            if(tag.equals("details")){
+                editPost();
+            }else {
+                editPostId="none";
+            }
+        }
 
         return view;
     }
@@ -269,10 +274,11 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
                         reference.child(postid).setValue(hashMap);
 
                         progressDialog.dismiss();
-
+                        fragmentManager.popBackStack(0,0);
                     }
                     else {
                         Toast.makeText(getActivity(), "Failed!", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -280,12 +286,13 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
                 public void onFailure(@NonNull Exception e) {
 
                     Toast.makeText(getActivity(), ""+ e.getMessage(), Toast.LENGTH_SHORT).show();
-
+                    progressDialog.dismiss();
                 }
             });
         }
         else {
             Toast.makeText(getActivity(), "no Image Selected!", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         }
     }
 
@@ -295,6 +302,16 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
     public void onCreateOptionsMenu(@NonNull @NotNull Menu menu, @NonNull @NotNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.donate_toolbar, menu);
+        MenuItem update = menu.findItem(R.id.update_now);
+        MenuItem donate = menu.findItem(R.id.donate_now);
+        int index = getActivity().getSupportFragmentManager().getBackStackEntryCount() - 2;
+        if(getActivity().getSupportFragmentManager().getBackStackEntryAt(index).getName().equals("details")){
+            update.setVisible(true);
+            donate.setVisible(false);
+        }else{
+            update.setVisible(false);
+            donate.setVisible(true);
+        }
     }
 
 
@@ -307,9 +324,12 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
             return true;
         }else if(item.getItemId() == R.id.donate_now){
             uploadImage();
+        }else if(item.getItemId() == R.id.update_now){
+            updatePost();
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onDestroyView() {
@@ -342,6 +362,14 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
                 postTitle.setText(post.getTitle());
                 description.setText(post.getDescription());
                 quantity.setText(post.getQuantity());
+
+                String defaultCategory = post.getCategory();
+                int categoryIndex = ad1.getPosition(defaultCategory);
+                categoriesSpinner.setSelection(categoryIndex);
+
+                String defaultState = post.getLocation();
+                int stateIndex = ad2.getPosition(defaultState);
+                stateSpinner.setSelection(stateIndex);
             }
 
             @Override
@@ -349,6 +377,94 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
 
             }
         });
+
+
+    }
+
+    private void updatePost() {
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Posting");
+        progressDialog.show();
+        if(imageUrl != null || !editPostId.equals("none")){
+            //if new image inserted
+            if(imageUrl != null){
+                StorageReference fileReference = storageReference.child(System.currentTimeMillis()
+                        + "."+ getMimeType(getActivity(), imageUrl));
+                uploadTask = fileReference.putFile(imageUrl);
+                uploadTask.continueWithTask(new Continuation() {
+                    @Override
+                    public Object then(@NonNull Task task) throws Exception {
+                        if(!task.isSuccessful()){
+
+                            throw  task.getException();
+
+                        }
+                        return fileReference.getDownloadUrl();
+
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+
+                        if(task.isSuccessful()){
+
+                            Uri downloadUrl = task.getResult();
+
+                            myUrl = downloadUrl.toString();
+
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+
+//                        String postid = reference.push().getKey();
+                            HashMap<String,Object> hashMap = new HashMap<>();
+                            hashMap.put("id",editPostId);
+                            hashMap.put("image",myUrl);
+                            hashMap.put("title", postTitle.getText().toString());
+                            hashMap.put("description",description.getText().toString());
+                            hashMap.put("quantity",quantity.getText().toString());
+                            hashMap.put("location", state);
+                            hashMap.put("category", category);
+                            hashMap.put("donator", FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+                            reference.child(editPostId).setValue(hashMap);
+
+                            progressDialog.dismiss();
+                            fragmentManager.popBackStack(0,0);
+                        }
+                        else {
+                            Toast.makeText(getActivity(), "Failed!", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                        Toast.makeText(getActivity(), ""+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                });
+            }else{
+                //default image
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+                HashMap<String,Object> hashMap = new HashMap<>();
+                hashMap.put("id",editPostId);
+                hashMap.put("image",defaultImage);
+                hashMap.put("title", postTitle.getText().toString());
+                hashMap.put("description",description.getText().toString());
+                hashMap.put("quantity",quantity.getText().toString());
+                hashMap.put("location", state);
+                hashMap.put("category", category);
+                hashMap.put("donator", FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+                reference.child(editPostId).setValue(hashMap);
+                progressDialog.dismiss();
+                fragmentManager.popBackStack(0,0);
+            }
+        }
+        else {
+            Toast.makeText(getActivity(), "no Image Selected!", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+        }
     }
 
 

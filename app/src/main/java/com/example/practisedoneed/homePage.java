@@ -26,6 +26,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.jetbrains.annotations.NotNull;
+
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 public class homePage extends AppCompatActivity {
@@ -54,6 +56,9 @@ public class homePage extends AppCompatActivity {
                 .replace(R.id.fragment_container, new HomeFragment())
                 .addToBackStack("home")
                 .commit();
+
+
+
 
     }
 
@@ -86,11 +91,30 @@ public class homePage extends AppCompatActivity {
                 }
             };
 
+    @Override
+    public void onAttachFragment(@NonNull @NotNull Fragment fragment) {
+        super.onAttachFragment(fragment);
+        int index = fragmentManager.getBackStackEntryCount()-1;
+        if(fragmentManager.getBackStackEntryCount()!=0){
+            String tag = fragmentManager.getBackStackEntryAt(index).getName();
+            if(tag.equals("home")){
+                bottomNavigationView.getMenu().getItem(0).setChecked(true);
+            }else if(tag.equals("donate")){
+                bottomNavigationView.getMenu().getItem(1).setChecked(true);
+            }else if(tag.equals("profile")){
+                bottomNavigationView.getMenu().getItem(2).setChecked(true);
+            }
+        }
+    }
+
     //ni utk sync top toolbar dgn bottom
     @Override
     public void onBackPressed() {
 
         if(fragmentManager.getBackStackEntryCount()>1){
+
+//            String tag = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-1);
+//            Log.i(TAG,);
             fragmentManager.popBackStack(0,0);
             bottomNavigationView.getMenu().getItem(0).setChecked(true);
         }
@@ -104,6 +128,8 @@ public class homePage extends AppCompatActivity {
             pressedTime = System.currentTimeMillis();
         }
     }
+
+
 
     //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
