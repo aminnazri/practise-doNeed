@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="yello_musterd_i">#FFD819</color>
     <color name="y">#F7C80A</color>
     <color name="test">#FFBF01</color>
-    <color name="yellow_musterd">#FFD819</color>
+    <color name="auth">#000000</color>
+    <color name="yellow_musterd">#E3B100</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
