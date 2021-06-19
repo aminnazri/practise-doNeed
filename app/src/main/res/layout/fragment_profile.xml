@@ -10,12 +10,14 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_collapseMode="pin"
+            android:background="@color/yellow_musterd"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <RelativeLayout
@@ -29,7 +31,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/cocogoose"
                     android:text="doNeed"
-                    android:textColor="@color/lightGrey"
+                    android:textColor="@color/dark"
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
@@ -41,7 +43,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="15dp"
                     android:alpha="0.4"
-                    android:src="@drawable/logout3" />
+                    android:src="@drawable/exit" />
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -66,7 +68,6 @@
                     android:id="@+id/profile_linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/bar"
                     android:background="@color/white">
 
                     <LinearLayout
@@ -80,7 +81,6 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
-                            android:layout_marginRight="18dp"
                             android:layout_marginBottom="10dp" />
 
                     </LinearLayout>
@@ -161,7 +161,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/topBar"
                             android:background="@color/white"
-                             />
+                            />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/saved_recycler"

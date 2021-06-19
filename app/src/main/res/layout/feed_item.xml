@@ -56,7 +56,7 @@
             android:layout_height="60dp"
             android:alpha="0.9"
 
-            android:background="#FFC107"
+            android:background="@color/yellow_musterd"
             android:orientation="horizontal">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -114,7 +114,7 @@
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/cocogoose"
                 android:text="pKittle"
-                android:textColor="@color/lightGrey"
+                android:textColor="@color/dark"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

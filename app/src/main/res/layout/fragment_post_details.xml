@@ -9,7 +9,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/yellow_musterd">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -28,7 +29,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/cocogoose"
                     android:text="doNeed"
-                    android:textColor="@color/lightGrey"
+                    android:textColor="@color/dark"
                     android:textSize="25sp"
                     android:textStyle="bold" />
             </RelativeLayout>

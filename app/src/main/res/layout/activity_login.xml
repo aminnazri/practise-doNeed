@@ -30,8 +30,8 @@
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             android:layout_centerHorizontal="true"
-            app:cardCornerRadius="38dp"
             android:paddingBottom="10dp"
+            app:cardCornerRadius="38dp"
             app:cardBackgroundColor="@color/white"
             app:cardElevation="10dp"
             android:alpha="0.9">
@@ -133,14 +133,17 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.textfield.TextInputLayout>
 
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="100dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/LoginSubmit_btn">
+                    app:layout_constraintTop_toBottomOf="@+id/LoginSubmit_btn"
+                    app:layout_constraintVertical_bias="0.3">
 
                     <TextView
 
@@ -162,8 +165,6 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
-
-
 
                 <Button
                     android:id="@+id/LoginSubmit_btn"

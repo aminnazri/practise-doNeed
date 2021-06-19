@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ProfileSetting"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/yellow_musterd">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -22,18 +22,24 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
 
                 >
+
                 <ImageView
+                    android:id="@+id/close"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
+
                     android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="15dp"
+                    android:src="@drawable/arrow" />
 
-                    android:src="@drawable/arrow"
-                    android:id="@+id/close" />
-
-                <TextView
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Save"
@@ -42,7 +48,8 @@
                     android:layout_marginEnd="15dp"
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/dark"
                     />
 
 
@@ -71,7 +78,8 @@
         android:layout_marginRight="10dp"
         app:cardCornerRadius="38dp"
         app:cardBackgroundColor="@color/white"
-        app:cardElevation="10dp">
+        app:cardElevation="10dp"
+        android:alpha="0.8">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -92,7 +100,7 @@
                     android:text="User Name"
                     android:layout_marginStart="3dp"
                     android:textSize="13sp"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/dark"
                     android:fontFamily="@font/lato"/>
                 <EditText
                     android:id="@+id/username"
@@ -119,7 +127,7 @@
                     android:text="Email"
                     android:textSize="13sp"
                     android:layout_marginStart="3dp"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/dark"
                     android:fontFamily="@font/lato"
                     />
                 <EditText
@@ -148,7 +156,7 @@
                     android:text="Phone Number"
                     android:layout_marginStart="3dp"
                     android:textSize="13sp"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/dark"
                     android:fontFamily="@font/lato"/>
                 <EditText
                     android:id="@+id/phoneNumber"
@@ -175,7 +183,7 @@
                     android:text="Address"
                     android:layout_marginStart="3dp"
                     android:textSize="13sp"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/dark"
                     android:fontFamily="@font/lato"/>
                 <EditText
                     android:id="@+id/login_password"
