@@ -1,26 +1,41 @@
 package com.example.practisedoneed;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.practisedoneed.fragment.profileFragment;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import org.jetbrains.annotations.NotNull;
 
 public class ProfileSetting extends AppCompatActivity {
 
     Uri imageUrl;
-    ImageView  image_added;
+    ImageView  image_added,back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_setting);
+        setContentView(R.layout.profile_setting2);
+        back = findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileSetting.this, homePage.class));
+            }
+        });
+
 
     }
 
@@ -65,7 +80,6 @@ public class ProfileSetting extends AppCompatActivity {
         return mime.getExtensionFromMimeType(contentResolver.getType(uri));
 
     }
-
 
 
 }

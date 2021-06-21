@@ -2,6 +2,7 @@ package com.example.practisedoneed;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -11,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -41,8 +43,8 @@ public class test extends AppCompatActivity {
 
         // Here we are initialising
         // the text and image View
-        click = findViewById(R.id.click);
-        userpic = findViewById(R.id.set_profile_image);
+//        click = findViewById(R.id.click);
+//        userpic = findViewById(R.id.set_profile_image);
 
         // allowing permissions of gallery and camera
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -64,6 +66,7 @@ public class test extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pick Image From");
         builder.setItems(options, new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == 0) {
@@ -103,6 +106,7 @@ public class test extends AppCompatActivity {
     }
 
     // Requesting camera permission
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void requestCameraPermission() {
         requestPermissions(cameraPermission, CAMERA_REQUEST);
     }

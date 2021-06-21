@@ -117,10 +117,10 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
             save = itemView.findViewById(R.id.save);
             username = itemView.findViewById(R.id.usernamepost);
             title = itemView.findViewById(R.id.title);
-//            quantity = itemView.findViewById(R.id.quantity);
-//            category = itemView.findViewById(R.id.category);
-//            location = itemView.findViewById(R.id.location);
-//            description = itemView.findViewById(R.id.description);
+            quantity = itemView.findViewById(R.id.quantity);
+            category = itemView.findViewById(R.id.category);
+            location = itemView.findViewById(R.id.location);
+            description = itemView.findViewById(R.id.description);
 
         }
     }

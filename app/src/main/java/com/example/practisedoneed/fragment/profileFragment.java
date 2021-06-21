@@ -70,6 +70,7 @@ public class profileFragment extends Fragment {
         profileid = prefs.getString("profileId", "none");
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userID = firebaseUser.getUid();
+
 ///////////////////////////////////////////////////////////////////////////////////////
 
         profilePicture = rootView.findViewById(R.id.image_profile);

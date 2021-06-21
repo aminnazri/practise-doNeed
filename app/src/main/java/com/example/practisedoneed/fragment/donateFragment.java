@@ -342,7 +342,7 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         if(parent.getId()==R.id.categories_spinner){
             category = categoryArray[position];
         }else if(parent.getId()==R.id.state_spinner){
-            ((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
             state = stateArray[position];
         }
     }
