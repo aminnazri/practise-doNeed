@@ -69,6 +69,8 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
         holder.location.setText(post.getLocation());
 
         publisherInfo(holder.imageProfile, holder.username, post.getDonator());
+        isSaved(post.getId(), holder.saveIcon);
+
         if(post.getDonator().equals(currentUser)){
             holder.chatBtn.setVisibility(View.GONE);
             holder.saveIcon.setVisibility(View.GONE);
@@ -101,6 +103,21 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
                 popupMenu.show();
             }
         });
+        holder.saveIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.saveIcon.getTag().equals("save")){
+                    FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid())
+                            .child(post.getId()).setValue("true");
+                }
+                else{
+                    FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid())
+                            .child(post.getId()).removeValue();
+                }
+            }
+        });
+
+
     }
 
 
@@ -119,7 +136,7 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
 
             postImage = itemView.findViewById(R.id.post_image);
             saveIcon = itemView.findViewById(R.id.save);
-            optionIcon = itemView.findViewById(R.id.option);
+            optionIcon = itemView.findViewById(R.id.optionIcon);
             imageProfile = itemView.findViewById(R.id.image_profile);
             title = itemView.findViewById(R.id.post_title);
             username = itemView.findViewById(R.id.usernamepost);
@@ -152,6 +169,29 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+
+            }
+        });
+    }
+
+    public void isSaved(String postId, ImageView imageView){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Saves")
+                .child(firebaseUser.getUid());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if(snapshot.child(postId).exists()){
+                    imageView.setImageResource(R.drawable.ic_save_black);
+                    imageView.setTag("saved");
+                }else{
+                    imageView.setImageResource(R.drawable.ic_save);
+                    imageView.setTag("save");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
             }
         });

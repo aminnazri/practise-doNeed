@@ -183,6 +183,7 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
     // Here we will pick image from gallery or camera
     private void pickFromGallery() {
         CropImage.activity().setAspectRatio(5,4).start(requireContext(), this);
+
     }
 
     public static String getMimeType(Activity context, Uri uri) {

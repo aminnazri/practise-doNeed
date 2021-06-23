@@ -68,7 +68,7 @@
                 app:tint="@color/black" />
 
             <ImageView
-                android:id="@+id/option"
+                android:id="@+id/optionIcon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="16dp"
@@ -205,20 +205,45 @@
                 app:layout_constraintTop_toBottomOf="@id/category"
                 app:layout_constraintVertical_bias="0.015" />
 
+<!--            <Button-->
+<!--                android:id="@+id/chat_button"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="40dp"-->
+<!--                android:layout_marginBottom="40dp"-->
+<!--                android:text="CHAT AND DEALS WITH DONATOR"-->
+<!--                android:textColor="@color/dark"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.498"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/location" />-->
+
             <Button
                 android:id="@+id/chat_button"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button1"
+                android:fontFamily="@font/cocogoose"
+                android:paddingLeft="30dp"
+                android:paddingTop="5dp"
+                android:paddingRight="30dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="45dp"
                 android:layout_marginBottom="40dp"
-                android:text="CHAT AND DEALS WITH DONATOR"
-                android:textColor="@color/dark"
+                android:text="CONTACT DONATOR"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/yellow_musterd"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintHorizontal_bias="0.46"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/location" />
-
+                app:layout_constraintTop_toBottomOf="@id/location"
+                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

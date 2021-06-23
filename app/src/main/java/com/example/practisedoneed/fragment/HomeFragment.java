@@ -35,6 +35,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.example.practisedoneed.adapter.donateAdapter;
 
@@ -58,6 +59,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     RecyclerView.LayoutManager linearLayoutManager;
     private Toolbar toolbar;
     private TextView doNeedTitle;
+    SearchView searchView;
+    String search;
 
     private TextView textState;
     private boolean[] selectedState;
@@ -99,6 +102,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         postAdapter = new donateAdapter(getContext(),postLists);
         recyclerView.setAdapter(postAdapter);
 
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+////                search = query;
+//                if(query!=null){
+//                    readPost(query);
+//                }
+//                else{
+//                    readPost("");
+//                }
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
+
         readPost();
 
         return view;
@@ -107,8 +129,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreateOptionsMenu(@NonNull @NotNull Menu menu, @NonNull @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.home_toolbar, menu);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search_tool).getActionView();
+        searchView = (SearchView) menu.findItem(R.id.search_tool).getActionView();
         searchView.setQueryHint("Search Item");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                search = query;
+                if(query!=null){
+                    searchItem(query);
+                }
+                else{
+                    readPost();
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return true;
+            }
+        });
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -147,6 +189,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 public void onClick(DialogInterface dialog, int which) {
                     //get true item n search
                     String SB = "";
+
                     for (int i = 0; i<selectedState.length; i++){
                         boolean checked = selectedState[i];
                         if (checked) {
@@ -236,9 +279,35 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private  void  readPost(){
-
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
         reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                postLists.clear();
+                for(DataSnapshot Snapshot : dataSnapshot.getChildren()){
+
+                    donatePost post  = Snapshot.getValue(donatePost.class);
+                    postLists.add(post);
+                }
+                Collections.reverse(postLists);
+                postAdapter.notifyDataSetChanged();
+//                progressBar.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void searchItem(String data){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        Query query = reference.orderByChild("title").startAt(data).endAt(data + "\uf8ff");
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

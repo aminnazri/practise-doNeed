@@ -53,9 +53,15 @@ public class profileFragment extends Fragment {
     private FirebaseUser firebaseUser;
     String userID;
     String profileid;
-    //tryyy
+
     private myFotosAdapter fotosAdapter;
     private List<donatePost> postList;
+    RecyclerView recyclerView1;
+
+    private List<String> mySaves;
+    RecyclerView recyclerView_saves;
+    private myFotosAdapter saves_adapter;
+    private List<donatePost> savesList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,7 +104,7 @@ public class profileFragment extends Fragment {
         tabLayout = (TabLayout) rootView.findViewById(R.id.tablayout);
         setupTabIcons();
 
-        RecyclerView recyclerView1 = rootView.findViewById(R.id.post_recycler);
+        recyclerView1 = rootView.findViewById(R.id.post_recycler);
         recyclerView1.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(),3);
         recyclerView1.setLayoutManager(linearLayoutManager);
@@ -106,8 +112,24 @@ public class profileFragment extends Fragment {
         fotosAdapter = new myFotosAdapter(getContext(),postList);
         recyclerView1.setAdapter(fotosAdapter);
 
+        mySaves = new ArrayList<>();
+        recyclerView_saves = rootView.findViewById(R.id.saved_recycler);
+        recyclerView1.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_saves = new GridLayoutManager(getContext(),3);
+        recyclerView_saves.setLayoutManager(linearLayoutManager_saves);
+        savesList = new ArrayList<>();
+        saves_adapter = new myFotosAdapter(getContext(),savesList);
+        recyclerView_saves.setAdapter(saves_adapter);
+
+        recyclerView1.setVisibility(View.VISIBLE);
+        recyclerView_saves.setVisibility(View.GONE);
+
+        checkTab();
         userProfile();
-        myFotos();
+        myPhotos();
+        mySaves();
+
+
 
         return rootView;
     }
@@ -117,7 +139,40 @@ public class profileFragment extends Fragment {
         tabLayout.getTabAt(1).setIcon(tabIcon[1]);
     }
 
-    private void myFotos(){
+    private void checkTab(){
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition()==0){
+                    recyclerView1.setVisibility(View.VISIBLE);
+                    recyclerView_saves.setVisibility(View.GONE);
+                }
+                else if(tab.getPosition()==1){
+                    recyclerView1.setVisibility(View.GONE);
+                    recyclerView_saves.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+//        if(tabLayout.getSelectedTabPosition()==0){
+//            recyclerView1.setVisibility(View.VISIBLE);
+//            recyclerView_saves.setVisibility(View.GONE);
+//        }else if(tabLayout.getSelectedTabPosition()==1){
+//            recyclerView1.setVisibility(View.GONE);
+//            recyclerView_saves.setVisibility(View.VISIBLE);
+//        }
+    }
+
+    private void myPhotos(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -133,7 +188,6 @@ public class profileFragment extends Fragment {
                 }
                 Collections.reverse(postList);
                 fotosAdapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -151,7 +205,50 @@ public class profileFragment extends Fragment {
                 User user = snapshot.getValue(User.class);
                 Glide.with(getContext()).load(user.getImageUrl()).into(profilePicture);
                 username.setText(user.getUsername());
+            }
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
+            }
+        });
+    }
+
+    private void mySaves(){
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Saves")
+                .child(firebaseUser.getUid());
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for(DataSnapshot data : snapshot.getChildren()){
+                    mySaves.add(data.getKey());
+                }
+                displaySaves();
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void displaySaves(){
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Posts");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                savesList.clear();
+                for(DataSnapshot data : snapshot.getChildren()){
+                    donatePost post = data.getValue(donatePost.class);
+                    if(!mySaves.isEmpty()){
+                        for(String id : mySaves){
+                            if(post.getId().equals(id)){
+                                savesList.add(post);
+                            }
+                        }
+                    }
+                }
+                saves_adapter.notifyDataSetChanged();
             }
 
             @Override

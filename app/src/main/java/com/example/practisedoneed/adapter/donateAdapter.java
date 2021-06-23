@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ import com.example.practisedoneed.Model.User;
 import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.R;
 import com.example.practisedoneed.fragment.PostDetailsFragment;
+import com.example.practisedoneed.fragment.donateFragment;
 import com.example.practisedoneed.fragment.profileFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -65,6 +68,11 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
                 .into(holder.post_image);
 
         holder.title.setText(post.getTitle());
+        if(post.getDonator().equals(firebaseUser.getUid())){
+            holder.save.setVisibility(View.GONE);
+        }else {
+            holder.save.setVisibility(View.VISIBLE);
+        }
         holder.image_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,9 +98,22 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
                 //try2
             }
         });
+        holder.save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.save.getTag().equals("save")){
+                    FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid())
+                            .child(post.getId()).setValue("true");
+                }
+                else{
+                    FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid())
+                            .child(post.getId()).removeValue();
+                }
+            }
+        });
 
 
-
+        isSaved(post.getId(), holder.save);
         publisherInfo(holder.image_profile, holder.username, post.getDonator());
 
 
@@ -146,6 +167,29 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+
+            }
+        });
+    }
+
+    public void isSaved(String postId, ImageView imageView){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Saves")
+                .child(firebaseUser.getUid());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if(snapshot.child(postId).exists()){
+                    imageView.setImageResource(R.drawable.ic_save_black);
+                    imageView.setTag("saved");
+                }else{
+                    imageView.setImageResource(R.drawable.ic_save);
+                    imageView.setTag("save");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
             }
         });
