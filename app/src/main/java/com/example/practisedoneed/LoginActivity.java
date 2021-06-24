@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText password,email;
     Button login;
-    TextView text_signup;
+    TextView text_signup,forgotPassword;
     FirebaseAuth mauth;
     DatabaseReference reference;
     ProgressDialog pd;
@@ -48,11 +48,19 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.LoginSubmit_btn);
         text_signup = findViewById(R.id.txt_signUp);
         mauth = FirebaseAuth.getInstance();
+        forgotPassword = findViewById(R.id.forgotPassword);
 
         text_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+            }
+        });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ResetPassword.class));
             }
         });
 
@@ -125,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
+
 
     }
 }
