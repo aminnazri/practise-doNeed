@@ -97,8 +97,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
                             if (task.isSuccessful()){
-
-                                DatabaseReference  reference = FirebaseDatabase.getInstance().getReference().child("Users")
+                                if (mauth.getCurrentUser().isEmailVerified()) {
+                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users")
                                         .child(mauth.getCurrentUser().getUid());
 
                                 reference.addValueEventListener(new ValueEventListener() {
@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                         pd.dismiss();
 
-                                        Intent intent = new Intent(LoginActivity.this,homePage.class);
+                                        Intent intent = new Intent(LoginActivity.this, homePage.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
                                         finish();
@@ -120,6 +120,11 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 });
 
+                                }
+
+                                else{
+                                    Toast.makeText(LoginActivity.this, "Please verify your email", Toast.LENGTH_SHORT).show();
+                                }
 
                             }else {
                                 pd.dismiss();

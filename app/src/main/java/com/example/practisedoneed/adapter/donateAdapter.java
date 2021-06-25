@@ -158,9 +158,9 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
 
                 User user = dataSnapshot.getValue(User.class);
 
-                Glide.with(mContext).load(user.getImageUrl()).into(image_profile);
+//                Glide.with(mContext).load(user.getImageUrl()).into(image_profile);
 
-                donator.setText(user.getUsername());
+//                donator.setText(user.getUsername());
 
             }
 

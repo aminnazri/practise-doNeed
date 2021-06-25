@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -124,10 +127,28 @@ public class SignUpActivity extends AppCompatActivity {
 
                             if(task.isSuccessful()){
 
-                                pd.dismiss();
-                                Intent intent = new Intent(SignUpActivity.this ,homePage.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
+                                firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                        if(task.isSuccessful()) {
+
+//                                            Toast.makeText(SignUpActivity.this, "User register succesfully. Please verify your email id ", Toast.LENGTH_LONG).setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0).show();
+
+                                            Toast toast= Toast.makeText(getApplicationContext(),
+                                                    "User register succesfully. Please verify your email id", Toast.LENGTH_LONG);
+                                            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                                            toast.show();pd.dismiss();
+                                            Intent intent = new Intent(SignUpActivity.this ,LoginActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                        }
+                                        else{
+                                            Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+
+
                             }
                         }
                     });
