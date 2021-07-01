@@ -2,18 +2,20 @@ package com.example.practisedoneed.Model;
 
 public class User {
 
-    private  String id ;
-    private  String username ;
-    private  String email ;
-    private  String imageUrl ;
-    private  String phone ;
+    private String id;
+    private String username;
+    private String email;
+    private String imageUrl;
+    private String phone;
+    private String address;
 
-    public User(String id, String username, String email, String imageUrl, String phone) {
+    public User(String id, String username, String email, String imageUrl, String phone, String address) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.imageUrl = imageUrl;
         this.phone = phone;
+        this.address = address;
     }
 
     public User() {
@@ -57,5 +59,13 @@ public class User {
 
     public void setPhone(String phoneNumber) {
         this.phone = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

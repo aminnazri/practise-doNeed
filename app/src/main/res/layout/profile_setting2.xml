@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-
-
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,7 +102,7 @@
                                     android:layout_height="40dp"
                                     android:layout_marginTop="1dp"
                                     android:backgroundTint="@color/grey"
-                                    android:inputType="textPassword"
+                                    android:inputType="textPersonName"
                                     android:textColor="@color/black" />
                             </LinearLayout>
 
@@ -129,13 +127,14 @@
                                     android:textStyle="bold" />
 
                                 <EditText
-                                    android:id="@+id/login_email"
+                                    android:id="@+id/email"
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
                                     android:layout_marginTop="1dp"
                                     android:backgroundTint="@color/grey"
                                     android:inputType="textEmailAddress"
-                                    android:textColor="@color/black" />
+                                    android:textColor="@color/black"
+                                    />
                             </LinearLayout>
 
                             <LinearLayout
@@ -189,12 +188,12 @@
                                     android:textStyle="bold" />
 
                                 <EditText
-                                    android:id="@+id/login_password"
+                                    android:id="@+id/address"
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
                                     android:layout_marginTop="1dp"
                                     android:backgroundTint="@color/grey"
-                                    android:inputType="textPassword"
+                                    android:inputType="textPostalAddress"
                                     android:textColor="@color/black" />
                             </LinearLayout>
 
@@ -248,13 +247,15 @@
 
         </RelativeLayout>
 
+<!--        android:src="@drawable/baseline_account_circle_black_48"-->
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_profile"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="20dp"
             android:elevation="10dp"
-            android:src="@drawable/baseline_account_circle_black_48"
+
             app:civ_border_color="@color/white"
             app:civ_circle_background_color="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -308,7 +309,7 @@
         <!--        </androidx.cardview.widget.CardView>-->
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/post"
+            android:id="@+id/save"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
