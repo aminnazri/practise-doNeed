@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PractiseDoNeed">
-        <activity android:name=".ResetPassword"></activity>
+        <activity android:name=".ResetPassword" />
         <activity android:name=".test" />
         <activity
             android:name=".ProfileSetting"
@@ -24,7 +24,8 @@
         <activity
             android:name=".homePage"
             android:label="@string/title_activity_home_page" />
-        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SignUpActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
