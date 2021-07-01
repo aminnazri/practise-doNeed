@@ -74,7 +74,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(str_username) || TextUtils.isEmpty(
                         str_phoneNumber) || TextUtils.isEmpty(str_email) || TextUtils.isEmpty(str_password)||TextUtils.isEmpty(str_address)||TextUtils.isEmpty(str_reconfirmPassword)){
 
-                    Toast.makeText(SignUpActivity.this,"All Filds are required",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this,"All Fields are required",Toast.LENGTH_SHORT).show();
 
 
                 }else if(str_password.length()<6) {
@@ -135,7 +135,7 @@ public class SignUpActivity extends AppCompatActivity {
 //                                            Toast.makeText(SignUpActivity.this, "User register succesfully. Please verify your email id ", Toast.LENGTH_LONG).setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0).show();
 
                                             Toast toast= Toast.makeText(getApplicationContext(),
-                                                    "User register succesfully. Please verify your email id", Toast.LENGTH_LONG);
+                                                    "User registered successfully. Please verify your email id", Toast.LENGTH_LONG);
                                             toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                                             toast.show();pd.dismiss();
                                             Intent intent = new Intent(SignUpActivity.this ,LoginActivity.class);
@@ -143,6 +143,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             startActivity(intent);
                                         }
                                         else{
+
                                             Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     }

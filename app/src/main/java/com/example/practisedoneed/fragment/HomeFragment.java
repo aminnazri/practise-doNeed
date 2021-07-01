@@ -12,25 +12,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.R;
 
 //import com.example.practisedoneed.databinding.FragmentHomeBinding;
-import com.example.practisedoneed.ui.home.HomeViewModel;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +37,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -54,6 +46,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
     private donateAdapter postAdapter;
     private List<donatePost> postLists;
+    private List<donatePost> filteredList;
     private ProgressBar progressBar;
 
     RecyclerView.LayoutManager linearLayoutManager;
@@ -72,6 +65,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private boolean[] selectedCategory;
     String[] categoryArray = {"All","Home Equipment","Furniture","Computer","Smartphone","Technology","Cloth","Sport"};
     final List<String> categoryList = Arrays.asList(categoryArray);
+
+    private List<String> filteredCategory;
+    private List<String> filteredState;
+    Boolean wantToClose;
 
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -102,24 +99,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         postAdapter = new donateAdapter(getContext(),postLists);
         recyclerView.setAdapter(postAdapter);
 
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-////                search = query;
-//                if(query!=null){
-//                    readPost(query);
-//                }
-//                else{
-//                    readPost("");
-//                }
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                return false;
-//            }
-//        });
+        filteredCategory = new ArrayList<>();
+        filteredState = new ArrayList<>();
+        filteredState.add("All");
+        filteredCategory.add("All");
+        filteredList = new ArrayList<>();
 
         readPost();
 
@@ -146,11 +130,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
+                if(newText.length()==0){
+                    readPost();
+                }
                 return true;
             }
         });
-
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -188,15 +173,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //get true item n search
-                    String SB = "";
+                    filteredCategory.clear();
+                    filteredState.clear();
+                    filteredList.clear();
+                    for (int i = 0; i<selectedCategory.length; i++){
+                        boolean checked = selectedCategory[i];
 
-                    for (int i = 0; i<selectedState.length; i++){
-                        boolean checked = selectedState[i];
                         if (checked) {
-                            SB = SB + stateList.get(i) + " ";
+                            filteredCategory.add(categoryList.get(i));
                         }
                     }
-                    Toast.makeText(getActivity(), SB, Toast.LENGTH_SHORT).show();
+                    for (int i = 0; i<selectedState.length; i++){
+                        boolean checked = selectedState[i];
+
+                        if (checked) {
+                            filteredState.add(stateList.get(i));
+                        }
+                    }
+                    wantToClose=true;
+                    setFiltered();
                 }
             });
 
@@ -216,6 +211,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //                    }
                     Arrays.fill(selectedState, false);
                     selectedState[0] = true;
+                    builder.show();
+
                 }
             });
 
@@ -232,7 +229,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                     selectedCategory[which] = isChecked;
                     String currentItem = categoryList.get(which);
-                    Toast.makeText(getActivity(), currentItem+ " "+ isChecked, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), currentItem+ " "+ isChecked, Toast.LENGTH_SHORT).show();
 
                     for(int i=1; i<selectedCategory.length; i++){
                         if(selectedCategory[i]){
@@ -247,14 +244,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //get true item n search
-                    String SB = "";
+                    filteredCategory.clear();
+                    filteredState.clear();
+                    filteredList.clear();
                     for (int i = 0; i<selectedCategory.length; i++){
                         boolean checked = selectedCategory[i];
+
                         if (checked) {
-                            SB = SB + categoryList.get(i) + " ";
+                            filteredCategory.add(categoryList.get(i));
                         }
                     }
-                    Toast.makeText(getActivity(), SB, Toast.LENGTH_SHORT).show();
+                    for (int i = 0; i<selectedState.length; i++){
+                        boolean checked = selectedState[i];
+
+                        if (checked) {
+                            filteredState.add(stateList.get(i));
+                        }
+                    }
+                    setFiltered();
                 }
             });
 
@@ -270,6 +277,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 public void onClick(DialogInterface dialog, int which) {
                     Arrays.fill(selectedCategory, false);
                     selectedCategory[0] = true;
+                    builder.show();
                 }
             });
 
@@ -330,4 +338,89 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
+
+//    private void filterItem(List<String> filterList, String in){
+////        postLists.clear();
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+//        String filter="";
+//        if(in.equals("location")){
+//            filter=in;
+//        }else if(in.equals("category")){
+//            filter=in;
+//        }
+//        for(String key: filterList){
+//            Toast.makeText(getActivity(), key, Toast.LENGTH_SHORT).show();
+//            Query query = reference.orderByChild(filter).equalTo(key);
+//            query.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//
+//                    for(DataSnapshot Snapshot : snapshot.getChildren()){
+//
+//                        donatePost post  = Snapshot.getValue(donatePost.class);
+//                        if(postLists.isEmpty()){
+//                            postLists.add(post);
+//                        }else{
+//                            if (!postLists.contains(post)) {
+//                                postLists.add(post);
+//                            }
+//                        }
+//                    }
+//                    postAdapter.notifyDataSetChanged();
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//                }
+//            });
+//        }
+//
+//    }
+
+    private void setFiltered(){
+
+        if(filteredState.contains("All") && filteredCategory.contains("All")){
+//            filteredList = postLists;
+            filteredList.addAll(postLists);
+        }
+        else if(!filteredState.contains("All") && !filteredCategory.contains("All")){
+            for(donatePost post: postLists){
+                for(int i = 0; i< filteredState.size(); i++){
+                    if(post.getLocation().equals(filteredState.get(i))){
+                        for(int x=0; x<filteredCategory.size(); x++){
+                            if(post.getCategory().equals(filteredCategory.get(x))){
+                                filteredList.add(post);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else if(!filteredState.contains("All")){
+            for(donatePost post: postLists){
+                for(int i = 0; i< filteredState.size(); i++){
+                    if(post.getLocation().equals(filteredState.get(i))){
+                        filteredList.add(post);
+                    }
+                }
+            }
+        }
+        else if(!filteredCategory.contains("All")){
+            for(donatePost post: postLists){
+                for(int i = 0; i< filteredCategory.size(); i++){
+                    if(post.getCategory().equals(filteredCategory.get(i))){
+                        filteredList.add(post);
+                    }
+                }
+            }
+        }
+
+        postAdapter = new donateAdapter(getContext(),filteredList);
+        recyclerView.setAdapter(postAdapter);
+    }
+
+
+
+
 }

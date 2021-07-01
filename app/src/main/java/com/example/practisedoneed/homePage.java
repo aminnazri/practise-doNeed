@@ -111,14 +111,25 @@ public class homePage extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if(fragmentManager.getBackStackEntryCount()>1){
-
-//            String tag = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-1);
-//            Log.i(TAG,);
-            fragmentManager.popBackStack(0,0);
-            bottomNavigationView.getMenu().getItem(0).setChecked(true);
-        }
-        else{
+//        if(fragmentManager.getBackStackEntryCount()>1){
+//
+//            String tag = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-1).getName();
+//            Log.i(TAG, tag);
+//            fragmentManager.popBackStack(0,0);
+//            bottomNavigationView.getMenu().getItem(0).setChecked(true);
+//        }
+//        else{
+//            if (pressedTime + 2000 > System.currentTimeMillis()) {
+//                super.onBackPressed();
+//                finish();
+//            } else {
+//                Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+//            }
+//            pressedTime = System.currentTimeMillis();
+//        }
+        String tag = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-1).getName();
+        Log.i(TAG, tag);
+        if(tag.equals("home")){
             if (pressedTime + 2000 > System.currentTimeMillis()) {
                 super.onBackPressed();
                 finish();
@@ -126,6 +137,16 @@ public class homePage extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
             }
             pressedTime = System.currentTimeMillis();
+        }else{
+            fragmentManager.popBackStack();
+            String name = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-2).getName();
+            if(name.equals("home")){
+                bottomNavigationView.getMenu().getItem(0).setChecked(true);
+            }else if(name.equals("donate")){
+                bottomNavigationView.getMenu().getItem(1).setChecked(true);
+            }else if(name.equals("profile")){
+                bottomNavigationView.getMenu().getItem(2).setChecked(true);
+            }
         }
     }
 

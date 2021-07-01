@@ -103,14 +103,6 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
     private String defaultImage;
     private FragmentManager fragmentManager;
 
-//    private static final int GalleryPick = 1;
-//    private static final int CAMERA_REQUEST = 100;
-//    private static final int STORAGE_REQUEST = 200;
-//    private static final int IMAGEPICK_GALLERY_REQUEST = 300;
-//    private static final int IMAGE_PICKCAMERA_REQUEST = 400;
-//    String cameraPermission[];
-//    String storagePermission[];
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_donate,container,false);
@@ -343,7 +335,7 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         if(parent.getId()==R.id.categories_spinner){
             category = categoryArray[position];
         }else if(parent.getId()==R.id.state_spinner){
-            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+//            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
             state = stateArray[position];
         }
     }

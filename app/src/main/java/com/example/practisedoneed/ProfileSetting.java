@@ -2,6 +2,7 @@ package com.example.practisedoneed;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -19,14 +20,21 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ProfileSetting extends AppCompatActivity {
+public class ProfileSetting extends AppCompatActivity implements View.OnClickListener {
 
     Uri imageUrl;
     ImageView  image_added,back;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_setting2);
+        toolbar = findViewById(R.id.toolbar);
+        back = findViewById(R.id.back);
+        back.setOnClickListener(this);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
 //        back = findViewById(R.id.back);
 //
 //        back.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +45,13 @@ public class ProfileSetting extends AppCompatActivity {
 //        });
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.back){
+            onBackPressed();
+        }
     }
 
     @Override
@@ -59,6 +74,7 @@ public class ProfileSetting extends AppCompatActivity {
         }
     }
 
+
     private void openFileChooser(){
 
         Intent intent = new Intent();
@@ -80,6 +96,7 @@ public class ProfileSetting extends AppCompatActivity {
         return mime.getExtensionFromMimeType(contentResolver.getType(uri));
 
     }
+
 
 
 }

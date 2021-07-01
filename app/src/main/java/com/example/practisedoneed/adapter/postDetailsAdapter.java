@@ -1,6 +1,9 @@
 package com.example.practisedoneed.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,10 +15,13 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.practisedoneed.MainActivity;
 import com.example.practisedoneed.Model.User;
 import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.R;
@@ -26,6 +32,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
@@ -38,6 +45,9 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
     public Context mContext;
     public List<donatePost> mPosts;
     public FirebaseUser firebaseUser;
+    public DatabaseReference mPostReference;
+    public DatabaseReference mSaveReference;
+    public String currentUser;
 
 
     public postDetailsAdapter(Context mContext, List<donatePost> mPosts) {
@@ -58,7 +68,7 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        String currentUser = firebaseUser.getUid();
+        currentUser = firebaseUser.getUid();
         final donatePost post = mPosts.get(position);
         Glide.with(mContext).load(post.getImage()).into(holder.postImage);
 
@@ -81,6 +91,7 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
+                popupMenu.inflate(R.menu.post_option);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
@@ -94,12 +105,12 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
                                     .addToBackStack("donate")
                                     .commit();
                         }else if(item.getItemId()==R.id.del_post){
-
+                            //del posts
+                            showDialog("Confrimation","Confirm Delete?",post.getId());
                         }
                         return false;
                     }
                 });
-                popupMenu.inflate(R.menu.post_option);
                 popupMenu.show();
             }
         });
@@ -117,6 +128,49 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
             }
         });
 
+
+    }
+
+//    private Activity getActivity() {
+////        Context context = getContext();
+//        while (mContext instanceof ContextWrapper) {
+//            if (mContext instanceof Activity) {
+//                return (Activity)mContext;
+//            }
+//            mContext = ((ContextWrapper)mContext).getBaseContext();
+//        }
+//        return null;
+//    }
+
+    public void showDialog(String title, CharSequence message, String postId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+
+        if (title != null) {
+            builder.setTitle(title);
+        }
+
+        builder.setMessage(message);
+//        builder.show();
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //del post
+                mPostReference = FirebaseDatabase.getInstance().getReference()
+                        .child("Posts").child(postId);
+                mPostReference.removeValue();
+                FragmentManager fragmentManager = ((FragmentActivity)mContext).getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
 
     }
 
