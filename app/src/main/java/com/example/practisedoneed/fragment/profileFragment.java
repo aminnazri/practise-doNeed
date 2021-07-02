@@ -51,6 +51,7 @@ public class profileFragment extends Fragment {
     Intent intent;
     private ImageView logout2, profilePicture;
     private TextView username, bio;
+    private Button settingButton, chatButton;
     private TabLayout tabLayout;
     private int[] tabIcon = {R.drawable.ic_grid, R.drawable.ic_save};
     private FirebaseUser firebaseUser;
@@ -73,7 +74,8 @@ public class profileFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
         intent = new Intent(getActivity(), ProfileSetting.class);
-        final Button button = (Button) rootView.findViewById(R.id.setting_button);
+        settingButton = (Button) rootView.findViewById(R.id.setting_button);
+        chatButton = (Button) rootView.findViewById(R.id.chat_button);
 
         SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         profileid = prefs.getString("profileId", "none");
@@ -86,9 +88,15 @@ public class profileFragment extends Fragment {
         username = rootView.findViewById(R.id.username);
         bio = rootView.findViewById(R.id.user_bio);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        settingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(intent);
+            }
+        });
+        chatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
@@ -132,9 +140,14 @@ public class profileFragment extends Fragment {
         myPhotos();
         if(profileid.equals(userID)){
             mySaves();
+            settingButton.setVisibility(View.VISIBLE);
+            chatButton.setVisibility(View.GONE);
             recyclerView_saves.setVisibility(View.VISIBLE);
             ((LinearLayout) Objects.requireNonNull(tabLayout.getTabAt(1)).view).setVisibility(View.VISIBLE);
-        }else {
+        }
+        else {
+            settingButton.setVisibility(View.GONE);
+            chatButton.setVisibility(View.VISIBLE);
             recyclerView_saves.setVisibility(View.GONE);
             ((LinearLayout) Objects.requireNonNull(tabLayout.getTabAt(1)).view).setVisibility(View.GONE);
 

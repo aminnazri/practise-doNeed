@@ -96,6 +96,7 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
         optionIcon.setOnClickListener(this);
         saveIcon.setOnClickListener(this);
         chatBtn.setOnClickListener(this);
+        imageProfile.setOnClickListener(this);
 
         readPostDetails();
 
@@ -262,6 +263,14 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
                         .child(post.getId()).removeValue();
             }
 
+        }else if(v.getId()==R.id.image_profile){
+            SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+            editor.putString("profileId",post.getDonator());
+            editor.apply();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new profileFragment())
+                    .addToBackStack("profile")
+                    .commit();
         }
         else if(v.getId()==R.id.chat_button){
 
