@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,7 +50,7 @@ import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 public class profileFragment extends Fragment {
 
     Intent intent;
-    private ImageView logout2, profilePicture;
+    private ImageView logout2, profilePicture,moon,sun;
     private TextView username, bio;
     private Button settingButton, chatButton;
     private TabLayout tabLayout;
@@ -83,10 +84,29 @@ public class profileFragment extends Fragment {
         userID = firebaseUser.getUid();
 
 ///////////////////////////////////////////////////////////////////////////////////////
-
+        moon = rootView.findViewById(R.id.moon);
+        sun = rootView.findViewById(R.id.sun);
         profilePicture = rootView.findViewById(R.id.image_profile);
         username = rootView.findViewById(R.id.username);
         bio = rootView.findViewById(R.id.user_bio);
+
+        moon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                startActivity(new Intent(requireActivity().getApplicationContext(),MainActivity.class));
+                requireActivity().finish();
+            }
+        });
+        sun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                startActivity(new Intent(requireActivity().getApplicationContext(),MainActivity.class));
+                requireActivity().finish();
+            }
+        });
+
 
         settingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
