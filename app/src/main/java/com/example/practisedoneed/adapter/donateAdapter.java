@@ -61,7 +61,6 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
         final donatePost post = mPost.get(position);
         Glide.with(mContext).load(post.getImage())
 //                .apply(new RequestOptions().placeholder(R.drawable.placeholder))
@@ -112,11 +111,8 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
             }
         });
 
-
         isSaved(post.getId(), holder.save);
         publisherInfo(holder.image_profile, holder.username, post.getDonator());
-
-
     }
 
     @Override

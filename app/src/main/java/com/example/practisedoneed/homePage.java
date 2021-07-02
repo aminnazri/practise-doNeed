@@ -1,6 +1,8 @@
 package com.example.practisedoneed;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -25,6 +27,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,6 +42,8 @@ public class homePage extends AppCompatActivity {
     private FragmentTransaction fragmentTransaction;
     private String fragmentName = "home";
     private long pressedTime;
+    private FirebaseUser firebaseUser;
+    String userID;
 
 
     @Override
@@ -56,10 +61,8 @@ public class homePage extends AppCompatActivity {
                 .replace(R.id.fragment_container, new HomeFragment())
                 .addToBackStack("home")
                 .commit();
-
-
-
-
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        userID = firebaseUser.getUid();
     }
 
 
@@ -78,6 +81,9 @@ public class homePage extends AppCompatActivity {
                             fragmentName="donate";
                             break;
                         case R.id.navigation_profile:
+                            SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                            editor.putString("profileId", userID);
+                            editor.apply();
                             selectedFagrament = new profileFragment();
                             fragmentName="profile";
                             break;

@@ -131,12 +131,16 @@
                         android:id="@+id/tablayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:tag="sticky">
+                        android:tag="sticky"
+                        app:tabMinWidth="210dp"
+                        app:tabMaxWidth="800dp">
 
                         <com.google.android.material.tabs.TabItem
                             android:id="@+id/mypost_btn"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+
+                            />
 
                         <com.google.android.material.tabs.TabItem
                             android:id="@+id/mysaves_btn"

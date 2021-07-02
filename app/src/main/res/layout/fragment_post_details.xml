@@ -11,7 +11,8 @@
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/yellow_musterd">
+        android:background="@color/yellow_musterd"
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -37,11 +38,17 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/postDetailsRecycler"
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/postDetailsRecycler"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/topBar"-->
+<!--        />-->
+
+    <include layout="@layout/details_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/topBar"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topBar" />
 
 
 

@@ -40,6 +40,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
+
+//CLASS ADAPTER NOT BEING USED NOW, JUST USE THE POSTDETAILSFRAGMENT CLASS
 public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.ViewHolder>{
 
     public Context mContext;
@@ -59,7 +61,7 @@ public class postDetailsAdapter extends RecyclerView.Adapter<postDetailsAdapter.
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.details_item,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.testing,parent,false);
 
         return new postDetailsAdapter.ViewHolder(view);
     }

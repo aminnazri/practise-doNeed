@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
@@ -128,7 +130,16 @@ public class profileFragment extends Fragment {
         checkTab();
         userProfile();
         myPhotos();
-        mySaves();
+        if(profileid.equals(userID)){
+            mySaves();
+            recyclerView_saves.setVisibility(View.VISIBLE);
+            ((LinearLayout) Objects.requireNonNull(tabLayout.getTabAt(1)).view).setVisibility(View.VISIBLE);
+        }else {
+            recyclerView_saves.setVisibility(View.GONE);
+            ((LinearLayout) Objects.requireNonNull(tabLayout.getTabAt(1)).view).setVisibility(View.GONE);
+
+        }
+
 
 
 
@@ -181,7 +192,7 @@ public class profileFragment extends Fragment {
                 postList.clear();
                 for(DataSnapshot data : snapshot.getChildren()){
                     donatePost post = data.getValue(donatePost.class);
-                    if(post.getDonator().equals(userID)){
+                    if(post.getDonator().equals(profileid)){
                         postList.add(post);
                     }
 //                    postList.add(post);
@@ -199,7 +210,7 @@ public class profileFragment extends Fragment {
     }
 
     public void userProfile(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userID);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(profileid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {

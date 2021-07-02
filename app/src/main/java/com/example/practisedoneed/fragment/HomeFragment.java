@@ -98,6 +98,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         postLists = new ArrayList<>();
         postAdapter = new donateAdapter(getContext(),postLists);
         recyclerView.setAdapter(postAdapter);
+        recyclerView.setHasFixedSize(true);
 
         filteredCategory = new ArrayList<>();
         filteredState = new ArrayList<>();
