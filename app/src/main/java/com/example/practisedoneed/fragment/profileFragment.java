@@ -250,6 +250,8 @@ public class profileFragment extends Fragment {
                 User user = snapshot.getValue(User.class);
                 Glide.with(getContext()).load(user.getImageUrl()).into(profilePicture);
                 username.setText(user.getUsername());
+                bio.setText(user.getBio());
+
             }
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {

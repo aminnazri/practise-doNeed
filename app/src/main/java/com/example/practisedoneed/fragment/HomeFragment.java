@@ -330,7 +330,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Collections.reverse(postLists);
                 postAdapter.notifyDataSetChanged();
 //                progressBar.setVisibility(View.GONE);
-
             }
 
             @Override

@@ -131,7 +131,7 @@
                     android:fontFamily="@font/lato"
                     />
                 <EditText
-                    android:id="@+id/login_email"
+                    android:id="@+id/user_email"
                     android:layout_marginTop="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -186,7 +186,34 @@
                     android:textColor="@color/dark"
                     android:fontFamily="@font/lato"/>
                 <EditText
-                    android:id="@+id/login_password"
+                    android:id="@+id/user_address"
+                    android:layout_marginTop="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/grey"
+                    android:inputType="textPassword"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bio_field"
+                android:layout_below="@+id/address_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bio"
+                    android:layout_marginStart="3dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/dark"
+                    android:fontFamily="@font/lato"/>
+                <EditText
+                    android:id="@+id/user_bio"
                     android:layout_marginTop="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"

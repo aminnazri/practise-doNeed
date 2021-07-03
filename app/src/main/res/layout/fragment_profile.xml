@@ -47,7 +47,7 @@
                     android:layout_toStartOf="@+id/logout2"
                     android:src="@drawable/moon"
                     android:visibility="visible"
-                    android:onClick="btnNightMode"/>
+                    />
 
                 <ImageView
                     android:id="@+id/sun"

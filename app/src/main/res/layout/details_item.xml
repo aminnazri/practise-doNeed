@@ -65,7 +65,7 @@
                     android:layout_alignBottom="@+id/post_title"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="3dp"
-                    android:layout_marginEnd="29dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="3dp"
                     android:src="@drawable/ic_save"
                     app:layout_constraintBottom_toBottomOf="@+id/post_title"
@@ -78,11 +78,10 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignTop="@+id/post_title"
-
                     android:layout_alignBottom="@+id/post_title"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="29dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="3dp"
                     android:src="@drawable/ic_option"
                     android:visibility="visible"
@@ -109,7 +108,7 @@
                     android:layout_alignTop="@+id/image_profile"
                     android:layout_alignBottom="@+id/image_profile"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="28dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="9dp"
                     android:layout_marginBottom="12dp"
                     android:layout_toEndOf="@+id/image_profile"
@@ -252,17 +251,36 @@
                     app:layout_constraintTop_toBottomOf="@id/category"
                     app:layout_constraintVertical_bias="0.015" />
 
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/location_text"
+                    android:layout_alignStart="@+id/location_text"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+
+                    android:layout_marginBottom="10dp"
+                    android:text="asdsadsad"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/location_text"
+                    app:layout_constraintTop_toBottomOf="@id/location"
+                    app:layout_constraintVertical_bias="0.0" />
+
                 <Button
                     android:id="@+id/chat_button"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginTop="308dp"
-                    android:layout_marginEnd="61dp"
+                    android:layout_below="@id/date"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
                     android:layout_marginBottom="100dp"
                     android:background="@drawable/button1"
                     android:fontFamily="@font/cocogoose"
@@ -280,7 +298,7 @@
                     app:layout_constraintHorizontal_bias="0.54"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/location"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintVertical_bias="1.0"/>
             </RelativeLayout>
 
 

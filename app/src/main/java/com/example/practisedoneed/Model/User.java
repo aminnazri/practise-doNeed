@@ -8,14 +8,16 @@ public class User {
     private String imageUrl;
     private String phone;
     private String address;
+    private String bio;
 
-    public User(String id, String username, String email, String imageUrl, String phone, String address) {
+    public User(String id, String username, String email, String imageUrl, String phone, String address, String bio) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.imageUrl = imageUrl;
         this.phone = phone;
         this.address = address;
+        this.bio = bio;
     }
 
     public User() {
@@ -67,5 +69,13 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }

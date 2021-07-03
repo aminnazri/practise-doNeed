@@ -29,6 +29,8 @@ import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.R;
 import com.example.practisedoneed.adapter.donateAdapter;
 import com.example.practisedoneed.adapter.postDetailsAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +43,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PostDetailsFragment extends Fragment implements View.OnClickListener {
 
@@ -54,8 +57,9 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
     public DatabaseReference mPostReference;
     private String userID;
     public ImageView postImage, saveIcon, imageProfile, optionIcon;
-    public TextView title,username,description,quantity,category,location;
+    public TextView title,username,description,quantity,category,location,date;
     public Button chatBtn;
+    private FragmentManager fragmentManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +68,7 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
 
         SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         postId = preferences.getString("postId", "none");
+        fragmentManager = getActivity().getSupportFragmentManager();
 
 
 
@@ -92,13 +97,17 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
         category = view.findViewById(R.id.category);
         location = view.findViewById(R.id.location);
         chatBtn = view.findViewById(R.id.chat_button);
+        date = view.findViewById(R.id.date);
 
         optionIcon.setOnClickListener(this);
         saveIcon.setOnClickListener(this);
         chatBtn.setOnClickListener(this);
         imageProfile.setOnClickListener(this);
 
+
         readPostDetails();
+
+
 
 
 
@@ -170,9 +179,13 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
                 //del post
                 mPostReference = FirebaseDatabase.getInstance().getReference()
                         .child("Posts").child(postId);
-                mPostReference.removeValue();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.popBackStack();
+                mPostReference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                        fragmentManager.popBackStack();
+                    }
+                });
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -197,26 +210,28 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
 //                postLists.add(post);
 //                postAdapter.notifyDataSetChanged();
 
-                post = snapshot.getValue(donatePost.class);
-                isSaved(post.getId(), saveIcon);
-                publisherInfo(imageProfile, username, post.getDonator());
-                Glide.with(getActivity()).load(post.getImage()).into(postImage);
-                title.setText(post.getTitle());
-                description.setText(post.getDescription());
-                quantity.setText(post.getQuantity());
-                category.setText(post.getCategory());
-                location.setText(post.getLocation());
+                if(snapshot.exists()){
+                    post = snapshot.getValue(donatePost.class);
+                    isSaved(post.getId(), saveIcon);
+                    publisherInfo(imageProfile, username, post.getDonator());
+                    Glide.with(getActivity()).load(post.getImage()).into(postImage);
+                    title.setText(post.getTitle());
+                    description.setText(post.getDescription());
+                    quantity.setText(post.getQuantity());
+                    category.setText(post.getCategory());
+                    location.setText(post.getLocation());
+                    date.setText(post.getDate());
 
-                if(post.getDonator().equals(userID)){
-                    chatBtn.setVisibility(View.GONE);
-                    saveIcon.setVisibility(View.GONE);
-                    optionIcon.setVisibility(View.VISIBLE);
-                }else{
-                    chatBtn.setVisibility(View.VISIBLE);
-                    saveIcon.setVisibility(View.VISIBLE);
-                    optionIcon.setVisibility(View.GONE);
+                    if(post.getDonator().equals(userID)){
+                        chatBtn.setVisibility(View.INVISIBLE);
+                        saveIcon.setVisibility(View.GONE);
+                        optionIcon.setVisibility(View.VISIBLE);
+                    }else{
+                        chatBtn.setVisibility(View.VISIBLE);
+                        saveIcon.setVisibility(View.VISIBLE);
+                        optionIcon.setVisibility(View.GONE);
+                    }
                 }
-
             }
 
             @Override
@@ -239,6 +254,7 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
                         SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
                         editor.putString("editPostID",post.getId());
                         editor.putString("imageUrl",post.getImage());
+                        editor.putString("date", post.getDate());
                         editor.apply();
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container
                                 , new donateFragment())

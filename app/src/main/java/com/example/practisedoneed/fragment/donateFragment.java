@@ -68,6 +68,8 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -102,6 +104,11 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
     private String editPostId;
     private String defaultImage;
     private FragmentManager fragmentManager;
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String Date;
+    private String defaultDate;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -111,6 +118,11 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         postId = preferences.getString("postId", "none");
         editPostId = preferences.getString("editPostID","none");
         defaultImage = preferences.getString("imageUrl","none");
+        defaultDate = preferences.getString("date", "none");
+
+        calendar = Calendar.getInstance();
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date = dateFormat.format(calendar.getTime());
 
         postTitle = view.findViewById(R.id.Tittle);
         description = view.findViewById(R.id.Description);
@@ -224,7 +236,7 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Posting");
         progressDialog.show();
-        if(imageUrl != null){
+        if(imageUrl != null ){
 
             StorageReference fileReference = storageReference.child(System.currentTimeMillis()
                     + "."+ getMimeType(getActivity(), imageUrl));
@@ -263,11 +275,15 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
                         hashMap.put("location", state);
                         hashMap.put("category", category);
                         hashMap.put("donator", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        hashMap.put("date", Date);
 
                         reference.child(postid).setValue(hashMap);
 
                         progressDialog.dismiss();
-                        fragmentManager.popBackStack(0,0);
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container
+                                , new HomeFragment())
+                                .addToBackStack("home")
+                                .commit();
                     }
                     else {
                         Toast.makeText(getActivity(), "Failed!", Toast.LENGTH_SHORT).show();
@@ -316,9 +332,23 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
 
             return true;
         }else if(item.getItemId() == R.id.donate_now){
-            uploadImage();
+            if(imageUrl!=null && !postTitle.getText().toString().isEmpty()
+                    && !description.getText().toString().isEmpty() && !quantity.getText().toString().isEmpty()
+                    && !state.equals("State") && !category.equals("Categories")) {
+                uploadImage();
+            }else {
+                Toast.makeText(context, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            }
+
         }else if(item.getItemId() == R.id.update_now){
-            updatePost();
+            if((imageUrl!=null || !editPostId.equals("none")) && !postTitle.getText().toString().isEmpty()
+                    && !description.getText().toString().isEmpty() && !quantity.getText().toString().isEmpty()
+                    && !state.equals("State") && !category.equals("Categories")) {
+                updatePost();
+            }else {
+                Toast.makeText(context, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -417,11 +447,17 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
                             hashMap.put("location", state);
                             hashMap.put("category", category);
                             hashMap.put("donator", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            hashMap.put("date", defaultDate);
 
-                            reference.child(editPostId).setValue(hashMap);
+                            reference.child(editPostId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    progressDialog.dismiss();
+                                    fragmentManager.popBackStack();
+                                }
+                            });
 
-                            progressDialog.dismiss();
-                            fragmentManager.popBackStack(0,0);
+
                         }
                         else {
                             Toast.makeText(getActivity(), "Failed!", Toast.LENGTH_SHORT).show();
@@ -449,9 +485,14 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
                 hashMap.put("category", category);
                 hashMap.put("donator", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                reference.child(editPostId).setValue(hashMap);
-                progressDialog.dismiss();
-                fragmentManager.popBackStack(0,0);
+                reference.child(editPostId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                        progressDialog.dismiss();
+                        fragmentManager.popBackStack();
+                    }
+                });
+
             }
         }
         else {

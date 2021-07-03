@@ -94,7 +94,7 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
                         new PostDetailsFragment())
                         .addToBackStack("details")
                         .commit();
-                //try2
+
             }
         });
         holder.save.setOnClickListener(new View.OnClickListener() {

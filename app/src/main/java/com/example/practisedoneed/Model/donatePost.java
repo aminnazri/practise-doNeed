@@ -10,8 +10,9 @@ public class donatePost {
     private  String quantity;
     private  String location;
     private  String category;
+    private String date;
 
-    public donatePost(String id, String image, String donator, String title, String description, String quantity, String location, String category) {
+    public donatePost(String id, String image, String donator, String title, String description, String quantity, String location, String category, String date) {
         this.id = id;
         this.image = image;
         this.donator = donator;
@@ -20,6 +21,7 @@ public class donatePost {
         this.quantity = quantity;
         this.location = location;
         this.category = category;
+        this.date = date;
     }
 
     public donatePost(){
@@ -88,5 +90,13 @@ public class donatePost {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

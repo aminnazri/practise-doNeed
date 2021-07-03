@@ -49,7 +49,7 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
 
     private Uri imageUrl;
     private ImageView profile_image, add_image, back;
-    private EditText username, email, phone, address;
+    private EditText username, email, phone, address, bio;
     private MaterialButton saveBtn;
     private Toolbar toolbar;
     private FirebaseUser firebaseUser;
@@ -77,6 +77,7 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
         email = findViewById(R.id.email);
         phone = findViewById(R.id.phoneNumber);
         address = findViewById(R.id.address);
+        bio = findViewById(R.id.bio);
         saveBtn = findViewById(R.id.save);
         saveBtn.setOnClickListener(this);
 
@@ -119,14 +120,6 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private String getFileExtensions(Uri uri) {
-
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
-
-    }
-
     public static String getMimeType(Activity context, Uri uri) {
         String extension;
         //Check uri format to avoid null
@@ -164,6 +157,7 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
                 email.setFocusable(false);
                 phone.setText(user.getPhone());
                 address.setText(user.getAddress());
+                bio.setText(user.getBio());
             }
 
             @Override
@@ -181,6 +175,7 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
         String str_email = email.getText().toString();
         String str_address = address.getText().toString();
         String str_phoneNumber = phone.getText().toString();
+        String str_bio = bio.getText().toString();
 
         if (str_username.isEmpty() || str_email.isEmpty() || str_address.isEmpty() || str_phoneNumber.isEmpty()) {
             pd.dismiss();
@@ -207,19 +202,19 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
 
                             userImage = downloadUrl.toString();
                             pd.dismiss();
-                            uploadData(str_username,str_address,str_phoneNumber,str_email);
+                            uploadData(str_username,str_address,str_phoneNumber,str_email,str_bio);
                         }
                     }
                 });
             }else{
                 pd.dismiss();
-                uploadData(str_username,str_address,str_phoneNumber,str_email);
+                uploadData(str_username,str_address,str_phoneNumber,str_email,str_bio);
             }
 
         }
     }
 
-    private void uploadData(String str_username,String str_address,String str_phoneNumber,String str_email){
+    private void uploadData(String str_username,String str_address,String str_phoneNumber,String str_email,String str_bio){
         reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
 
 
@@ -229,6 +224,7 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
         hashMap.put("phone", str_phoneNumber);
         hashMap.put("email", str_email);
         hashMap.put("imageUrl", userImage);
+        hashMap.put("bio", str_bio);
 
         reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

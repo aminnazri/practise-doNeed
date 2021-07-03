@@ -63,6 +63,23 @@ public class homePage extends AppCompatActivity {
                 .commit();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userID = firebaseUser.getUid();
+
+        fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                int index = fragmentManager.getBackStackEntryCount()-1;
+                if(fragmentManager.getBackStackEntryCount()!=0){
+                    String tag = fragmentManager.getBackStackEntryAt(index).getName();
+                    if(tag.equals("home")){
+                        bottomNavigationView.getMenu().getItem(0).setChecked(true);
+                    }else if(tag.equals("donate")){
+                        bottomNavigationView.getMenu().getItem(1).setChecked(true);
+                    }else if(tag.equals("profile")){
+                        bottomNavigationView.getMenu().getItem(2).setChecked(true);
+                    }
+                }
+            }
+        });
     }
 
 
