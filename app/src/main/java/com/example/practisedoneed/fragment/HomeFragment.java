@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,7 +55,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Toolbar toolbar;
     private TextView doNeedTitle;
     SearchView searchView;
-    String search;
+
 
     private TextView textState;
     private boolean[] selectedState;
@@ -138,6 +140,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+        if(item.getItemId()==R.id.chat_tool){
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new mainChatFragment())
+                    .addToBackStack("main_chat")
+                    .commit();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

@@ -108,10 +108,6 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
         readPostDetails();
 
 
-
-
-
-
         return view;
     }
 
@@ -289,7 +285,13 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
                     .commit();
         }
         else if(v.getId()==R.id.chat_button){
-
+            SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+            editor.putString("profileId",post.getDonator());
+            editor.apply();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new testChatFrag())
+                    .addToBackStack("chat")
+                    .commit();
         }
     }
 }
