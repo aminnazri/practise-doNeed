@@ -35,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
     DatabaseReference reference;
     ProgressDialog pd;
     Toast toast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +51,11 @@ public class SignUpActivity extends AppCompatActivity {
         register = findViewById(R.id.signUpSubmit_btn);
         text_login = findViewById(R.id.txt_login);
         mauth = FirebaseAuth.getInstance();
+
         text_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
             }
         });
 
@@ -137,7 +139,8 @@ public class SignUpActivity extends AppCompatActivity {
                                             Toast toast= Toast.makeText(getApplicationContext(),
                                                     "User registered successfully. Please verify your email id", Toast.LENGTH_LONG);
                                             toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
-                                            toast.show();pd.dismiss();
+                                            toast.show();
+                                            pd.dismiss();
                                             Intent intent = new Intent(SignUpActivity.this ,LoginActivity.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                             startActivity(intent);

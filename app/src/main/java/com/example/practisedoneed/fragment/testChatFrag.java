@@ -62,7 +62,7 @@ public class testChatFrag extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_test_chat, container, false);
         SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
-        chatWith = preferences.getString("profileId", "none");
+        chatWith = preferences.getString("chatWith", "none");
 
         recyclerView = view.findViewById(R.id.recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -121,7 +121,7 @@ public class testChatFrag extends Fragment implements View.OnClickListener {
                     for (DataSnapshot data : snapshot.getChildren()) {
                         ChatID chat = data.getValue(ChatID.class);
                         if ((chat.getMember1().equals(myID) || chat.getMember1().equals(chatWith)) &&
-                                chat.getMember2().equals(myID) || chat.getMember2().equals(chatWith)) {
+                                (chat.getMember2().equals(myID) || chat.getMember2().equals(chatWith))) {
                             chatID = chat.getId();
 
                         }
@@ -145,7 +145,7 @@ public class testChatFrag extends Fragment implements View.OnClickListener {
 
                     databaseReference.child(uploadId).setValue(hashMap);
                     chatID = uploadId;
-                    Toast.makeText(getActivity(), "ojdoiasdoasdasdsad", Toast.LENGTH_SHORT).show();
+
                 }
 
                 if (chatID != null) {

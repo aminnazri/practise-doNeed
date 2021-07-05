@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     Button login, register;
     FirebaseUser firebaseUser;
 
+    //check user already login or not
     protected void onStart() {
         super.onStart();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //function on startup
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.login_btn);
         register = findViewById(R.id.signUp_btn);
 
+        //click login button
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //click register button
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

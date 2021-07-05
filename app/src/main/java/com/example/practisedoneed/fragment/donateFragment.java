@@ -161,8 +161,10 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         fragmentManager = getActivity().getSupportFragmentManager();
 
         int index = getActivity().getSupportFragmentManager().getBackStackEntryCount() - 2;
+        Log.d("editID",editPostId);
         if(!editPostId.equals("none")){
 //            editPost();
+            Log.d("editID",editPostId);
             FragmentManager.BackStackEntry backEntry = getActivity().getSupportFragmentManager().getBackStackEntryAt(index);
 //                    getParentFragmentManager().getBackStackEntryAt(index);
             String tag = backEntry.getName();
@@ -381,18 +383,20 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 donatePost post = snapshot.getValue(donatePost.class);
-                Picasso.get().load(post.getImage()).into(image_add);
-                postTitle.setText(post.getTitle());
-                description.setText(post.getDescription());
-                quantity.setText(post.getQuantity());
+                if(post!=null) {
+                    Picasso.get().load(post.getImage()).into(image_add);
+                    postTitle.setText(post.getTitle());
+                    description.setText(post.getDescription());
+                    quantity.setText(post.getQuantity());
 
-                String defaultCategory = post.getCategory();
-                int categoryIndex = ad1.getPosition(defaultCategory);
-                categoriesSpinner.setSelection(categoryIndex);
+                    String defaultCategory = post.getCategory();
+                    int categoryIndex = ad1.getPosition(defaultCategory);
+                    categoriesSpinner.setSelection(categoryIndex);
 
-                String defaultState = post.getLocation();
-                int stateIndex = ad2.getPosition(defaultState);
-                stateSpinner.setSelection(stateIndex);
+                    String defaultState = post.getLocation();
+                    int stateIndex = ad2.getPosition(defaultState);
+                    stateSpinner.setSelection(stateIndex);
+                }
             }
 
             @Override

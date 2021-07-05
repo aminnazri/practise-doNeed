@@ -84,54 +84,14 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(str_email) || TextUtils.isEmpty(str_password)){
 
-                    Toast.makeText(LoginActivity.this,"All Filds are required",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"All Fields are required",Toast.LENGTH_SHORT).show();
 
                 }else if(str_password.length()<6) {
                     Toast.makeText(LoginActivity.this,"Password must have 6 characters",Toast.LENGTH_SHORT).show();
 
                 }else {
 
-                    mauth.signInWithEmailAndPassword(str_email,str_password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-
-
-                            if (task.isSuccessful()){
-                                if (mauth.getCurrentUser().isEmailVerified()) {
-                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users")
-                                        .child(mauth.getCurrentUser().getUid());
-
-                                reference.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                        pd.dismiss();
-
-                                        Intent intent = new Intent(LoginActivity.this, homePage.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        pd.dismiss();
-                                    }
-                                });
-
-                                }
-
-                                else{
-                                    Toast.makeText(LoginActivity.this, "Please verify your email", Toast.LENGTH_SHORT).show();
-                                }
-
-                            }else {
-                                pd.dismiss();
-                                Toast.makeText(LoginActivity.this,"Authentication Failed!",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+                    signIn(str_email,str_password);
 
                 }
 
@@ -141,4 +101,51 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
+    //SIGN IN FUNCTION
+    private void signIn(String str_email, String str_password){
+        mauth.signInWithEmailAndPassword(str_email,str_password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()){
+                    if (mauth.getCurrentUser().isEmailVerified()) {
+                        //SIGN IN SUCCESSFUL AND EMAIL VERIFIED
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users")
+                                .child(mauth.getCurrentUser().getUid());
+
+                        reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                pd.dismiss();
+
+                                Intent intent = new Intent(LoginActivity.this, homePage.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                pd.dismiss();
+                            }
+                        });
+
+                    }
+                    else{
+                        //EMAIL NOT VERIFIED
+                        Toast.makeText(LoginActivity.this, "Please verify your email", Toast.LENGTH_SHORT).show();
+                    }
+
+                }else {
+                    //SIGN IN FAIL
+                    pd.dismiss();
+                    Toast.makeText(LoginActivity.this,"Authentication Failed!",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 }

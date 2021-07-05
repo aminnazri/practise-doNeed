@@ -116,6 +116,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreateOptionsMenu(@NonNull @NotNull Menu menu, @NonNull @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.home_toolbar, menu);
+        //SEARCH FUNCTION
         searchView = (SearchView) menu.findItem(R.id.search_tool).getActionView();
         searchView.setQueryHint("Search Item");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -144,6 +145,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+        //if user click chat button
         if(item.getItemId()==R.id.chat_tool){
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new mainChatFragment())
@@ -161,6 +163,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        //State filter function
         if(v.getId()==R.id.state_filter){
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Select State")
@@ -234,6 +237,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             dialog.show();
         }
 
+        //Category filter function
         else if(v.getId()==R.id.category_filter){
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Select Category")
@@ -300,12 +304,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    //Show posts function
+    //Retrieve from database
     private  void  readPost(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
 
                 postLists.clear();
                 for(DataSnapshot Snapshot : dataSnapshot.getChildren()){
@@ -326,6 +331,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
     }
 
+    //Search Item/Posts function
+    //search by post's title
     private void searchItem(String data){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
         Query query = reference.orderByChild("title").startAt(data).endAt(data + "\uf8ff");
@@ -391,6 +398,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //
 //    }
 
+    //Show item filtered on feed
     private void setFiltered(){
 
         if(filteredState.contains("All") && filteredCategory.contains("All")){

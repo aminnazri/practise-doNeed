@@ -47,7 +47,7 @@ import java.util.Objects;
 
 public class PostDetailsFragment extends Fragment implements View.OnClickListener {
 
-//    private RecyclerView recyclerView;
+    //    private RecyclerView recyclerView;
 //    private postDetailsAdapter postAdapter;
 //    private List<donatePost> postLists;
 //    private RecyclerView.LayoutManager linearLayoutManager;
@@ -57,19 +57,25 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
     public DatabaseReference mPostReference;
     private String userID;
     public ImageView postImage, saveIcon, imageProfile, optionIcon;
-    public TextView title,username,description,quantity,category,location,date;
+    public TextView title, username, description, quantity, category, location, date;
     public Button chatBtn;
     private FragmentManager fragmentManager;
+    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_post_details,container,false);
+        View view = inflater.inflate(R.layout.fragment_post_details, container, false);
 
         SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         postId = preferences.getString("postId", "none");
         fragmentManager = getActivity().getSupportFragmentManager();
 
+        editor = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+        editor.putString("editPostID","none");
+        editor.putString("imageUrl","none");
+        editor.putString("date", "none");
+        editor.apply();
 
 
 //        recyclerView = view.findViewById(R.id.postDetailsRecycler);
@@ -111,7 +117,7 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
         return view;
     }
 
-    private  void  publisherInfo(final ImageView image_profile, final TextView donator , String userid){
+    private void publisherInfo(final ImageView image_profile, final TextView donator, String userid) {
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
@@ -136,17 +142,17 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
         });
     }
 
-    public void isSaved(String postId, ImageView imageView){
+    public void isSaved(String postId, ImageView imageView) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Saves")
                 .child(userID);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if(snapshot.child(postId).exists()){
+                if (snapshot.child(postId).exists()) {
                     imageView.setImageResource(R.drawable.ic_save_black);
                     imageView.setTag("saved");
-                }else{
+                } else {
                     imageView.setImageResource(R.drawable.ic_save);
                     imageView.setTag("save");
                 }
@@ -205,8 +211,11 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
 //                donatePost post = snapshot.getValue(donatePost.class);
 //                postLists.add(post);
 //                postAdapter.notifyDataSetChanged();
+                if (getActivity() == null) {
+                    return;
+                }
 
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     post = snapshot.getValue(donatePost.class);
                     isSaved(post.getId(), saveIcon);
                     publisherInfo(imageProfile, username, post.getDonator());
@@ -218,11 +227,11 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
                     location.setText(post.getLocation());
                     date.setText(post.getDate());
 
-                    if(post.getDonator().equals(userID)){
+                    if (post.getDonator().equals(userID)) {
                         chatBtn.setVisibility(View.INVISIBLE);
                         saveIcon.setVisibility(View.GONE);
                         optionIcon.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         chatBtn.setVisibility(View.VISIBLE);
                         saveIcon.setVisibility(View.VISIBLE);
                         optionIcon.setVisibility(View.GONE);
@@ -240,53 +249,49 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.optionIcon){
+        if (v.getId() == R.id.optionIcon) {
             PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
             popupMenu.inflate(R.menu.post_option);
             popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
-                    if(item.getItemId()==R.id.edit_post){
-                        SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
-                        editor.putString("editPostID",post.getId());
-                        editor.putString("imageUrl",post.getImage());
+                    if (item.getItemId() == R.id.edit_post) {
+                        editor.putString("editPostID", post.getId());
+                        editor.putString("imageUrl", post.getImage());
                         editor.putString("date", post.getDate());
                         editor.apply();
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container
                                 , new donateFragment())
                                 .addToBackStack("donate")
                                 .commit();
-                    }else if(item.getItemId()==R.id.del_post){
+                    } else if (item.getItemId() == R.id.del_post) {
                         //del posts
-                        showDialog("Confrimation","Confirm Delete?",post.getId());
+                        showDialog("Confrimation", "Confirm Delete?", post.getId());
                     }
                     return false;
                 }
             });
             popupMenu.show();
-        }
-        else if(v.getId()==R.id.save){
-            if(saveIcon.getTag().equals("save")){
+        } else if (v.getId() == R.id.save) {
+            if (saveIcon.getTag().equals("save")) {
                 FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid())
                         .child(post.getId()).setValue("true");
-            }
-            else{
+            } else {
                 FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid())
                         .child(post.getId()).removeValue();
             }
 
-        }else if(v.getId()==R.id.image_profile){
-            SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
-            editor.putString("profileId",post.getDonator());
+        } else if (v.getId() == R.id.image_profile) {
+//            SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+            editor.putString("profileId", post.getDonator());
             editor.apply();
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new profileFragment())
                     .addToBackStack("profile")
                     .commit();
-        }
-        else if(v.getId()==R.id.chat_button){
-            SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
-            editor.putString("profileId",post.getDonator());
+        } else if (v.getId() == R.id.chat_button) {
+//            SharedPreferences.Editor editor = getContext().getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
+            editor.putString("chatWith", post.getDonator());
             editor.apply();
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new testChatFrag())

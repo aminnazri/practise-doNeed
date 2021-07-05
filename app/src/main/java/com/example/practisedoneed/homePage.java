@@ -36,7 +36,7 @@ import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 public class homePage extends AppCompatActivity {
 
     private Button logout;
-    private BottomNavigationView bottomNavigationView ;
+    private BottomNavigationView bottomNavigationView;
     private Fragment selectedFagrament = null;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -83,6 +83,7 @@ public class homePage extends AppCompatActivity {
     }
 
 
+    //FUNCTION FOR ITEM IN BOTTOM NAVIGATION
     private final BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListner =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -114,42 +115,32 @@ public class homePage extends AppCompatActivity {
                 }
             };
 
+    //SET CLICKED ITEM ON BOTTOMNAVIGATION
     @Override
     public void onAttachFragment(@NonNull @NotNull Fragment fragment) {
         super.onAttachFragment(fragment);
-        int index = fragmentManager.getBackStackEntryCount()-1;
-        if(fragmentManager.getBackStackEntryCount()!=0){
-            String tag = fragmentManager.getBackStackEntryAt(index).getName();
-            if(tag.equals("home")){
-                bottomNavigationView.getMenu().getItem(0).setChecked(true);
-            }else if(tag.equals("donate")){
-                bottomNavigationView.getMenu().getItem(1).setChecked(true);
-            }else if(tag.equals("profile")){
-                bottomNavigationView.getMenu().getItem(2).setChecked(true);
+
+        if(fragmentManager!=null){
+            int index = fragmentManager.getBackStackEntryCount()-1;
+
+            if(fragmentManager.getBackStackEntryCount()!=0){
+                String tag = fragmentManager.getBackStackEntryAt(index).getName();
+                if(tag.equals("home")){
+                    bottomNavigationView.getMenu().getItem(0).setChecked(true);
+                }else if(tag.equals("donate")){
+                    bottomNavigationView.getMenu().getItem(1).setChecked(true);
+                }else if(tag.equals("profile")){
+                    bottomNavigationView.getMenu().getItem(2).setChecked(true);
+                }
             }
         }
+
     }
 
-    //ni utk sync top toolbar dgn bottom
+    //FUNCTION WHEN BACK BUTTON PRESSED
     @Override
     public void onBackPressed() {
 
-//        if(fragmentManager.getBackStackEntryCount()>1){
-//
-//            String tag = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-1).getName();
-//            Log.i(TAG, tag);
-//            fragmentManager.popBackStack(0,0);
-//            bottomNavigationView.getMenu().getItem(0).setChecked(true);
-//        }
-//        else{
-//            if (pressedTime + 2000 > System.currentTimeMillis()) {
-//                super.onBackPressed();
-//                finish();
-//            } else {
-//                Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
-//            }
-//            pressedTime = System.currentTimeMillis();
-//        }
         String tag = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-1).getName();
         Log.i(TAG, tag);
         if(tag.equals("home")){
@@ -173,11 +164,5 @@ public class homePage extends AppCompatActivity {
         }
     }
 
-
-
-    //    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        return super.onCreateOptionsMenu(menu);
-//    }
 
 }

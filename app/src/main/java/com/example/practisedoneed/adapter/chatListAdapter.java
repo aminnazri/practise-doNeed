@@ -48,18 +48,6 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.main_chat_item, parent, false);
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
-//                editor.putString("profileId", profileID);
-//                editor.apply();
-//                ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                        new testChatFrag())
-//                        .addToBackStack("chat")
-//                        .commit();
-//            }
-//        });
         return new chatListAdapter.ViewHolder(view);
     }
 
@@ -95,7 +83,7 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = context.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
-                editor.putString("profileId", holder.userChat.getText().toString());
+                editor.putString("chatWith", holder.userChat.getText().toString());
                 editor.apply();
                 ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new testChatFrag())
@@ -126,7 +114,7 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     SharedPreferences.Editor editor = context.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
-                    editor.putString("profileId", userChat.getText().toString());
+                    editor.putString("chatWith", userChat.getText().toString());
                     editor.apply();
                     ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new testChatFrag())
