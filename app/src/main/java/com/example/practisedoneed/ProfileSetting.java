@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
@@ -22,7 +21,6 @@ import com.bumptech.glide.Glide;
 import com.example.practisedoneed.Model.User;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,15 +33,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.HashMap;
-
-import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 //profile setting class
 public class ProfileSetting extends AppCompatActivity implements View.OnClickListener {
@@ -67,7 +62,7 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_setting2);
+        setContentView(R.layout.activity_profile_setting);
         toolbar = findViewById(R.id.toolbar);
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
