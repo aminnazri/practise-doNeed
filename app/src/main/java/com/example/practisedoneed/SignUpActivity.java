@@ -26,6 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
+//Sign Up class
 public class SignUpActivity extends AppCompatActivity {
 
     EditText username ,phoneNumber,password,email,address,reconfirmPassword;
@@ -34,12 +35,11 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseAuth mauth;
     DatabaseReference reference;
     ProgressDialog pd;
-    Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_sign_up);
+        setContentView(R.layout.activity_sign_up);
 
         username = findViewById(R.id.signUp_username);
         email = findViewById(R.id.signUp_email);
@@ -59,6 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        //click SIGN UP button
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,20 +75,22 @@ public class SignUpActivity extends AppCompatActivity {
                 String str_reconfirmPassword= reconfirmPassword.getText().toString();
 
                 if(TextUtils.isEmpty(str_username) || TextUtils.isEmpty(
-                        str_phoneNumber) || TextUtils.isEmpty(str_email) || TextUtils.isEmpty(str_password)||TextUtils.isEmpty(str_address)||TextUtils.isEmpty(str_reconfirmPassword)){
-
+                        str_phoneNumber) || TextUtils.isEmpty(str_email) || TextUtils.isEmpty(str_password)
+                        ||TextUtils.isEmpty(str_address)||TextUtils.isEmpty(str_reconfirmPassword)){
+                    //check if there is an empty field
                     Toast.makeText(SignUpActivity.this,"All Fields are required",Toast.LENGTH_SHORT).show();
 
 
                 }else if(str_password.length()<6) {
+                    //check if the password less than 6
                     Toast.makeText(SignUpActivity.this,"Password must have 6 characters",Toast.LENGTH_SHORT).show();
 
                 }else if(!str_password.equals(str_reconfirmPassword)){
+                    //check if the password and reconfirm password match
                     Toast.makeText(SignUpActivity.this,"Password must same on both field",Toast.LENGTH_SHORT).show();
                 }
-
                 else {
-
+                    //if everything ok, call REGISTER function
                     register(str_username,str_email,str_address,str_phoneNumber,str_password);
 
                 }
@@ -102,6 +105,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    //REGISTER FUNCTION
     private  void register (final String username , final String email , String address, String phoneNumber, String password){
 
         mauth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {

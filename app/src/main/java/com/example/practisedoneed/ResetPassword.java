@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.jetbrains.annotations.NotNull;
 
+//Reset password class
 public class ResetPassword extends AppCompatActivity {
 
     private EditText email_text;
@@ -26,7 +27,6 @@ public class ResetPassword extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView txt_login;
     FirebaseAuth auth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,22 +56,26 @@ public class ResetPassword extends AppCompatActivity {
 
     }
 
+    //RESET PASSWORD FUNCTION
     private void resetPassword() {
 
         String email = email_text.getText().toString().trim();
 
+        //Check if the password filed is empty or not
         if(email.isEmpty()){
             email_text.setError("Email is required!");
             email_text.requestFocus();
             return;
         }
 
+        //check if the email follow an email format
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             email_text.setError("Please provide valid email!");
             email_text.requestFocus();
             return;
         }
 
+        //pop up progress bar
         progressBar.setVisibility(View.VISIBLE);
         auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

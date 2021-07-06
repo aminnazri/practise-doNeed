@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.practisedoneed.Model.ChatID;
 import com.example.practisedoneed.R;
 import com.example.practisedoneed.adapter.chatListAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +28,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+//Main Chat class
+//This class will show a list of chat
 public class mainChatFragment extends Fragment implements View.OnClickListener{
 
     private chatListAdapter chatListAdapter;
@@ -34,7 +37,6 @@ public class mainChatFragment extends Fragment implements View.OnClickListener{
     private List<ChatID> chatIDList;
     private FirebaseUser firebaseUser;
     private String myID;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class mainChatFragment extends Fragment implements View.OnClickListener{
         recyclerView = view.findViewById(R.id.recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
 
         chatIDList = new ArrayList<>();
         chatListAdapter = new chatListAdapter(getContext(),chatIDList);
@@ -60,6 +63,7 @@ public class mainChatFragment extends Fragment implements View.OnClickListener{
 
     }
 
+    //GET USER CHAT LIST FUNCTION
     public void getChat(){
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ChatID");

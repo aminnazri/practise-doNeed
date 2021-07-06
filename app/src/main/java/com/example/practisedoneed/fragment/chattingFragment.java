@@ -3,19 +3,14 @@ package com.example.practisedoneed.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,9 +35,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
-
-public class testChatFrag extends Fragment implements View.OnClickListener {
+//Chat class
+//This class will enable user to chat with another user
+public class chattingFragment extends Fragment implements View.OnClickListener {
 
     private String chatWith, message, myID, chatID;
     FirebaseUser firebaseUser;
@@ -60,7 +55,7 @@ public class testChatFrag extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_test_chat, container, false);
+        View view = inflater.inflate(R.layout.fragment_chatting, container, false);
         SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         chatWith = preferences.getString("chatWith", "none");
 
@@ -89,11 +84,14 @@ public class testChatFrag extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.send_btn) {
+            //if user click send button
             sendMessage(myID, chatWith, et_message.getText().toString());
             et_message.setText("");
         }
     }
 
+    //SHOW ALL MESSAGE IN THE CHAT FUNCTION
+    //will read/retrieve all message from database
     private void readMessages() {
 
         chatsList = new ArrayList<>();
@@ -181,6 +179,7 @@ public class testChatFrag extends Fragment implements View.OnClickListener {
 
     }
 
+    //SEND MESSAGE FUNCTION
     private void sendMessage(final String myID, final String chatWithID, final String message) {
 
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();

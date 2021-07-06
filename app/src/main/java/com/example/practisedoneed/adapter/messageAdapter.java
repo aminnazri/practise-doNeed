@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-
+//Message or Chatting Adapter
 public class messageAdapter extends RecyclerView.Adapter<messageAdapter.ViewHolder> {
 
     Context context;
@@ -38,8 +38,10 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.ViewHold
     public messageAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view;
         if (viewType == MESSAGE_RIGHT) {
+            //set the message on the right
             view = LayoutInflater.from(context).inflate(R.layout.chat_right_item, parent, false);
         } else {
+            //set the message on the left
             view = LayoutInflater.from(context).inflate(R.layout.chat_left_item, parent, false);
         }
         return new messageAdapter.ViewHolder(view);
@@ -48,7 +50,6 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull @NotNull messageAdapter.ViewHolder holder, int position) {
         Chat chats  = chatslist.get(position);
-
         holder.messageTV.setText(chats.getMessage());
     }
 
@@ -62,7 +63,9 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.ViewHold
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         assert user != null;
+        //check if the message was send by who
         if (chatslist.get(position).getSender().equals(user.getUid())) {
+
             return MESSAGE_RIGHT;
         } else {
             return MESSAGE_LEFT;
@@ -70,10 +73,9 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.ViewHold
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder {
-        TextView messageTV;
+        TextView messageTV; //message textview
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             messageTV = itemView.findViewById(R.id.message_text);
 
         }

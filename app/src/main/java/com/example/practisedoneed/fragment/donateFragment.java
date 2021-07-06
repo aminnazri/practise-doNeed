@@ -1,16 +1,11 @@
 package com.example.practisedoneed.fragment;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -33,21 +28,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.R;
-import com.example.practisedoneed.homePage;
 //import com.example.practisedoneed.databinding.FragmentNotificationsBinding;
-import com.example.practisedoneed.test;
-import com.example.practisedoneed.ui.notifications.NotificationsViewModel;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -63,7 +51,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -71,10 +58,10 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Objects;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
+//Donate Item Class
 public class donateFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private static final int RESULT_OK = -1;
@@ -161,12 +148,11 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         fragmentManager = getActivity().getSupportFragmentManager();
 
         int index = getActivity().getSupportFragmentManager().getBackStackEntryCount() - 2;
-        Log.d("editID",editPostId);
+
+        //Check if the user want to edit or post a new item
         if(!editPostId.equals("none")){
-//            editPost();
             Log.d("editID",editPostId);
             FragmentManager.BackStackEntry backEntry = getActivity().getSupportFragmentManager().getBackStackEntryAt(index);
-//                    getParentFragmentManager().getBackStackEntryAt(index);
             String tag = backEntry.getName();
             Log.i(TAG,tag);
             if(tag.equals("details")){
@@ -186,12 +172,13 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         }
     }
 
+    //PICK IMAGE FUNCTION
     // Here we will pick image from gallery or camera
     private void pickFromGallery() {
         CropImage.activity().setAspectRatio(5,4).start(requireContext(), this);
-
     }
 
+    //GET IMAGE EXTENSION FUNCTION
     public static String getMimeType(Activity context, Uri uri) {
         String extension;
         //Check uri format to avoid null
@@ -217,13 +204,16 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
     }
 
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //GET THE CHOSEN IMAGE
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE ) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 imageUrl = result.getUri();
+                //Set the image in imageview
                 Picasso.get().load(imageUrl).into(image_add);
             }else {
                 Toast.makeText(getActivity(),"Something gone wrong!",Toast.LENGTH_SHORT).show();
@@ -233,7 +223,8 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         }
     }
 
-    private void uploadImage() {
+    //UPLOAD ITEM/POST FUNCTION
+    private void uploadItem() {
 
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Posting");
@@ -330,19 +321,22 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
+            //If user click back button
             getActivity().onBackPressed();
 
             return true;
         }else if(item.getItemId() == R.id.donate_now){
+            //if user click donate button
             if(imageUrl!=null && !postTitle.getText().toString().isEmpty()
                     && !description.getText().toString().isEmpty() && !quantity.getText().toString().isEmpty()
                     && !state.equals("State") && !category.equals("Categories")) {
-                uploadImage();
+                uploadItem();
             }else {
                 Toast.makeText(context, "Please fill all the fields", Toast.LENGTH_SHORT).show();
             }
 
         }else if(item.getItemId() == R.id.update_now){
+            //if user click update button
             if((imageUrl!=null || !editPostId.equals("none")) && !postTitle.getText().toString().isEmpty()
                     && !description.getText().toString().isEmpty() && !quantity.getText().toString().isEmpty()
                     && !state.equals("State") && !category.equals("Categories")) {
@@ -377,6 +371,8 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
 
     }
 
+    //EDIT POST FUNCTION
+    //edit title or description or image etc
     public void editPost(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(editPostId);
         reference.addValueEventListener(new ValueEventListener() {
@@ -408,6 +404,7 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
 
     }
 
+    //UPDATE POST FUNCTION
     private void updatePost() {
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Posting");

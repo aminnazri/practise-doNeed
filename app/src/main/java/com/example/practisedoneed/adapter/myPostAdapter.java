@@ -2,7 +2,6 @@ package com.example.practisedoneed.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +20,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
-
-public class myFotosAdapter extends RecyclerView.Adapter<myFotosAdapter.ViewHolder>{
+//User's Post Adapter
+public class myPostAdapter extends RecyclerView.Adapter<myPostAdapter.ViewHolder>{
 
     public Context mContext;
     public List<donatePost> mPosts;
 
-    public myFotosAdapter(Context mContext, List<donatePost> mPosts) {
+    public myPostAdapter(Context mContext, List<donatePost> mPosts) {
         this.mContext = mContext;
         this.mPosts = mPosts;
     }
@@ -39,17 +37,19 @@ public class myFotosAdapter extends RecyclerView.Adapter<myFotosAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(mContext).inflate(R.layout.fotos_item,parent,false);
-        return new myFotosAdapter.ViewHolder(view);
+        return new myPostAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
         final donatePost post = mPosts.get(position);
+        //Set posts image into imageview
         Glide.with(mContext).load(post.getImage()).into(holder.postImage);
 
         holder.postImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Open Post Details Fragment
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
                 editor.putString("postId",post.getId());
                 editor.apply();

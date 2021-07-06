@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
@@ -22,7 +21,6 @@ import com.bumptech.glide.Glide;
 import com.example.practisedoneed.Model.User;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,7 +33,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import org.jetbrains.annotations.NotNull;
@@ -43,8 +40,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.util.HashMap;
 
-import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
-
+//profile setting class
 public class ProfileSetting extends AppCompatActivity implements View.OnClickListener {
 
     private Uri imageUrl;
@@ -66,7 +62,7 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_setting2);
+        setContentView(R.layout.activity_profile_setting);
         toolbar = findViewById(R.id.toolbar);
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
@@ -92,6 +88,8 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
 
     }
 
+
+    //onClick function
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.back) {
@@ -103,12 +101,14 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-
+            //GET AN IMAGE CHOSE BY USER FOR THEIR PROFILE PICTURE
+            //SET THE IMAGE IN IMAGEVIEW IN PROFILE SETTING
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             imageUrl = result.getUri();
             Glide.with(this).load(imageUrl).into(profile_image);
@@ -120,6 +120,8 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+
+    //GET IMAGE EXTENSION FUNCTION
     public static String getMimeType(Activity context, Uri uri) {
         String extension;
         //Check uri format to avoid null
@@ -144,6 +146,8 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
         return extension;
     }
 
+
+    //GET USER PROFILE FROM FIREBASE DATABASE FUNCTION
     private void userProfile() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userID);
         reference.addValueEventListener(new ValueEventListener() {
@@ -167,6 +171,8 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+
+    //SAVE THE UPDATED USER PROFILE
     private void saveProfile() {
         ProgressDialog pd = new ProgressDialog(ProfileSetting.this);
         pd.setMessage("Please wait...");
@@ -181,6 +187,7 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
             pd.dismiss();
             Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
         } else {
+            //Check if user choose a new profile picture
             if (checkImage && imageUrl != null) {
                 StorageReference fileRef = storageRef.child(System.currentTimeMillis() + "."
                         + getMimeType(this,imageUrl));
@@ -214,10 +221,10 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    //UPLOAD USERDATA FUNCTION
+    //UPLOAD THE UPDATED USER PROFILE TO DATABASE
     private void uploadData(String str_username,String str_address,String str_phoneNumber,String str_email,String str_bio){
         reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
-
-
         hashMap.put("id", userID);
         hashMap.put("username", str_username);
         hashMap.put("address", str_address);

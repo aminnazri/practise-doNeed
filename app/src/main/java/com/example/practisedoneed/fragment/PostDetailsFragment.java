@@ -8,11 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -27,8 +23,6 @@ import com.bumptech.glide.Glide;
 import com.example.practisedoneed.Model.User;
 import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.R;
-import com.example.practisedoneed.adapter.donateAdapter;
-import com.example.practisedoneed.adapter.postDetailsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,16 +35,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 public class PostDetailsFragment extends Fragment implements View.OnClickListener {
 
-    //    private RecyclerView recyclerView;
-//    private postDetailsAdapter postAdapter;
-//    private List<donatePost> postLists;
-//    private RecyclerView.LayoutManager linearLayoutManager;
+
     private donatePost post;
     private String postId;
     public FirebaseUser firebaseUser;
@@ -76,18 +63,6 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
         editor.putString("imageUrl","none");
         editor.putString("date", "none");
         editor.apply();
-
-
-//        recyclerView = view.findViewById(R.id.postDetailsRecycler);
-//        recyclerView.setHasFixedSize(true);
-//        linearLayoutManager = new LinearLayoutManager(getContext());
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//
-//        postLists = new ArrayList<>();
-//        postAdapter = new postDetailsAdapter(getContext(),postLists);
-//        recyclerView.setAdapter(postAdapter);
-//        recyclerView.stopScroll();
-
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userID = firebaseUser.getUid();
@@ -165,6 +140,7 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
         });
     }
 
+    //Delete Post Function
     public void showDialog(String title, CharSequence message, String postId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -207,10 +183,6 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                postLists.clear();
-//                donatePost post = snapshot.getValue(donatePost.class);
-//                postLists.add(post);
-//                postAdapter.notifyDataSetChanged();
                 if (getActivity() == null) {
                     return;
                 }
@@ -244,7 +216,6 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
 
             }
         });
-
     }
 
     @Override
@@ -265,7 +236,7 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
                                 .addToBackStack("donate")
                                 .commit();
                     } else if (item.getItemId() == R.id.del_post) {
-                        //del posts
+                        //delete posts confirmation
                         showDialog("Confrimation", "Confirm Delete?", post.getId());
                     }
                     return false;
@@ -294,7 +265,7 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
             editor.putString("chatWith", post.getDonator());
             editor.apply();
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new testChatFrag())
+                    new chattingFragment())
                     .addToBackStack("chat")
                     .commit();
         }

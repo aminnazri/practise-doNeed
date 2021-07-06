@@ -6,9 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/yellow_musterd">
 
-<!--    tools:ignore="MissingConstraints"-->
-
-<!--    TAK PAKAI PON-->
+<!--    TAK PAKAI PON .... FOR TESTING ONLY-->
 
     <ImageView
         android:id="@+id/post_image"
