@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.practisedoneed.Model.ChatID;
 import com.example.practisedoneed.R;
 import com.example.practisedoneed.adapter.chatListAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,7 +38,6 @@ public class mainChatFragment extends Fragment implements View.OnClickListener{
     private FirebaseUser firebaseUser;
     private String myID;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_chat, container, false);
@@ -47,6 +47,7 @@ public class mainChatFragment extends Fragment implements View.OnClickListener{
         recyclerView = view.findViewById(R.id.recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
 
         chatIDList = new ArrayList<>();
         chatListAdapter = new chatListAdapter(getContext(),chatIDList);

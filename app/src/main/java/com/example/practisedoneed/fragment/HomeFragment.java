@@ -147,7 +147,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if(item.getItemId()==R.id.chat_tool){
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new mainChatFragment())
-                    .addToBackStack("main_chat")
+                    .addToBackStack("chat")
                     .commit();
         }
         return super.onOptionsItemSelected(item);

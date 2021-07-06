@@ -73,11 +73,16 @@ public class homePage extends AppCompatActivity {
                 if(fragmentManager.getBackStackEntryCount()!=0){
                     String tag = fragmentManager.getBackStackEntryAt(index).getName();
                     if(tag.equals("home")){
+                        bottomNavigationView.setVisibility(View.VISIBLE);
                         bottomNavigationView.getMenu().getItem(0).setChecked(true);
                     }else if(tag.equals("donate")){
+                        bottomNavigationView.setVisibility(View.VISIBLE);
                         bottomNavigationView.getMenu().getItem(1).setChecked(true);
                     }else if(tag.equals("profile")){
+                        bottomNavigationView.setVisibility(View.VISIBLE);
                         bottomNavigationView.getMenu().getItem(2).setChecked(true);
+                    }else if(tag.equals("chat")){
+                        bottomNavigationView.setVisibility(View.GONE);
                     }
                 }
             }
