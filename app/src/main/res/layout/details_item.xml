@@ -8,6 +8,18 @@
 
 
     <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="284dp"
+        android:src="@drawable/left_arrrow"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/post_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/post_image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -18,13 +30,14 @@
         tools:layout_editor_absoluteY="5dp" />
 
     <androidx.cardview.widget.CardView
+        android:elevation="100dp"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/layout_detail_view"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
+        app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_image"
         app:layout_constraintVertical_bias="0.212"
@@ -32,7 +45,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="362dp"
+            android:layout_height="wrap_content"
             android:scrollbars="vertical">
 
             <RelativeLayout
@@ -47,7 +60,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="17dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="18dp"
                     android:fontFamily="@font/cocogoose"
                     android:text="asdasdasdsad"
                     android:textColor="@color/black"
@@ -119,6 +132,7 @@
                     app:layout_constraintStart_toEndOf="@+id/image_profile"
                     app:layout_constraintTop_toBottomOf="@id/post_title" />
 
+
                 <TextView
                     android:id="@+id/details"
                     android:layout_width="wrap_content"
@@ -144,6 +158,8 @@
                     android:layout_marginStart="-1dp"
                     android:layout_marginTop="13dp"
                     android:textColor="@color/black"
+                    android:text=""
+                    android:fontFamily="@font/lato"
                     app:layout_constraintStart_toStartOf="@+id/details"
                     app:layout_constraintTop_toBottomOf="@id/details" />
 
@@ -260,7 +276,7 @@
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="0dp"
-
+                    android:fontFamily="@font/lato"
                     android:layout_marginBottom="10dp"
                     android:text="asdsadsad"
                     android:textColor="@color/darkGrey"
@@ -275,11 +291,11 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/date"
+                    android:layout_below="@+id/date"
 
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="0dp"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginEnd="0dp"
                     android:layout_marginBottom="100dp"
                     android:background="@drawable/button1"
@@ -290,7 +306,7 @@
                     android:paddingBottom="5dp"
                     android:text="CONTACT DONATOR"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     app:backgroundTint="@color/yellow_musterd"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -298,7 +314,7 @@
                     app:layout_constraintHorizontal_bias="0.54"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/location"
-                    app:layout_constraintVertical_bias="1.0"/>
+                    app:layout_constraintVertical_bias="1.0" />
             </RelativeLayout>
 
 
