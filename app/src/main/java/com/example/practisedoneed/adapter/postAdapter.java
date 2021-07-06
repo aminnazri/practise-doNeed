@@ -1,15 +1,12 @@
 package com.example.practisedoneed.adapter;
 
-import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,7 +18,6 @@ import com.example.practisedoneed.Model.User;
 import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.R;
 import com.example.practisedoneed.fragment.PostDetailsFragment;
-import com.example.practisedoneed.fragment.donateFragment;
 import com.example.practisedoneed.fragment.profileFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,15 +31,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
-
-public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder> {
+//ADAPTER FOR FEED FRAGMENT
+public class postAdapter extends RecyclerView.Adapter<postAdapter.ViewHolder> {
 
     public Context mContext;
     public List<donatePost> mPost;
     private FirebaseUser firebaseUser;
 
-    public donateAdapter(Context mContext, List<donatePost> mPost) {
+    public postAdapter(Context mContext, List<donatePost> mPost) {
         this.mContext = mContext;
         this.mPost = mPost;
     }
@@ -54,7 +49,7 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.feed_item,parent,false);
 
-        return new donateAdapter.ViewHolder(view);
+        return new postAdapter.ViewHolder(view);
     }
 
     @Override
@@ -62,10 +57,9 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final donatePost post = mPost.get(position);
-        Glide.with(mContext).load(post.getImage())
-//                .apply(new RequestOptions().placeholder(R.drawable.placeholder))
-                .into(holder.post_image);
-
+        //Set donator profile picture
+        Glide.with(mContext).load(post.getImage()).into(holder.post_image);
+        //set post title
         holder.title.setText(post.getTitle());
         if(post.getDonator().equals(firebaseUser.getUid())){
             holder.save.setVisibility(View.GONE);
@@ -75,6 +69,7 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
         holder.image_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Open Profile Fragment
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
                 editor.putString("profileId",post.getDonator());
                 editor.apply();
@@ -87,6 +82,7 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
         holder.post_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Open Post Detail Fragment
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
                 editor.putString("postId",post.getId());
                 editor.apply();
@@ -100,6 +96,7 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
         holder.save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //SAVE POSTS FUNCTION
                 if(holder.save.getTag().equals("save")){
                     FirebaseDatabase.getInstance().getReference().child("Saves").child(firebaseUser.getUid())
                             .child(post.getId()).setValue("true");
@@ -112,7 +109,7 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
         });
 
         isSaved(post.getId(), holder.save);
-        publisherInfo(holder.image_profile, holder.username, post.getDonator());
+        donatorInfo(holder.image_profile, holder.username, post.getDonator());
     }
 
     @Override
@@ -142,9 +139,23 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
         }
     }
 
-    private  void  publisherInfo(final ImageView image_profile, final TextView donator , String userid ){
+    //Check if the activity is destroyed or not
+    //Prevent the apps from crash because of destroyed activity
+    public static boolean isValidContextForGlide(final Context context) {
+        if (context == null) {
+            return false;
+        }
+        if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            if (activity.isDestroyed() || activity.isFinishing()) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-
+    //GET DONATOR INFO FUNCTION
+    private  void donatorInfo(final ImageView image_profile, final TextView donator , String userid ){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -153,11 +164,10 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
 
 
                 User user = dataSnapshot.getValue(User.class);
-
-                Glide.with(mContext).load(user.getImageUrl()).into(image_profile);
-
-                donator.setText(user.getUsername());
-
+                if(isValidContextForGlide(mContext)){
+                    Glide.with(mContext).load(user.getImageUrl()).into(image_profile);
+                    donator.setText(user.getUsername());
+                }
             }
 
             @Override
@@ -168,6 +178,8 @@ public class donateAdapter extends RecyclerView.Adapter<donateAdapter.ViewHolder
         });
     }
 
+    //CHECK SAVED POST FUNCTION
+    //If the post is saved, the save icon will turn to black
     public void isSaved(String postId, ImageView imageView){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Saves")
                 .child(firebaseUser.getUid());

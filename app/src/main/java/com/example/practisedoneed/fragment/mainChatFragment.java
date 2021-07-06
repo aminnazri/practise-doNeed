@@ -27,6 +27,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+//Main Chat class
+//This class will show a list of chat
 public class mainChatFragment extends Fragment implements View.OnClickListener{
 
     private chatListAdapter chatListAdapter;
@@ -60,6 +62,7 @@ public class mainChatFragment extends Fragment implements View.OnClickListener{
 
     }
 
+    //GET USER CHAT LIST FUNCTION
     public void getChat(){
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ChatID");

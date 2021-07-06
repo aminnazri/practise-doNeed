@@ -10,15 +10,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.practisedoneed.Model.Chat;
 import com.example.practisedoneed.Model.ChatID;
 import com.example.practisedoneed.Model.User;
 import com.example.practisedoneed.R;
-import com.example.practisedoneed.fragment.testChatFrag;
+import com.example.practisedoneed.fragment.chattingFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,12 +29,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+//Chat List Adapter
 public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ViewHolder> {
 
     private Context context;
     private List<ChatID> chatslist;
     private String chatWith;
-    private String profileID;
 
     public chatListAdapter(Context context, List<ChatID> chatslist) {
         this.context = context;
@@ -56,6 +54,7 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ViewHo
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String myID = user.getUid();
         ChatID chat = chatslist.get(position);
+        //Check the chat id for current user
         if(chat.getMember1().equals(myID)){
             chatWith = chat.getMember2();
             holder.userChat.setText(chatWith);
@@ -68,6 +67,7 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ViewHo
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                //Get the chatWith user profile picture and username
                 User user = snapshot.getValue(User.class);
                 Glide.with(context).load(user.getImageUrl()).into(holder.profile_picture);
                 holder.username.setText(user.getUsername());
@@ -82,11 +82,12 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ViewHo
         holder.username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Open Chatting Fragment with the chatWith user
                 SharedPreferences.Editor editor = context.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
                 editor.putString("chatWith", holder.userChat.getText().toString());
                 editor.apply();
                 ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new testChatFrag())
+                        new chattingFragment())
                         .addToBackStack("chat")
                         .commit();
             }
@@ -113,11 +114,12 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //Open Chatting Fragment with the chatWith user
                     SharedPreferences.Editor editor = context.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit();
                     editor.putString("chatWith", userChat.getText().toString());
                     editor.apply();
                     ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new testChatFrag())
+                            new chattingFragment())
                             .addToBackStack("chat")
                             .commit();
                 }

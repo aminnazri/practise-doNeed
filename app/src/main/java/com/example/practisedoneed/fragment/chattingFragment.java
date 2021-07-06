@@ -42,7 +42,9 @@ import java.util.List;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
-public class testChatFrag extends Fragment implements View.OnClickListener {
+//Chat class
+//This class will enable user to chat with another user
+public class chattingFragment extends Fragment implements View.OnClickListener {
 
     private String chatWith, message, myID, chatID;
     FirebaseUser firebaseUser;
@@ -89,11 +91,14 @@ public class testChatFrag extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.send_btn) {
+            //if user click send button
             sendMessage(myID, chatWith, et_message.getText().toString());
             et_message.setText("");
         }
     }
 
+    //SHOW ALL MESSAGE IN THE CHAT FUNCTION
+    //will read/retrieve all message from database
     private void readMessages() {
 
         chatsList = new ArrayList<>();
@@ -181,6 +186,7 @@ public class testChatFrag extends Fragment implements View.OnClickListener {
 
     }
 
+    //SEND MESSAGE FUNCTION
     private void sendMessage(final String myID, final String chatWithID, final String message) {
 
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();

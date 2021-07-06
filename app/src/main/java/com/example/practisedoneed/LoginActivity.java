@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
+//Login class
 public class LoginActivity extends AppCompatActivity {
 
     EditText password,email;
@@ -71,8 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-//                startActivity(new Intent(LoginActivity.this, homePage.class));
-//                finish();
                 pd = new ProgressDialog(LoginActivity.this);
                 pd.setMessage("Please wait...");
                 pd.show();
@@ -83,16 +82,16 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 if(TextUtils.isEmpty(str_email) || TextUtils.isEmpty(str_password)){
-
+                    //check if there is an empty field
                     Toast.makeText(LoginActivity.this,"All Fields are required",Toast.LENGTH_SHORT).show();
 
                 }else if(str_password.length()<6) {
+                    //check if the password less than 6
                     Toast.makeText(LoginActivity.this,"Password must have 6 characters",Toast.LENGTH_SHORT).show();
 
                 }else {
-
+                    //if everything ok, call sign in function
                     signIn(str_email,str_password);
-
                 }
 
             }

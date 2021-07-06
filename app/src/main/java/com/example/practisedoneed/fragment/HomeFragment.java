@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,7 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.example.practisedoneed.adapter.donateAdapter;
+import com.example.practisedoneed.adapter.postAdapter;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -42,11 +41,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
+//FEED CLASS
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView recyclerView;
-    private donateAdapter postAdapter;
+    private com.example.practisedoneed.adapter.postAdapter postAdapter;
     private List<donatePost> postLists;
     private List<donatePost> filteredList;
     private ProgressBar progressBar;
@@ -98,7 +97,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         postLists = new ArrayList<>();
-        postAdapter = new donateAdapter(getContext(),postLists);
+        postAdapter = new postAdapter(getContext(),postLists);
         recyclerView.setAdapter(postAdapter);
         recyclerView.setHasFixedSize(true);
 
@@ -122,7 +121,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                search = query;
                 if(query!=null){
                     searchItem(query);
                 }
@@ -145,7 +143,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
-        //if user click chat button
+        //if user click chat button on toolbar
         if(item.getItemId()==R.id.chat_tool){
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new mainChatFragment())
@@ -156,14 +154,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-//        binding = null;
-    }
-
-    @Override
     public void onClick(View v) {
-        //State filter function
+        //STATE FILTER FUNCTION
         if(v.getId()==R.id.state_filter){
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Select State")
@@ -237,7 +229,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             dialog.show();
         }
 
-        //Category filter function
+        //CATEGORY FILTER FUNCTION
         else if(v.getId()==R.id.category_filter){
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Select Category")
@@ -304,8 +296,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    //Show posts function
-    //Retrieve from database
+    //SHOW POSTS FUNCTION
+    //Retrieve Posts from database
     private  void  readPost(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
         reference.addValueEventListener(new ValueEventListener() {
@@ -331,8 +323,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-    //Search Item/Posts function
-    //search by post's title
+    //SEARCH POSTS FUNCTION
+    //Search by post's title
     private void searchItem(String data){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
         Query query = reference.orderByChild("title").startAt(data).endAt(data + "\uf8ff");
@@ -359,46 +351,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-//    private void filterItem(List<String> filterList, String in){
-////        postLists.clear();
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
-//        String filter="";
-//        if(in.equals("location")){
-//            filter=in;
-//        }else if(in.equals("category")){
-//            filter=in;
-//        }
-//        for(String key: filterList){
-//            Toast.makeText(getActivity(), key, Toast.LENGTH_SHORT).show();
-//            Query query = reference.orderByChild(filter).equalTo(key);
-//            query.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//
-//                    for(DataSnapshot Snapshot : snapshot.getChildren()){
-//
-//                        donatePost post  = Snapshot.getValue(donatePost.class);
-//                        if(postLists.isEmpty()){
-//                            postLists.add(post);
-//                        }else{
-//                            if (!postLists.contains(post)) {
-//                                postLists.add(post);
-//                            }
-//                        }
-//                    }
-//                    postAdapter.notifyDataSetChanged();
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//                }
-//            });
-//        }
-//
-//    }
 
-    //Show item filtered on feed
+    //SHOW FILTERED POSTS FUNCTION
+    //Show only the filtered posts
     private void setFiltered(){
 
         if(filteredState.contains("All") && filteredCategory.contains("All")){
@@ -437,7 +392,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         }
 
-        postAdapter = new donateAdapter(getContext(),filteredList);
+        postAdapter = new postAdapter(getContext(),filteredList);
         recyclerView.setAdapter(postAdapter);
     }
 

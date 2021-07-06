@@ -27,8 +27,7 @@ import com.example.practisedoneed.Model.donatePost;
 import com.example.practisedoneed.ProfileSetting;
 import com.example.practisedoneed.R;
 
-import com.example.practisedoneed.adapter.myFotosAdapter;
-import com.example.practisedoneed.test;
+import com.example.practisedoneed.adapter.myPostAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,6 +46,7 @@ import java.util.Objects;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
+//Profile Class
 public class profileFragment extends Fragment {
 
     Intent intent;
@@ -59,14 +59,17 @@ public class profileFragment extends Fragment {
     String userID;
     String profileid;
 
-    private myFotosAdapter fotosAdapter;
+    private myPostAdapter fotosAdapter;
     private List<donatePost> postList;
     RecyclerView recyclerView1;
 
     private List<String> mySaves;
     RecyclerView recyclerView_saves;
-    private myFotosAdapter saves_adapter;
+    private myPostAdapter saves_adapter;
     private List<donatePost> savesList;
+    SharedPreferences.Editor editor;
+    SharedPreferences prefs;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,8 +81,10 @@ public class profileFragment extends Fragment {
         settingButton = (Button) rootView.findViewById(R.id.setting_button);
         chatButton = (Button) rootView.findViewById(R.id.chat_button);
 
-        SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
+        prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         profileid = prefs.getString("profileId", "none");
+        editor = prefs.edit();
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userID = firebaseUser.getUid();
 
@@ -90,10 +95,21 @@ public class profileFragment extends Fragment {
         username = rootView.findViewById(R.id.username);
         bio = rootView.findViewById(R.id.user_bio);
 
+        //Check whether user choose light or night mode
+        if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+            moon.setVisibility(View.GONE);
+            sun.setVisibility(View.VISIBLE);
+        }else{
+            sun.setVisibility(View.GONE);
+            moon.setVisibility(View.VISIBLE);
+        }
+
         moon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                editor.putInt("NightModeInt",AppCompatDelegate.getDefaultNightMode());
+                editor.apply();
                 startActivity(new Intent(requireActivity().getApplicationContext(),MainActivity.class));
                 requireActivity().finish();
             }
@@ -102,6 +118,8 @@ public class profileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                editor.putInt("NightModeInt",AppCompatDelegate.getDefaultNightMode());
+                editor.apply();
                 startActivity(new Intent(requireActivity().getApplicationContext(),MainActivity.class));
                 requireActivity().finish();
             }
@@ -110,13 +128,20 @@ public class profileFragment extends Fragment {
 
         settingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //Open profile Setting Page
                 startActivity(intent);
             }
         });
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //Open Chat Page
+                editor.putString("chatWith", profileid);
+                editor.apply();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new chattingFragment())
+                        .addToBackStack("chat")
+                        .commit();
             }
         });
 
@@ -125,6 +150,7 @@ public class profileFragment extends Fragment {
         logout2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //LOGOUT FUNCTION
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getActivity(), MainActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -140,7 +166,7 @@ public class profileFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(),3);
         recyclerView1.setLayoutManager(linearLayoutManager);
         postList = new ArrayList<>();
-        fotosAdapter = new myFotosAdapter(getContext(),postList);
+        fotosAdapter = new myPostAdapter(getContext(),postList);
         recyclerView1.setAdapter(fotosAdapter);
 
         mySaves = new ArrayList<>();
@@ -149,7 +175,7 @@ public class profileFragment extends Fragment {
         LinearLayoutManager linearLayoutManager_saves = new GridLayoutManager(getContext(),3);
         recyclerView_saves.setLayoutManager(linearLayoutManager_saves);
         savesList = new ArrayList<>();
-        saves_adapter = new myFotosAdapter(getContext(),savesList);
+        saves_adapter = new myPostAdapter(getContext(),savesList);
         recyclerView_saves.setAdapter(saves_adapter);
 
         recyclerView1.setVisibility(View.VISIBLE);
@@ -157,7 +183,7 @@ public class profileFragment extends Fragment {
 
         checkTab();
         userProfile();
-        myPhotos();
+        myPosts();
         if(profileid.equals(userID)){
             mySaves();
             settingButton.setVisibility(View.VISIBLE);
@@ -184,6 +210,7 @@ public class profileFragment extends Fragment {
         tabLayout.getTabAt(1).setIcon(tabIcon[1]);
     }
 
+    //Check whether user on myPost tab or savePost tab
     private void checkTab(){
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -208,16 +235,10 @@ public class profileFragment extends Fragment {
 
             }
         });
-//        if(tabLayout.getSelectedTabPosition()==0){
-//            recyclerView1.setVisibility(View.VISIBLE);
-//            recyclerView_saves.setVisibility(View.GONE);
-//        }else if(tabLayout.getSelectedTabPosition()==1){
-//            recyclerView1.setVisibility(View.GONE);
-//            recyclerView_saves.setVisibility(View.VISIBLE);
-//        }
     }
 
-    private void myPhotos(){
+    //GET USER POSTS FUNCTION
+    private void myPosts(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -242,6 +263,7 @@ public class profileFragment extends Fragment {
         });
     }
 
+    //GET USER PROFILE FUNCTION
     public void userProfile(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(profileid);
         reference.addValueEventListener(new ValueEventListener() {
@@ -260,6 +282,7 @@ public class profileFragment extends Fragment {
         });
     }
 
+    //GET USER SAVE POSTS FUNCTION
     private void mySaves(){
         DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Saves")
                 .child(firebaseUser.getUid());
@@ -279,6 +302,7 @@ public class profileFragment extends Fragment {
         });
     }
 
+    //SHOW USER SAVE POSTS FUNCTION
     private void displaySaves(){
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("Posts");
         db.addValueEventListener(new ValueEventListener() {

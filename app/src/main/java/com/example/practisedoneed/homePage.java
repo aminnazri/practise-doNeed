@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -44,6 +45,7 @@ public class homePage extends AppCompatActivity {
     private long pressedTime;
     private FirebaseUser firebaseUser;
     String userID;
+
 
 
     @Override
@@ -163,6 +165,5 @@ public class homePage extends AppCompatActivity {
             }
         }
     }
-
 
 }
