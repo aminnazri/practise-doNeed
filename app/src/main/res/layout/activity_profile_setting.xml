@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ProfileSetting">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -46,7 +45,8 @@
             android:paddingBottom="10dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
-            app:cardElevation="10dp">
+            app:cardElevation="10dp"
+            >
 
             <ScrollView
                 android:id="@+id/scroll"
@@ -57,187 +57,116 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-
-                    <RelativeLayout
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/username_field"
+                        android:layout_marginTop="80dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <LinearLayout
-                            android:id="@+id/username_field"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginTop="100dp"
-                            android:layout_marginRight="40dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="3dp"
-                                android:fontFamily="@font/lato"
-                                android:text="User Name"
-                                android:textColor="@color/dark"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-
-                            <EditText
-                                android:id="@+id/username"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_marginTop="1dp"
-                                android:backgroundTint="@color/grey"
-                                android:inputType="textPersonName"
-                                android:textColor="@color/black" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/email_field"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/username_field"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginRight="40dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="3dp"
-                                android:fontFamily="@font/lato"
-                                android:text="Email"
-                                android:textColor="@color/dark"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-
-                            <EditText
-                                android:id="@+id/email"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_marginTop="1dp"
-                                android:backgroundTint="@color/grey"
-                                android:inputType="textEmailAddress"
-                                android:textColor="@color/black" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/phoneNumber_field"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/email_field"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginTop="30dp"
-                            android:layout_marginRight="40dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="3dp"
-                                android:fontFamily="@font/lato"
-                                android:text="Phone Number"
-                                android:textColor="@color/dark"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-
-                            <EditText
-                                android:id="@+id/phoneNumber"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_marginTop="1dp"
-                                android:backgroundTint="@color/grey"
-                                android:inputType="phone"
-                                android:textColor="@color/black" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/address_field"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/phoneNumber_field"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginTop="30dp"
-                            android:layout_marginRight="40dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="3dp"
-                                android:fontFamily="@font/lato"
-                                android:text="Address"
-                                android:textColor="@color/dark"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-
-                            <EditText
-                                android:id="@+id/address"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_marginTop="1dp"
-                                android:backgroundTint="@color/grey"
-                                android:inputType="textPostalAddress"
-                                android:textColor="@color/black" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/bio_field"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/address_field"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginTop="30dp"
-                            android:layout_marginRight="40dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="3dp"
-                                android:fontFamily="@font/lato"
-                                android:text="Bio"
-                                android:textColor="@color/dark"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-
-                            <EditText
-                                android:id="@+id/bio"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_marginTop="1dp"
-                                android:backgroundTint="@color/grey"
-                                android:inputType="text"
-                                android:textColor="@color/black" />
-                        </LinearLayout>
-
-
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.496"
-                        app:layout_constraintStart_toStartOf="parent">
+                        android:hint="User Name"
+                        app:hintTextColor="@color/darkGrey"
+                        app:layout_constraintTop_toTopOf="parent"
 
+                        app:startIconDrawable="@drawable/user1">
 
-                    </LinearLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/username"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:inputType="textEmailAddress"
+                            android:textColor="@color/darkGrey" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/email_field"
+                        android:layout_marginTop="10dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email"
+                        android:editable="false"
+                        app:hintTextColor="@color/darkGrey"
+                        app:layout_constraintTop_toBottomOf="@+id/username_field"
+                        app:startIconDrawable="@drawable/email"
+                        tools:layout_editor_absoluteX="20dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/email"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:inputType="textEmailAddress"
+                            android:textColor="@color/darkGrey" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/phone_field"
+                        android:layout_marginTop="10dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Phone Number"
+                        app:hintTextColor="@color/darkGrey"
+                        app:layout_constraintTop_toBottomOf="@+id/email_field"
+                        app:startIconDrawable="@drawable/phone"
+                        tools:layout_editor_absoluteX="20dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/phoneNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:inputType="textEmailAddress"
+                            android:textColor="@color/darkGrey" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/address_field"
+                        android:layout_marginTop="10dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address"
+                        app:endIconMode="clear_text"
+                        app:hintTextColor="@color/darkGrey"
+                        app:layout_constraintTop_toBottomOf="@+id/phone_field"
+                        app:startIconDrawable="@drawable/address"
+                        tools:layout_editor_absoluteX="20dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/address"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:inputType="textEmailAddress"
+                            android:textColor="@color/darkGrey" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/bio_field"
+                        android:layout_marginTop="10dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Bio"
+                        app:hintTextColor="@color/darkGrey"
+                        app:layout_constraintTop_toBottomOf="@+id/address_field"
+                        app:startIconDrawable="@drawable/bio"
+                        tools:layout_editor_absoluteX="20dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/bio"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:inputType="textEmailAddress"
+                            android:textColor="@color/darkGrey" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

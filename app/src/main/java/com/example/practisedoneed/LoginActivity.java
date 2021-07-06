@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 pd = new ProgressDialog(LoginActivity.this);
                 pd.setMessage("Please wait...");
                 pd.show();
+
                 //  String str_username= username.getText().toString();
                 //  String str_fullname= fullname.getText().toString();
                 String str_email= email.getText().toString();
@@ -84,11 +85,11 @@ public class LoginActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(str_email) || TextUtils.isEmpty(str_password)){
                     //check if there is an empty field
                     Toast.makeText(LoginActivity.this,"All Fields are required",Toast.LENGTH_SHORT).show();
-
+                    pd.dismiss();
                 }else if(str_password.length()<6) {
                     //check if the password less than 6
                     Toast.makeText(LoginActivity.this,"Password must have 6 characters",Toast.LENGTH_SHORT).show();
-
+                    pd.dismiss();
                 }else {
                     //if everything ok, call sign in function
                     signIn(str_email,str_password);
