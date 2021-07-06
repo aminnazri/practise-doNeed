@@ -18,7 +18,7 @@
         <activity android:name=".ResetPassword" />
         <activity
             android:name=".ProfileSetting"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".homePage"
             android:label="@string/title_activity_home_page" />

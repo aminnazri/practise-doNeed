@@ -39,7 +39,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -66,60 +67,47 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/Login_txt"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_marginTop="56dp"
                     android:hint="Email"
-                    app:boxBackgroundColor="@color/lightGrey"
-                    app:boxBackgroundMode="filled"
                     app:endIconMode="clear_text"
-                    app:hintEnabled="true"
+                    app:startIconDrawable="@drawable/email"
                     app:hintTextColor="@color/darkGrey"
                     app:layout_constraintTop_toBottomOf="@+id/Login_txt"
-                    tools:layout_editor_absoluteX="0dp">
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/login_email"
-
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:ems="10"
                         android:inputType="textEmailAddress"
-                        android:paddingStart="10dp"
-                        android:textColor="@color/dark"
-                        android:textColorHint="@color/yellow_musterd"
-
+                        android:textColor="@color/darkGrey"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/password_field"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/email_field"
-                    android:layout_marginTop="44dp"
+                    android:layout_marginTop="30dp"
                     android:hint="Password"
-                    app:boxBackgroundColor="@color/lightGrey"
-                    app:boxBackgroundMode="filled"
-                    app:hintTextColor="@color/darkGrey"
+                    app:hintTextColor="@color/black"
+                    app:startIconDrawable="@drawable/lock"
                     app:layout_constraintEnd_toEndOf="@+id/email_field"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/email_field"
                     app:layout_constraintTop_toBottomOf="@+id/email_field"
+                    app:boxStrokeErrorColor="@color/black"
                     app:passwordToggleEnabled="true">
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/login_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:ems="20"
                         android:inputType="textPassword"
-                        android:textColor="@color/dark"
-
+                        android:textColor="@color/darkGrey"
                         />
 
 
