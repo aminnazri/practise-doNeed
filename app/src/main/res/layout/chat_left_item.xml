@@ -11,17 +11,17 @@
         android:id="@+id/message_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:background="@drawable/chat_bubble_left"
         android:fontFamily="@font/lato"
         android:paddingStart="8dp"
         android:paddingTop="8dp"
-
         android:paddingEnd="8dp"
         android:paddingBottom="8dp"
-        android:layout_marginStart="5dp"
         android:text="Hi. How are you? Some random text here and here. I need spend more time for android dev"
         android:textColor="@color/black"
         android:textSize="15sp"
+        app:backgroundTint="@color/lightGrey"
         app:layout_constrainedWidth="true"
         app:layout_constraintStart_toEndOf="@+id/marginSpacer_beforeMessage"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/marginSpacer_beforeMessage"
         app:layout_constraintStart_toStartOf="@+id/marginSpacer_beforeMessage"
-        app:tint="@color/white" />
+        app:tint="@color/lightGrey" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -55,7 +55,7 @@
         android:src="@drawable/tail2extension"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/marginSpacer_beforeMessage"
-        app:tint="@color/white" />
+        app:tint="@color/lightGrey" />
 
 
 
