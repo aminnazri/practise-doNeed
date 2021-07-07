@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/yellow_musterd">
+    android:background="@color/white">
 
 
     <ImageView
@@ -23,7 +23,6 @@
         android:id="@+id/post_image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:src="@drawable/add"
         app:layout_constraintDimensionRatio="5:4"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="44dp"
