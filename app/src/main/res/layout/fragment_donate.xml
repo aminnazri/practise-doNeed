@@ -30,34 +30,45 @@
                 android:paddingRight="10dp"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <androidx.cardview.widget.CardView
                     android:layout_marginTop="10dp"
                     android:layout_width="@dimen/_250sdp"
                     android:layout_height="@dimen/_200sdp"
-
-                    android:layout_marginLeft="21dp"
-                    android:layout_marginRight="21dp"
+                    android:scaleType="centerInside"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="20dp"
+                    app:layout_constraintDimensionRatio="5:4"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
                     android:layout_gravity="center"
+
+                    android:background="@drawable/button_backgroynd"
+
                     >
 
-                    <ImageView
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/image_add"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerInside"
-                        app:layout_constraintDimensionRatio="5:4"
-                        android:layout_gravity="center"
-                        android:src="@mipmap/ic_launcher_foreground"
-                        android:id="@+id/image_add"
-                        android:background="@drawable/button_backgroynd"
+                        app:riv_corner_radius_bottom_left="8dp"
+                        app:riv_corner_radius_bottom_right="8dp"
+                        app:riv_corner_radius_top_left="8dip"
+                        app:riv_corner_radius_top_right="8dip"
+                        android:src="@drawable/camera1"
+                        tools:ignore="MissingConstraints"
+                        tools:layout_editor_absoluteX="3dp"
+                        tools:layout_editor_absoluteY="4dp"
+
                         />
 
-                </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/choose_image_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Choose Image"
+                    android:text="add image"
+                    android:drawableLeft="@drawable/camera"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="6dp"
                     />
