@@ -81,4 +81,16 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
     implementation 'com.android.support:design:30.0.0'
+
+    //animation
+    implementation 'com.github.hajiyevelnur92:intentanimation:1.0'
+
+    //zoom image.3
+    implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
+    implementation 'com.zolad:zoominimageview:1.0.0'
+
+    //slide to change fragment
+    implementation 'com.r0adkll:slidableactivity:2.1.0'
+
+
 }
