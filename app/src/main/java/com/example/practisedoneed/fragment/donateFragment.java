@@ -97,15 +97,16 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
     private String defaultDate;
 
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_donate,container,false);
-        setHasOptionsMenu(true);
+
         SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         postId = preferences.getString("postId", "none");
         editPostId = preferences.getString("editPostID","none");
         defaultImage = preferences.getString("imageUrl","none");
-        defaultDate = preferences.getString("date", "none");
+        defaultDate = preferences.getString("defaultDate","none");
 
         calendar = Calendar.getInstance();
         dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -114,6 +115,7 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
         postTitle = view.findViewById(R.id.Tittle);
         description = view.findViewById(R.id.Description);
         quantity = view.findViewById(R.id.Quantity);
+        setHasOptionsMenu(true);
         toolbar = (Toolbar) view.findViewById(R.id.app_toolbar);
         AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
         assert appCompatActivity != null;
@@ -432,10 +434,9 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
 
                         if(task.isSuccessful()){
 
+
                             Uri downloadUrl = task.getResult();
-
                             myUrl = downloadUrl.toString();
-
                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
 
 //                        String postid = reference.push().getKey();
@@ -485,6 +486,7 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
                 hashMap.put("location", state);
                 hashMap.put("category", category);
                 hashMap.put("donator", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                hashMap.put("date", defaultDate);
 
                 reference.child(editPostId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

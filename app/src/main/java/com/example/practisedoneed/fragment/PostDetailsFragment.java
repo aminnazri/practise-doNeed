@@ -6,18 +6,24 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.practisedoneed.Model.User;
@@ -35,6 +41,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class PostDetailsFragment extends Fragment implements View.OnClickListener {
 
 
@@ -48,6 +56,7 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
     public Button chatBtn;
     private FragmentManager fragmentManager;
     SharedPreferences.Editor editor;
+    private Toolbar toolbar;
 
 
     @Override
@@ -58,6 +67,15 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
         SharedPreferences preferences = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         postId = preferences.getString("postId", "none");
         fragmentManager = getActivity().getSupportFragmentManager();
+
+        toolbar = (Toolbar) view.findViewById(R.id.tool_bar);
+        // showing the back button in action bar
+        AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
+        assert appCompatActivity != null;
+        appCompatActivity.setSupportActionBar(toolbar);
+        appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        appCompatActivity.getSupportActionBar().setHomeButtonEnabled(true);
+        setHasOptionsMenu(true);
 
         editor = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
         editor.putString("editPostID","none");
@@ -92,6 +110,18 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
 
         return view;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            getActivity().onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     private void publisherInfo(final ImageView image_profile, final TextView donator, String userid) {
 
@@ -230,12 +260,13 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
                     if (item.getItemId() == R.id.edit_post) {
                         editor.putString("editPostID", post.getId());
                         editor.putString("imageUrl", post.getImage());
-                        editor.putString("date", post.getDate());
+                        editor.putString("defaultDate", post.getDate());
                         editor.apply();
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container
-                                , new donateFragment())
+
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new donateFragment())
                                 .addToBackStack("donate")
                                 .commit();
+
                     } else if (item.getItemId() == R.id.del_post) {
                         //delete posts confirmation
                         showDialog("Confrimation", "Confirm Delete?", post.getId());

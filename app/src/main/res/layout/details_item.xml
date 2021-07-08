@@ -7,17 +7,17 @@
     android:background="@color/white">
 
 
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="284dp"
-        android:src="@drawable/left_arrrow"
-        android:elevation="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/post_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ImageView-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="284dp"-->
+<!--        android:src="@drawable/left_arrrow"-->
+<!--        android:elevation="10dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/post_image"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <com.zolad.zoominimageview.ZoomInImageView
         android:id="@+id/post_image"
@@ -33,7 +33,7 @@
         android:elevation="100dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="310dp"
+        android:layout_marginTop="@dimen/_230sdp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/layout_detail_view"
         app:cardBackgroundColor="@color/white"
