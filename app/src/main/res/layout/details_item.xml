@@ -28,28 +28,33 @@
         tools:layout_editor_absoluteX="44dp"
         tools:layout_editor_absoluteY="5dp" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.Cut"
         android:elevation="100dp"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="310dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/layout_detail_view"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardElevation="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_image"
         app:layout_constraintVertical_bias="0.212"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="0dp"
+        >
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+
             android:scrollbars="vertical">
 
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+
                 >
 
                 <TextView
@@ -150,15 +155,15 @@
 
                 <TextView
                     android:id="@+id/description"
-                    android:layout_width="318dp"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/details"
                     android:layout_alignStart="@+id/details"
                     android:layout_marginStart="-1dp"
                     android:layout_marginTop="13dp"
-                    android:textColor="@color/black"
-                    android:text=""
                     android:fontFamily="@font/lato"
+                    android:text="fdsfsdffdasfdsfdsffdsfsdfsdafadsf"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="@+id/details"
                     app:layout_constraintTop_toBottomOf="@id/details" />
 
@@ -275,8 +280,8 @@
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="0dp"
-                    android:fontFamily="@font/lato"
                     android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/lato"
                     android:text="asdsadsad"
                     android:textColor="@color/darkGrey"
                     android:textSize="10sp"
@@ -294,9 +299,9 @@
 
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="0dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="0dp"
-                    android:layout_marginBottom="100dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/button1"
                     android:fontFamily="@font/cocogoose"
                     android:paddingLeft="30dp"
@@ -308,18 +313,17 @@
                     android:textSize="15sp"
                     android:textStyle="bold"
                     app:backgroundTint="@color/yellow_musterd"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+
                     app:layout_constraintHorizontal_bias="0.54"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/location"
+
+                    app:layout_constraintTop_toBottomOf="@+id/date"
                     app:layout_constraintVertical_bias="1.0" />
             </RelativeLayout>
 
 
         </ScrollView>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
