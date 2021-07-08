@@ -60,7 +60,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <com.zolad.zoominimageview.ZoomInImageView
             android:id="@+id/post_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

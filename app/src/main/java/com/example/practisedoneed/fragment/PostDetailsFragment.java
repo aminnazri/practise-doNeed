@@ -49,6 +49,7 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
     private FragmentManager fragmentManager;
     SharedPreferences.Editor editor;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
