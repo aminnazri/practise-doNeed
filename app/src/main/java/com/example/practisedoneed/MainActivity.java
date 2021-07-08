@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.jetbrains.annotations.NotNull;
 
+import maes.tech.intentanim.CustomIntent;
+
 //Main class
 public class MainActivity extends AppCompatActivity {
 
@@ -54,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+                CustomIntent.customType(MainActivity.this,"left-to-right");
+                finishAfterTransition();
             }
         });
 
@@ -62,9 +67,19 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SignUpActivity.class));
+                Intent intent = new Intent(MainActivity.this,SignUpActivity.class);
+                startActivity(intent);
+                CustomIntent.customType(MainActivity.this,"left-to-right");
             }
         });
+    }
+
+    //                overridePendingTransition(R.anim.test,R.anim.slide_out);
+
+    public void openActivity2(View view){
+        Intent intent = new Intent(this,LoginActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out);
     }
 
 

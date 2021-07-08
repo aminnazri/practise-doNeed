@@ -23,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.r0adkll.slidr.Slidr;
+import com.r0adkll.slidr.model.SlidrInterface;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
@@ -35,13 +37,15 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mauth;
     DatabaseReference reference;
     ProgressDialog pd;
-
+    SlidrInterface slidrInterface;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Slidr.attach(this);
 
 
         password = findViewById(R.id.login_password);
@@ -101,6 +105,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
+
 
     //SIGN IN FUNCTION
     private void signIn(String str_email, String str_password){
