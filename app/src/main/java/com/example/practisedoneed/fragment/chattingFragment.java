@@ -88,8 +88,8 @@ public class chattingFragment extends Fragment implements View.OnClickListener {
         if (v.getId() == R.id.send_btn) {
             //if user click send button
             if (!et_message.getText().toString().equals("")){
-            sendMessage(myID, chatWith, et_message.getText().toString());
-            et_message.setText("");}
+                sendMessage(myID, chatWith, et_message.getText().toString());
+                et_message.setText("");}
         }else if(v.getId() == R.id.back){
             getActivity().onBackPressed();
         }
