@@ -33,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.r0adkll.slidr.Slidr;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import org.jetbrains.annotations.NotNull;
@@ -63,6 +64,7 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_setting);
+        Slidr.attach(this);
         toolbar = findViewById(R.id.toolbar);
         back = findViewById(R.id.back);
         back.setOnClickListener(this);

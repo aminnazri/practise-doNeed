@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.r0adkll.slidr.Slidr;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -40,6 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        Slidr.attach(this);
 
         username = findViewById(R.id.signUp_username);
         email = findViewById(R.id.signUp_email);

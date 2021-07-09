@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(intent);
                 CustomIntent.customType(MainActivity.this,"left-to-right");
-                finishAfterTransition();
+
             }
         });
 
@@ -77,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
 
     //                overridePendingTransition(R.anim.test,R.anim.slide_out);
 
-    public void openActivity2(View view){
-        Intent intent = new Intent(this,LoginActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out);
-    }
+//    public void openActivity2(View view){
+//        Intent intent = new Intent(this,LoginActivity.class);
+//        startActivity(intent);
+//        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out);
+//    }
 
 
     //Save apps state to use after reopen apps

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.r0adkll.slidr.Slidr;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,6 +32,7 @@ public class ResetPassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Slidr.attach(this);
         setContentView(R.layout.activity_reset_password);
 
         txt_login = findViewById(R.id.txt_login);
