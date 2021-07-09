@@ -42,7 +42,7 @@ public class chattingFragment extends Fragment implements View.OnClickListener {
     private String chatWith, message, myID, chatID;
     FirebaseUser firebaseUser;
     EditText et_message;
-    ImageView send, profile_picture;
+    ImageView send, profile_picture, back;
     TextView username;
 
     DatabaseReference reference;
@@ -68,7 +68,9 @@ public class chattingFragment extends Fragment implements View.OnClickListener {
         et_message = view.findViewById(R.id.edit_text_message);
         profile_picture = view.findViewById(R.id.profile_picture);
         username = view.findViewById(R.id.userID);
+        back = view.findViewById(R.id.back);
 
+        back.setOnClickListener(this);
         send.setOnClickListener(this);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -88,6 +90,8 @@ public class chattingFragment extends Fragment implements View.OnClickListener {
             if (!et_message.getText().toString().equals("")){
             sendMessage(myID, chatWith, et_message.getText().toString());
             et_message.setText("");}
+        }else if(v.getId() == R.id.back){
+            getActivity().onBackPressed();
         }
     }
 
