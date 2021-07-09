@@ -143,6 +143,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="6dp"
+                            android:background="@drawable/background3"
                             android:text="Profile settings"
                             android:textSize="15sp" />
 
