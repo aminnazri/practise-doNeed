@@ -28,6 +28,7 @@ import com.example.practisedoneed.ProfileSetting;
 import com.example.practisedoneed.R;
 
 import com.example.practisedoneed.adapter.myPostAdapter;
+import com.example.practisedoneed.homePage;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -77,7 +78,7 @@ public class profileFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        intent = new Intent(getActivity(), ProfileSetting.class);
+        intent = new Intent(getContext(), ProfileSetting.class);
         settingButton = (Button) rootView.findViewById(R.id.setting_button);
         chatButton = (Button) rootView.findViewById(R.id.chat_button);
 
@@ -269,10 +270,13 @@ public class profileFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                Glide.with(getContext()).load(user.getImageUrl()).into(profilePicture);
-                username.setText(user.getUsername());
-                bio.setText(user.getBio());
+                if (getActivity() != null) {
+                    User user = snapshot.getValue(User.class);
+                    Glide.with(getContext()).load(user.getImageUrl()).into(profilePicture);
+                    username.setText(user.getUsername());
+                    bio.setText(user.getBio());
+                }
+
 
             }
             @Override

@@ -153,9 +153,10 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
                 User user = snapshot.getValue(User.class);
                 userImage = user.getImageUrl();
-                Glide.with(ProfileSetting.this).load(user.getImageUrl()).into(profile_image);
+                Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
                 username.setText(user.getUsername());
                 email.setText(user.getEmail());
                 email.setFocusable(false);
