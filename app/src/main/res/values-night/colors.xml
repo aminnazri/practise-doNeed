@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="y">#F7C80A</color>
-    <color name="test">#FFBF01</color>
+    <color name="test">#E3B100</color>
     <color name="auth">#E3B100</color>
     <color name="yellow_musterd">#9F7D02</color>
     <color name="darkyellowmusterd">#9F7D02</color>
