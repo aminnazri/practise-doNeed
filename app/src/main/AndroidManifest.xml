@@ -21,7 +21,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".homePage"
-            android:label="@string/title_activity_home_page" />
+            android:label="@string/title_activity_home_page"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".SignUpActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".LoginActivity" />
