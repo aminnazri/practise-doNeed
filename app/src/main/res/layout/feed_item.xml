@@ -125,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="27dp"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/cocogoose"
+                android:fontFamily="@font/gilroybold"
                 android:text="pKittle"
                 android:textColor="@color/dark"
                 android:textSize="20sp"

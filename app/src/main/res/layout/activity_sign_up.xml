@@ -72,7 +72,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="20dp"
-                        android:fontFamily="@font/cocogoose"
+                        android:fontFamily="@font/gilroybold"
                         android:text="SIGN UP"
                         android:textColor="@color/auth"
                         android:textSize="41sp"
@@ -89,7 +89,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:hint="Username"
-                        app:boxStrokeColor="@color/black"
                         app:endIconMode="clear_text"
                         app:endIconTint="@color/black"
                         app:layout_constraintBottom_toTopOf="@id/signUp_email_layout"
@@ -209,7 +208,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="12dp"
                         android:background="@drawable/button1"
-                        android:fontFamily="@font/cocogoose"
+                        android:fontFamily="@font/gilroybold"
                         android:paddingLeft="40dp"
                         android:paddingTop="2dp"
                         android:paddingRight="40dp"
@@ -242,6 +241,7 @@
                             android:id="@+id/stirng_signUp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/gilroylight"
                             android:text="Do have an account? "
                             android:textColor="@color/darkGrey" />
 
@@ -250,7 +250,7 @@
                             android:id="@+id/txt_login"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
+android:fontFamily="@font/gilroybold"
                             android:text="Login."
                             android:textColor="@color/auth"
                             android:textStyle="bold" />

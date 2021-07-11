@@ -22,7 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="44dp"
-            android:fontFamily="@font/cocogoose"
+            android:fontFamily="@font/gilroybold"
             android:text="doNeed"
             android:textColor="#54000000"
             android:textSize="65sp"
