@@ -132,12 +132,14 @@ public class PostDetailsFragment extends Fragment implements View.OnClickListene
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                if(getActivity() != null){
+                    User user = dataSnapshot.getValue(User.class);
 
-                User user = dataSnapshot.getValue(User.class);
+                    Glide.with(getContext()).load(user.getImageUrl()).into(image_profile);
 
-                Glide.with(getContext()).load(user.getImageUrl()).into(image_profile);
+                    donator.setText(user.getUsername());
+                }
 
-                donator.setText(user.getUsername());
             }
 
             @Override

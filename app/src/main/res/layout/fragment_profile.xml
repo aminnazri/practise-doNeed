@@ -145,15 +145,19 @@
                             android:layout_marginTop="10dp"
                             android:background="@drawable/background3"
                             android:text="Profile settings"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            />
 
                         <Button
                             android:id="@+id/chat_button"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="6dp"
+                            android:layout_height="40dp"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp"
                             android:text="Chat Now"
                             android:textSize="15sp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background3"
                             android:visibility="gone"/>
                     </LinearLayout>
                 </LinearLayout>

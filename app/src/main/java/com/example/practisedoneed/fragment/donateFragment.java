@@ -78,7 +78,7 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
     Spinner stateSpinner;
     String[] stateArray = {"State","Johor","Kedah","Kelantan","Melaka","Negeri Sembilan","Pahang","Penang","Perak","Perlis"
             ,"Sabah","Sarawak","Selangor","Terengganu","Kuala Lumpur","Labuan","Putrajaya"};
-    String[] categoryArray = {"Categories","Home Equipment","Furniture","Computer","Smartphone","Technology","Cloth","Sport"};
+    String[] categoryArray = {"Categories","Books","Home Equipment","Food","Furniture","Computer","Smartphone","Technology","Cloth","Sport"};
     String category;
     String state;
     ArrayAdapter ad1;
@@ -319,9 +319,10 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
     }
 
 
-
+    //right icon and back icon
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+        //back icon
         if (item.getItemId() == android.R.id.home) {
             //If user click back button
             getActivity().onBackPressed();
@@ -402,8 +403,6 @@ public class donateFragment extends Fragment implements AdapterView.OnItemSelect
 
             }
         });
-
-
     }
 
     //UPDATE POST FUNCTION

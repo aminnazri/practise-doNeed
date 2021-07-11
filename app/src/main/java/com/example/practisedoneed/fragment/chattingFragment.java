@@ -126,9 +126,9 @@ public class chattingFragment extends Fragment implements View.OnClickListener {
                         if ((chat.getMember1().equals(myID) || chat.getMember1().equals(chatWith)) &&
                                 (chat.getMember2().equals(myID) || chat.getMember2().equals(chatWith))) {
                             chatID = chat.getId();
-
                         }
                     }
+                    //if never chat with the chatWith user
                     if (chatID == null) {
                         String uploadId = databaseReference.push().getKey();
                         HashMap<String, String> hashMap = new HashMap<>();
@@ -140,6 +140,7 @@ public class chattingFragment extends Fragment implements View.OnClickListener {
                         chatID = uploadId;
                     }
                 } else {
+                    //if never chat with the chatWith user
                     String uploadId = databaseReference.push().getKey();
                     HashMap<String, String> hashMap = new HashMap<>();
                     hashMap.put("id", uploadId);
@@ -174,7 +175,6 @@ public class chattingFragment extends Fragment implements View.OnClickListener {
                     });
                 }
             }
-
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
 

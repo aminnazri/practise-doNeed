@@ -83,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this,"All Fields are required",Toast.LENGTH_SHORT).show();
 
 
-                }else if(str_password.length()<6) {
+                }else if(str_password.length()<7) {
                     //check if the password less than 6
                     Toast.makeText(SignUpActivity.this,"Password must have 6 characters",Toast.LENGTH_SHORT).show();
 

@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private TextView textCategory;
     private boolean[] selectedCategory;
-    String[] categoryArray = {"All","Home Equipment","Furniture","Computer","Smartphone","Technology","Cloth","Sport"};
+    String[] categoryArray = {"All","Books","Home Equipment","Food","Furniture","Computer","Smartphone","Technology","Cloth","Sport"};
     final List<String> categoryList = Arrays.asList(categoryArray);
 
     private List<String> filteredCategory;
@@ -164,11 +164,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 
-
                     selectedState[which] = isChecked;
-                    String currentItem = stateList.get(which);
-                    Toast.makeText(getActivity(), currentItem+ " "+ isChecked, Toast.LENGTH_SHORT).show();
-
                     for(int i=1; i<selectedState.length; i++){
                         if(selectedState[i]){
                             selectedState[0] = false;
@@ -237,10 +233,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             builder.setMultiChoiceItems(categoryArray, selectedCategory, new DialogInterface.OnMultiChoiceClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                    selectedCategory[which] = isChecked;
-                    String currentItem = categoryList.get(which);
-//                    Toast.makeText(getActivity(), currentItem+ " "+ isChecked, Toast.LENGTH_SHORT).show();
 
+                    selectedCategory[which] = isChecked;
                     for(int i=1; i<selectedCategory.length; i++){
                         if(selectedCategory[i]){
                             selectedCategory[0] = false;

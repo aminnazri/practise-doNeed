@@ -158,7 +158,9 @@ public class ProfileSetting extends AppCompatActivity implements View.OnClickLis
 
                 User user = snapshot.getValue(User.class);
                 userImage = user.getImageUrl();
-                Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
+                if(userImage!=null){
+                    Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
+                }
                 username.setText(user.getUsername());
                 email.setText(user.getEmail());
                 email.setFocusable(false);
