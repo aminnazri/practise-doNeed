@@ -85,11 +85,12 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }else if(str_password.length()<7) {
                     //check if the password less than 6
-                    Toast.makeText(SignUpActivity.this,"Password must have 6 characters",Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(SignUpActivity.this,"Password must have 7 characters",Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
                 }else if(!str_password.equals(str_reconfirmPassword)){
                     //check if the password and reconfirm password match
                     Toast.makeText(SignUpActivity.this,"Password must same on both field",Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
                 }
                 else {
                     //if everything ok, call REGISTER function

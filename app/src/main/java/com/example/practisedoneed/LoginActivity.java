@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     pd.dismiss();
                 }else if(str_password.length()<6) {
                     //check if the password less than 6
-                    Toast.makeText(LoginActivity.this,"Password must have 6 characters",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"Password must have 7 characters",Toast.LENGTH_SHORT).show();
                     pd.dismiss();
                 }else {
                     //if everything ok, call sign in function
@@ -143,6 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                     else{
                         //EMAIL NOT VERIFIED
                         Toast.makeText(LoginActivity.this, "Please verify your email", Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
                     }
 
                 }else {
