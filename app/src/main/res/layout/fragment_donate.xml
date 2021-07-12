@@ -72,6 +72,7 @@
                     android:drawableLeft="@drawable/camera"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="6dp"
+                    android:fontFamily="@font/gilroylight"
                     />
 
                 <EditText
@@ -84,6 +85,7 @@
                     android:maxLines="5"
                     android:background="@drawable/text_background"
                     android:padding="10dp"
+                    android:fontFamily="@font/gilroylight"
                     android:layout_marginLeft="21dp"
                     android:layout_marginRight="21dp"
                     android:inputType="text"
@@ -100,6 +102,7 @@
                     android:textColorHint="@color/grey"
                     android:background="@drawable/text_background"
                     android:padding="10dp"
+                    android:fontFamily="@font/gilroylight"
                     android:layout_marginLeft="21dp"
                     android:layout_marginRight="21dp"
                     android:textColor="@color/black"
@@ -116,6 +119,7 @@
                     android:hint="Quantity"
                     android:textColorHint="@color/grey"
                     android:maxLines="5"
+                    android:fontFamily="@font/gilroylight"
                     android:background="@drawable/text_background"
                     android:padding="10dp"
                     android:layout_marginLeft="21dp"
@@ -133,6 +137,7 @@
                     android:layout_marginStart="21dp"
                     android:layout_marginEnd="21dp"
                     android:padding="10dp"
+                    android:fontFamily="@font/gilroylight"
                     android:prompt="@string/categories"
                     android:elevation="2dp"
                     android:textColor="@android:color/black"
@@ -147,6 +152,7 @@
                     android:layout_marginStart="21dp"
                     android:layout_marginEnd="21dp"
                     android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/gilroylight"
                     android:padding="10dp"
                     android:prompt="@string/state"
                     android:elevation="2dp"

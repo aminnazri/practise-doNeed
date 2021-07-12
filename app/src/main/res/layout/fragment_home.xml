@@ -81,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="State"
+                android:fontFamily="@font/gilroylight"
                 android:textColor="@color/darkGrey"
                 android:background="@android:drawable/editbox_background"
 
@@ -93,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Category"
+                android:fontFamily="@font/gilroylight"
                 android:textColor="@color/darkGrey"
                 android:background="@android:drawable/editbox_background"
                 />

@@ -80,6 +80,7 @@
                         android:id="@+id/login_email"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
+                        android:fontFamily="@font/gilroylight"
                         android:inputType="textEmailAddress"
                         android:textColor="@color/darkGrey"
                         />
@@ -107,6 +108,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
+                        android:fontFamily="@font/gilroylight"
                         android:textColor="@color/darkGrey"
                         />
 

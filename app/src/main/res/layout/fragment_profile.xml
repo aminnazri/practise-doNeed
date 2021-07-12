@@ -123,7 +123,7 @@
                             android:id="@+id/username"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato"
+                            android:fontFamily="@font/gilroybold"
                             android:textStyle="bold"
                             android:text="amin"
                             android:textColor="@color/darkGrey"
@@ -133,7 +133,7 @@
                             android:id="@+id/user_bio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato"
+                            android:fontFamily="@font/gilroylight"
                             android:text="bio"
                             android:textColor="@color/darkGrey"
                             android:textSize="15sp" />
@@ -145,6 +145,7 @@
                             android:layout_marginTop="10dp"
                             android:background="@drawable/background3"
                             android:text="Profile settings"
+                            android:fontFamily="@font/gilroylight"
                             android:textSize="15sp"
                             />
 
