@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -149,6 +150,10 @@ public class SignUpActivity extends AppCompatActivity {
                                             toast.show();
                                             pd.dismiss();
                                             Intent intent = new Intent(SignUpActivity.this ,LoginActivity.class);
+                                            SharedPreferences sharedPreferences = getSharedPreferences("PREFS",MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putBoolean("Verify",true);
+                                            editor.apply();
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                             startActivity(intent);
                                         }

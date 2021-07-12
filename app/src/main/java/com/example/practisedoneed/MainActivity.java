@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     int NightMode;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    boolean valid;
 
     //check user already login or not
     protected void onStart() {
@@ -35,10 +36,11 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("PREFS",MODE_PRIVATE);
         NightMode = sharedPreferences.getInt("NightModeInt", 1);
         AppCompatDelegate.setDefaultNightMode(NightMode);
+        valid = sharedPreferences.getBoolean("Valid",false);
 
         //check whether user already log in or not
         //if yes, go straight to feed page, no need to login again
-        if (firebaseUser != null) {
+        if (firebaseUser != null && valid) {
             startActivity(new Intent(MainActivity.this, homePage.class));
             finish();
         }

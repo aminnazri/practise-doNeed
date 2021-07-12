@@ -85,6 +85,8 @@ public class profileFragment extends Fragment {
         prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         profileid = prefs.getString("profileId", "none");
         editor = prefs.edit();
+        editor.putBoolean("Valid",true);
+        editor.apply();
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userID = firebaseUser.getUid();
